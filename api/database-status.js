@@ -12,7 +12,13 @@ export default async function handler(req, res) {
         to_regclass('public.organizations') is not null as organizations_exists,
         to_regclass('public.opportunities') is not null as opportunities_exists
     `;
-    return res.status(200).json(rows[0]);
+    const expectedProject = 'floral-wind-42634861';
+    const configuredProject = process.env.NEON_PROJECT_ID || '';
+    return res.status(200).json({
+      ...rows[0],
+      expected_project_matches: configuredProject ? configuredProject === expectedProject : null,
+      project_id_configured: Boolean(configuredProject)
+    });
   } catch (error) {
     return res.status(503).json({ error: 'Database connectivity check failed', code: error?.code || 'unknown' });
   }
