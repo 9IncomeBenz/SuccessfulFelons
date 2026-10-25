@@ -19,7 +19,7 @@ let followup='';$('job-form').addEventListener('submit',e=>{e.preventDefault();c
 $('income-form').addEventListener('submit',e=>{e.preventDefault();const revenue=val('i-price')*val('i-jobs'),costs=val('i-cost')*val('i-jobs')+val('i-fixed');$('income-result').textContent='Estimated monthly revenue: '+money(revenue)+'. Expenses: '+money(costs)+'. Profit before taxes: '+money(revenue-costs)+'.';});
 
 const TRACKER_KEY='sf_app_tracker_v2';let tracker=[];try{const saved=JSON.parse(localStorage.getItem(TRACKER_KEY)||'[]');if(Array.isArray(saved))tracker=saved.filter(x=>x&&typeof x==='object').slice(0,300)}catch{}
-const escapeCsv=v=>'"'+String(v??'').replaceAll('"','""').replace(/^[=+@\-\t\r]/,'\'</script></body></html>')+'"';
+const escapeCsv=v=>{let value=String(v??'');if(/^[=+@\-\t\r]/.test(value))value="'"+value;return '"'+value.replaceAll('"','""')+'"'};
 function downloadFile(name,data,type){const blob=new Blob([data],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function storeTracker(){try{localStorage.setItem(TRACKER_KEY,JSON.stringify(tracker));$('tracker-feedback').textContent='Saved on this device. Export a backup to avoid losing it.'}catch{$('tracker-feedback').textContent='Storage is unavailable or full. Export your tracker now; changes may not persist.'}}
 function clearTrackerForm(){$('tracker-form').reset();$('t-id').value='';$('tracker-feedback').textContent=''}
