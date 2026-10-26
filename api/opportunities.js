@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   if (!process.env.DATABASE_URL) return res.status(503).json({ error: 'Database not configured' });
   const kind = typeof req.query.kind === 'string' ? req.query.kind : '';
   const city = typeof req.query.city === 'string' ? req.query.city.trim().slice(0,80) : '';
-  const cityPattern = city ? '%' + city.replace(/[\\%_]/g, '\\const city = typeof req.query.city === 'string' ? req.query.city.trim().slice(0,80) : '';') + '%' : '';
+  const cityPattern = city ? '%' + city + '%' : '';
   if (kind && !allowedKinds.has(kind)) return res.status(400).json({ error: 'Invalid opportunity type' });
   try {
     const sql = neon(process.env.DATABASE_URL);
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
         and g.verified = true
         and (o.expires_at is null or o.expires_at > now())
         and (${kind} = '' or o.kind = ${kind})
-        and (${city} = '' or o.city ilike ${cityPattern} escape '\\')
+        and (${city} = '' or o.city ilike ${cityPattern})
       order by o.verified_at desc, o.created_at desc
       limit 50
     `;
