@@ -7,5 +7,5 @@ for(const file of ['index.html','tools.html']) {
  console.log('PASS script syntax:',file);
 }
 const tools=readFileSync('tools.html','utf8');
-for(const id of ['tracker-form','tracker-items','t-export','match-form','match-results','resume-form','housing-form','income-form','account-panel','account-check','resume-save-status','backup-export','backup-import'])assert.ok(tools.includes('id="'+id+'"'),'Missing '+id);
+for(const id of ['tracker-form','tracker-items','t-export','match-form','match-results','resume-form','housing-form','income-form','account-panel','account-check','resume-save-status','backup-export','backup-import','clear-device-data','clear-device-status'])assert.ok(tools.includes('id="'+id+'"'),'Missing '+id);
 console.log('PASS critical tool UI identifiers');
