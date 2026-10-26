@@ -13,7 +13,7 @@ console.log('PASS critical tool UI identifiers');
 const home=readFileSync('index.html','utf8');
 for(const id of ['listing-form','listing-results','saved-items','tracked-items','tracker-form','clear-workspace','resource-checklist'])assert.ok(home.includes('id="'+id+'"'),'Missing homepage '+id);
 for(const [page,html] of [['index.html',home],['tools.html',tools]]) {
- const ids=[...html.matchAll(/\\bid="([^"]+)"/g)].map(m=>m[1]);
+ const ids=[...html.matchAll(/id="([^"]+)"/g)].map(m=>m[1]);
  const seen=new Set();for(const id of ids){assert.ok(!seen.has(id),'Duplicate id '+id+' in '+page);seen.add(id)}
  console.log('PASS unique element IDs:',page);
 }
