@@ -9,3 +9,14 @@ for(const file of ['index.html','tools.html']) {
 const tools=readFileSync('tools.html','utf8');
 for(const id of ['tracker-form','tracker-items','t-export','match-form','match-results','resume-form','housing-form','income-form','account-panel','account-check','resume-save-status','backup-export','backup-import','clear-device-data','clear-device-status'])assert.ok(tools.includes('id="'+id+'"'),'Missing '+id);
 console.log('PASS critical tool UI identifiers');
+
+const home=readFileSync('index.html','utf8');
+for(const id of ['listing-form','listing-results','saved-items','tracked-items','tracker-form','clear-workspace','resource-checklist'])assert.ok(home.includes('id="'+id+'"'),'Missing homepage '+id);
+for(const [page,html] of [['index.html',home],['tools.html',tools]]) {
+ const ids=[...html.matchAll(/\\bid="([^"]+)"/g)].map(m=>m[1]);
+ const seen=new Set();for(const id of ids){assert.ok(!seen.has(id),'Duplicate id '+id+' in '+page);seen.add(id)}
+ console.log('PASS unique element IDs:',page);
+}
+assert.ok(home.includes("addEventListener('storage'"),'Homepage cross-tab updates missing');
+assert.ok(tools.includes("addEventListener('storage'"),'Tools cross-tab updates missing');
+console.log('PASS cross-tab storage listeners');
