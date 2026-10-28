@@ -9,7 +9,7 @@
     "check:workspace": "node scripts/validate-saved-leads.mjs",
     "check": "npm run check:employment && npm run check:workspace && npm run check:account",
     "check:account": "node scripts/validate-account-security.mjs",
-    "build": "node scripts/build-site.mjs"
+    "build": "npm run check && node scripts/build-site.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
