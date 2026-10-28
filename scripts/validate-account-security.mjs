@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 function source(path) {
   return readFileSync(path, 'utf8').replace(/^import .*;?\s*$/gm, '').replace(/export (default )?/g, '');
 }
-for (const file of ['api/_lib/auth.js','api/account/saved.js','api/account-status.js']) {
+for (const file of ['api/_lib/auth.js','api/account/saved.js','api/account/clear.js','api/account-status.js']) {
   assert.doesNotThrow(() => new Function(source(file)), 'Invalid JS syntax in ' + file);
 }
 const authSource = source('api/_lib/auth.js');
@@ -76,7 +76,9 @@ async function testAccountAPI(){
   await blockedHandler({method:'GET',headers:{}},res);
   assert.equal(res.statusCode,401);
   assert.match(readFileSync('migrations/002_private_saved_leads.sql','utf8'),/REVOKE ALL ON SCHEMA sf_private FROM PUBLIC/);
-  assert.match(readFileSync('api/account-status.js','utf8'),/accountsAvailable:\s*false/);
+  assert.match(readFileSync('api/account-status.js','utf8'),/accountsAvailable:\s*enabled/);
+  assert.match(readFileSync('api/account-status.js','utf8'),/ACCOUNT_REGISTRATION_ENABLED==='true'/,'Registration must be gated until enabled');
+  assert.match(readFileSync('api/account/clear.js','utf8'),/DELETE CLOUD SAVES/,'Cloud deletion requires explicit confirmation');
   console.log('PASS: JWT required, invalid inputs rejected, owner-scoped SQL, no public account launch.');
 }
 await testAuth();
