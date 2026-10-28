@@ -21,6 +21,33 @@ In the **Neon Console**, select the existing **SuccessfulFelons** project, produ
 
 Alternatively, for a domain-based email provider, use its verified sender address, SMTP host/port and securely stored API credential. Validate SPF, DKIM and DMARC on the **owned** domain, never on `vercel.app`.
 
+## Selected pilot sender — 2026-10-28
+
+**Chosen sender address:** `Successfulfelons0@gmail.com`. This is an owner-provided configuration choice, **not a confirmed working SMTP connection**. The latest connected Neon Auth read still reports `email_provider.type = shared` and sender `auth@mail.myneon.app`; no Gmail credential or test email has been configured by ChatGPT.
+
+Configure the sender on the account owner's devices and in the Neon Console:
+
+1. Sign in to the dedicated Google account `Successfulfelons0@gmail.com` and enable **2-Step Verification** in Google Account → Security. Google requires this before app passwords are available.
+2. Open [Google App Passwords](https://myaccount.google.com/apppasswords) **while signed in to the sending Gmail account**, name the app `SuccessfulFelons Neon Auth`, and generate a dedicated app password. Eligibility varies by account/security configuration. **Never paste either Gmail's password or this app password into ChatGPT, a GitHub file, or the public website.**
+3. Open [Neon Console](https://console.neon.tech/) → existing `SuccessfulFelons` project → `production` branch → Settings → Better Auth → **Custom SMTP**. Fill the fields below directly inside Neon, then Save.
+
+| Neon field | Exact selected value |
+|---|---|
+| Provider | Custom SMTP |
+| Host | `smtp.gmail.com` |
+| Port | `465` using SSL, or `587` using TLS (match the SSL/TLS choice available in Neon) |
+| Username | `Successfulfelons0@gmail.com` |
+| Password | **Google app password generated for this integration — enter privately in Neon only** |
+| Sender email | `Successfulfelons0@gmail.com` |
+| Sender name | `SuccessfulFelons` |
+
+4. In the same Better Auth settings, leave **public sign-up disabled at the provider** until the ready-to-test window and then enable **Verify at Sign-up**, **Require verification**, and **OTP/code verification**. The application's own Vercel registration gate stays off until all production tests pass.
+5. Use Neon's built-in custom-email **Send Test Email** to a mailbox you can access. Check arrival, spam folder, recognizable sender and a fresh one-time verification flow. When your actual test is successful, update this checklist with the date and test result, **not** any password or OTP code.
+
+Gmail SMTP is a small-scale pilot choice only. Google recommends more secure OAuth-based sign-in over app passwords where supported, and sending limits/deliverability can constrain production use. For broad release, consider a transactional provider with a separately owned domain and SPF/DKIM/DMARC. The `vercel.app` subdomain is not an email domain you control.
+
+References: https://support.google.com/accounts/answer/185833 and https://neon.com/docs/auth/production-checklist
+
 ## Neon Auth configuration
 1. Use **Settings → Better Auth** and ensure **Sign-up with Email**, **Verify at Sign-up**, **verification code (OTP)** and **Require verification** match the live use case. Codes are compatible with shared/custom mail; links require custom mail.
 2. Keep `https://successfulfelons.vercel.app` in trusted domains. Restrict old preview origins when they are no longer needed.
