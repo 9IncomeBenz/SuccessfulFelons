@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vercel dev"
+    "dev": "vercel dev",
+    "check:employment": "node scripts/validate-employment-data.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0"
