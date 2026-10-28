@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "state": "Ohio",
+  "count": 88,
+  "source": "https://ohiomeansjobs.ohio.gov/job-seekers/find-a-job/local-help",
+  "source_note": "OhioMeansJobs official directory of county service locations; every county has a center according to Ohio Department of Job and Family Services.",
+  "counties": [
+    {
+      "name": "Adams"
+    },
+    {
+      "name": "Allen"
+    },
+    {
+      "name": "Ashland"
+    },
+    {
+      "name": "Ashtabula"
+    },
+    {
+      "name": "Athens"
+    },
+    {
+      "name": "Auglaize"
+    },
+    {
+      "name": "Belmont"
+    },
+    {
+      "name": "Brown"
+    },
+    {
+      "name": "Butler"
+    },
+    {
+      "name": "Carroll"
+    },
+    {
+      "name": "Champaign"
+    },
+    {
+      "name": "Clark"
+    },
+    {
+      "name": "Clermont"
+    },
+    {
+      "name": "Clinton"
+    },
+    {
+      "name": "Columbiana"
+    },
+    {
+      "name": "Coshocton"
+    },
+    {
+      "name": "Crawford"
+    },
+    {
+      "name": "Cuyahoga"
+    },
+    {
+      "name": "Darke"
+    },
+    {
+      "name": "Defiance"
+    },
+    {
+      "name": "Delaware"
+    },
+    {
+      "name": "Erie"
+    },
+    {
+      "name": "Fairfield"
+    },
+    {
+      "name": "Fayette"
+    },
+    {
+      "name": "Franklin"
+    },
+    {
+      "name": "Fulton"
+    },
+    {
+      "name": "Gallia"
+    },
+    {
+      "name": "Geauga"
+    },
+    {
+      "name": "Greene"
+    },
+    {
+      "name": "Guernsey"
+    },
+    {
+      "name": "Hamilton"
+    },
+    {
+      "name": "Hancock"
+    },
+    {
+      "name": "Hardin"
+    },
+    {
+      "name": "Harrison"
+    },
+    {
+      "name": "Henry"
+    },
+    {
+      "name": "Highland"
+    },
+    {
+      "name": "Hocking"
+    },
+    {
+      "name": "Holmes"
+    },
+    {
+      "name": "Huron"
+    },
+    {
+      "name": "Jackson"
+    },
+    {
+      "name": "Jefferson"
+    },
+    {
+      "name": "Knox"
+    },
+    {
+      "name": "Lake"
+    },
+    {
+      "name": "Lawrence"
+    },
+    {
+      "name": "Licking"
+    },
+    {
+      "name": "Logan"
+    },
+    {
+      "name": "Lorain"
+    },
+    {
+      "name": "Lucas"
+    },
+    {
+      "name": "Madison"
+    },
+    {
+      "name": "Mahoning"
+    },
+    {
+      "name": "Marion"
+    },
+    {
+      "name": "Medina"
+    },
+    {
+      "name": "Meigs"
+    },
+    {
+      "name": "Mercer"
+    },
+    {
+      "name": "Miami"
+    },
+    {
+      "name": "Monroe"
+    },
+    {
+      "name": "Montgomery"
+    },
+    {
+      "name": "Morgan"
+    },
+    {
+      "name": "Morrow"
+    },
+    {
+      "name": "Muskingum"
+    },
+    {
+      "name": "Noble"
+    },
+    {
+      "name": "Ottawa"
+    },
+    {
+      "name": "Paulding"
+    },
+    {
+      "name": "Perry"
+    },
+    {
+      "name": "Pickaway"
+    },
+    {
+      "name": "Pike"
+    },
+    {
+      "name": "Portage"
+    },
+    {
+      "name": "Preble"
+    },
+    {
+      "name": "Putnam"
+    },
+    {
+      "name": "Richland"
+    },
+    {
+      "name": "Ross"
+    },
+    {
+      "name": "Sandusky"
+    },
+    {
+      "name": "Scioto"
+    },
+    {
+      "name": "Seneca"
+    },
+    {
+      "name": "Shelby"
+    },
+    {
+      "name": "Stark"
+    },
+    {
+      "name": "Summit"
+    },
+    {
+      "name": "Trumbull"
+    },
+    {
+      "name": "Tuscarawas"
+    },
+    {
+      "name": "Union"
+    },
+    {
+      "name": "Van Wert"
+    },
+    {
+      "name": "Vinton"
+    },
+    {
+      "name": "Warren"
+    },
+    {
+      "name": "Washington"
+    },
+    {
+      "name": "Wayne"
+    },
+    {
+      "name": "Williams"
+    },
+    {
+      "name": "Wood"
+    },
+    {
+      "name": "Wyandot"
+    }
+  ]
+}
