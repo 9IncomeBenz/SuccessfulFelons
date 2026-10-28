@@ -196,16 +196,17 @@
       "area": "Columbus, OH",
       "pay": "Approx. $1,670/week advertised",
       "rule": "Felony drug charges must be older than 7 years",
-      "detail": "Other felony convictions described as individually reviewed; the seven-year restriction is specifically on drug charges, not every offense. Verify posting remains open.",
+      "detail": "Historical employer job posting explicitly said felony drug charges must be older than seven years and other convictions are reviewed individually. Indeed now marks this listing expired. This is not an open job; confirm any current policy with Overhaul Carriers.",
       "evidence": "Employer-authored Indeed job description",
       "source": "https://www.indeed.com/viewjob?jk=be0093d26c9590a2",
       "date": "2026-10-28",
       "id": "overhaul-carriers-cdl-a-regional-driver",
       "reviewed_on": "2026-10-28",
-      "opening_status": "not_employer_confirmed",
+      "opening_status": "expired_listing",
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "status_note": "Job expired on Indeed as of October 28, 2026"
     },
     {
       "kind": "timed",
@@ -215,16 +216,17 @@
       "area": "Columbus, OH",
       "pay": "$1,500–$1,750/week advertised",
       "rule": "No felonies within past 10 years",
-      "detail": "Position also states no misdemeanors within past five years. CDL-A and experience required. Listing found in September 2026; reconfirm opening.",
+      "detail": "Historical syndicated advertisement stated a ten-year felony lookback and five-year misdemeanor lookback. Source currently returns 404; current hiring policy and the existence of this opening cannot be verified.",
       "evidence": "Employer-authored listing syndicated to job board",
       "source": "https://www.jobsparx.com/Job/B15018900/Venture-Logistics-Cdl-A-Driver-Home-Daily-4000-Sign-Bonus-Columbus-OH",
       "date": "2026-09-23",
       "id": "venture-logistics-cdl-a-home-daily-driver",
       "reviewed_on": "2026-10-28",
-      "opening_status": "not_employer_confirmed",
+      "opening_status": "source_unavailable",
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "status_note": "The cited job link returned 404 on October 28, 2026; historical policy only"
     },
     {
       "kind": "case",
