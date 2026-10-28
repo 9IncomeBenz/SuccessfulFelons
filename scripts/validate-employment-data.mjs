@@ -25,6 +25,7 @@ assert.match(directory, /id="county"/, 'Employer directory needs county selector
 assert.match(homepage, /href="\/housing\.html"/, 'Homepage must link directly to statewide housing');
 assert.match(statewide, /ohio-support-agencies\.json/, 'County navigator must load local community agencies');
 assert.match(statewide, /ohio-reentry-programs\.json/, 'County navigator must load local reentry services');
+assert.match(statewide, /service_counties/, 'Regional coalitions must show in every county served');
 assert.match(housing, /ohio-counties\.json/, 'Housing must use canonical county list');
 assert.match(housing, /ohio-support-agencies\.json/, 'Housing must load real community agencies');
 assert.match(housing, /ohiohousinglocator\.org/, 'Housing page must include statewide rental locator');
@@ -45,6 +46,7 @@ const programIds=new Set();
 for(const p of reentryPrograms.records){
   assert.ok(!programIds.has(p.id),'Duplicate reentry program '+p.id);programIds.add(p.id);
   assert.ok(countyNames.includes(p.county),'Unrecognized reentry program county '+p.id);
+  if(p.service_counties){assert.ok(Array.isArray(p.service_counties) && p.service_counties.length>1,'Regional counties must be a list');assert.ok(p.service_counties.every(c=>countyNames.includes(c)),'Unknown regional county '+p.id);assert.equal(new Set(p.service_counties).size,p.service_counties.length,'Duplicate regional county '+p.id);}
   assert.equal(p.not_vacancy,true,'Reentry programs must not be promoted as actual job openings');
   assert.equal(p.direct_contact_verified,false,'Public sources are not direct contact verification');
   assert.equal(new URL(p.url).protocol,'https:', 'Reentry program requires HTTPS source');
