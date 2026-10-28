@@ -38,6 +38,7 @@ export function createSuccessfulFelonsAccountClient(neonAuthUrl) {
     async list() { return (await request('GET')).leads; },
     async save(item) { return request('PUT',{item}); },
     async remove(id) { return request('DELETE',{id}); },
+    async clear() { const response=await fetch('/api/account/clear',{method:'POST',cache:'no-store',credentials:'same-origin',headers:{Authorization:'Bearer '+await authToken(),'Content-Type':'application/json'},body:JSON.stringify({confirmation:'DELETE CLOUD SAVES'})});const data=await response.json().catch(()=>({}));if(!response.ok)throw Error(data.error||'Cloud deletion unavailable');return data; },
     async importLocalWithConsent(localLeads) {
       if (!Array.isArray(localLeads) || localLeads.length > 100) throw Error('Invalid local backup');
       const uploaded=[];
