@@ -12,6 +12,18 @@ Early development. The site has an evidence-based employer-research directory an
 - Existing employer records have *approximate* county assignments derived from listed city/municipality; exact employer worksites have not been independently confirmed. The main database-backed opportunity search continues to search by city; it does not yet guarantee county-level or remote-matching accuracy.
 - Our statewide navigation is complete for the 88 counties, but the **supply of verified jobs, landlords and local reentry partners varies by county and is not yet complete**. Never replace an empty result with fabricated listings.
 
+## Ohio housing and locally published support
+- `/housing.html` is a dedicated 88-county housing navigator, with rental searches, emergency housing referrals, landlord-screening questions, and community-action contact details. This page does **not** claim properties or shelter beds are open, accepts no applications, and never declares a landlord will accept a particular felony.
+- `data/ohio-support-agencies.json` maps all **88** counties to the Community Action Agency name and published phone/website in the Ohio Association of Community Action Agencies' [directory](https://oacaa.org/find-an-agency/), research reviewed 2026-10-28. The 88 county references represent **48** agency names (including multijurisdiction providers); availability, funding and program eligibility still require direct contact.
+- `data/ohio-reentry-programs.json` contains 10 source-documented reentry employment and training/referral programs around Columbus, Cleveland, Cincinnati, Toledo and Dayton. Programs are **not verified vacancies** or guaranteed enrollments.
+- `/ohio.html` includes county-specific agency and reentry resources, and deep links into the housing and employment directories.
+- Housing and employment are equal primary areas. Throughout Ohio, the statewide tools work even in counties where no verified role or housing opening is in our database.
+
+## Provider confirmation queue
+- `data/employer-verification-queue.json` tracks the **17 researched job/employer entries** awaiting outreach; all contact states start `not_contacted`. It is not evidence of direct employer confirmation.
+- `docs/PROVIDER-VERIFICATION.md` defines explicit evidence tiers, confirmation questions, 3/5/7/10-year lookback differentiation, housing vacancy and screening verification, privacy rules, and publishing requirements.
+- The site includes public-source freshness warnings. No automated background service is contacting employers, landlords, or rechecking availability.
+
 ## Employment research
 - Browse `/employment.html` for documented second-chance employer programs, job postings that say applicants with records are welcome, position-specific felony lookback rules, and case-by-case or fair-chance legal language.
 - The homepage `#listings` search separately shows verified database opportunities and potential researched employer leads. Its city/type filters apply to the appropriate category, and it excludes expired or inaccessible listings from the main research leads.
@@ -23,7 +35,7 @@ Early development. The site has an evidence-based employer-research directory an
 - Dates reflect a research/source check, not automatic monitoring. Job listings may change between checks.
 
 ## Quality checks
-Run `npm run check:employment` (Node.js 24+). The validator checks all 88 Ohio counties, shared data wiring, unique IDs, HTTPS sources, evidence categories, scripts, restrictions and archived-status safeguards. GitHub Actions automatically runs the validator on relevant changes. Passing these tests **does not** establish that any job is presently available, and external links still require manual review.
+Run `npm run check:employment` (Node.js 24+). The validator checks all 88 Ohio counties, published agency contacts, sourced reentry programs, employer confirmation queue, HTML scripts, shared data wiring, unique IDs, HTTPS sources, evidence categories, restrictions and archived-status safeguards. GitHub Actions automatically runs the validator on relevant changes. Passing these tests **does not** establish that any job is presently available, and external links still require manual review.
 
 ## Local preview
 Open `index.html` in a browser for the basic static shell. To load the research JSON and backend APIs, serve the project over HTTP (for example, via Vercel dev) rather than opening individual HTML files with `file://`.
