@@ -1,0 +1,800 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-28",
+  "description": "County Community Action Agency contact info published in the Ohio Association of Community Action Agencies county directory. Programs and funding vary; no housing placement or eligibility is promised.",
+  "source": "https://oacaa.org/find-an-agency/",
+  "counties": {
+    "Adams": {
+      "name": "Adams Brown Community Action Partnership",
+      "phone": "937-378-6041",
+      "website": "https://www.abcap.net",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Brown": {
+      "name": "Adams Brown Community Action Partnership",
+      "phone": "937-378-6041",
+      "website": "https://www.abcap.net",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Allen": {
+      "name": "West Ohio Community Action Partnership",
+      "phone": "419-227-2586",
+      "website": "https://www.wocap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Auglaize": {
+      "name": "West Ohio Community Action Partnership",
+      "phone": "419-227-2586",
+      "website": "https://www.wocap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Mercer": {
+      "name": "West Ohio Community Action Partnership",
+      "phone": "419-227-2586",
+      "website": "https://www.wocap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Ashland": {
+      "name": "Kno-Ho-Co-Ashland Community Action Commission",
+      "phone": "740-622-9801",
+      "website": "https://www.knohoco.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Coshocton": {
+      "name": "Kno-Ho-Co-Ashland Community Action Commission",
+      "phone": "740-622-9801",
+      "website": "https://www.knohoco.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Holmes": {
+      "name": "Kno-Ho-Co-Ashland Community Action Commission",
+      "phone": "740-622-9801",
+      "website": "https://www.knohoco.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Knox": {
+      "name": "Kno-Ho-Co-Ashland Community Action Commission",
+      "phone": "740-622-9801",
+      "website": "https://www.knohoco.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Ashtabula": {
+      "name": "Ashtabula County Community Action Agency",
+      "phone": "440-990-1740",
+      "website": "https://www.accaa.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Athens": {
+      "name": "Hocking Athens Perry Community Action",
+      "phone": "740-767-4500",
+      "website": "https://www.hapcap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Hocking": {
+      "name": "Hocking Athens Perry Community Action",
+      "phone": "740-767-4500",
+      "website": "https://www.hapcap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Perry": {
+      "name": "Hocking Athens Perry Community Action",
+      "phone": "740-767-4500",
+      "website": "https://www.hapcap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Belmont": {
+      "name": "Community Action Commission of Belmont County",
+      "phone": "740-695-0293",
+      "website": "https://www.cacbelmont.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Butler": {
+      "name": "Supports to Encourage Low-Income Families (SELF)",
+      "phone": "513-868-9300",
+      "website": "https://www.selfhelps.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Carroll": {
+      "name": "HARCATUS Tri-County Community Action Organization",
+      "phone": "740-922-0933",
+      "website": "https://www.harcatus.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Harrison": {
+      "name": "HARCATUS Tri-County Community Action Organization",
+      "phone": "740-922-0933",
+      "website": "https://www.harcatus.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Tuscarawas": {
+      "name": "HARCATUS Tri-County Community Action Organization",
+      "phone": "740-922-0933",
+      "website": "https://www.harcatus.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Champaign": {
+      "name": "Bridges Community Action Partnership",
+      "phone": "937-642-4986",
+      "website": "https://www.bridgescap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Delaware": {
+      "name": "Bridges Community Action Partnership",
+      "phone": "937-642-4986",
+      "website": "https://www.bridgescap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Logan": {
+      "name": "Bridges Community Action Partnership",
+      "phone": "937-642-4986",
+      "website": "https://www.bridgescap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Madison": {
+      "name": "Bridges Community Action Partnership",
+      "phone": "937-642-4986",
+      "website": "https://www.bridgescap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Shelby": {
+      "name": "Bridges Community Action Partnership",
+      "phone": "937-642-4986",
+      "website": "https://www.bridgescap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Union": {
+      "name": "Bridges Community Action Partnership",
+      "phone": "937-642-4986",
+      "website": "https://www.bridgescap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Clark": {
+      "name": "Opportunities for Individual Change of Clark County",
+      "phone": "937-323-6461",
+      "website": "https://www.oicofclarkco.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Clermont": {
+      "name": "Clermont County Community Service",
+      "phone": "513-732-2277",
+      "website": "https://www.cccsi.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Clinton": {
+      "name": "Clinton County Community Action Program",
+      "phone": "937-382-8365",
+      "website": "https://www.clintoncap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Columbiana": {
+      "name": "Community Action Agency of Columbiana County",
+      "phone": "330-424-7221",
+      "website": "https://www.caaofcc.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Crawford": {
+      "name": "Ohio Heartland Community Action Commission",
+      "phone": "740-387-1039",
+      "website": "https://www.ohcac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Marion": {
+      "name": "Ohio Heartland Community Action Commission",
+      "phone": "740-387-1039",
+      "website": "https://www.ohcac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Morrow": {
+      "name": "Ohio Heartland Community Action Commission",
+      "phone": "740-387-1039",
+      "website": "https://www.ohcac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Cuyahoga": {
+      "name": "Step Forward",
+      "phone": "216-696-9077",
+      "website": "https://www.stepforwardtoday.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Darke": {
+      "name": "Miami Valley Community Action Partnership",
+      "phone": "937-341-5000",
+      "website": "https://www.miamivalleycap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Greene": {
+      "name": "Miami Valley Community Action Partnership",
+      "phone": "937-341-5000",
+      "website": "https://www.miamivalleycap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Montgomery": {
+      "name": "Miami Valley Community Action Partnership",
+      "phone": "937-341-5000",
+      "website": "https://www.miamivalleycap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Preble": {
+      "name": "Miami Valley Community Action Partnership",
+      "phone": "937-341-5000",
+      "website": "https://www.miamivalleycap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Defiance": {
+      "name": "Northwestern Ohio Community Action Commission",
+      "phone": "419-784-5136",
+      "website": "https://www.nocac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Fulton": {
+      "name": "Northwestern Ohio Community Action Commission",
+      "phone": "419-784-5136",
+      "website": "https://www.nocac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Henry": {
+      "name": "Northwestern Ohio Community Action Commission",
+      "phone": "419-784-5136",
+      "website": "https://www.nocac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Paulding": {
+      "name": "Northwestern Ohio Community Action Commission",
+      "phone": "419-784-5136",
+      "website": "https://www.nocac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Van Wert": {
+      "name": "Northwestern Ohio Community Action Commission",
+      "phone": "419-784-5136",
+      "website": "https://www.nocac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Williams": {
+      "name": "Northwestern Ohio Community Action Commission",
+      "phone": "419-784-5136",
+      "website": "https://www.nocac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Erie": {
+      "name": "Community Action Commission of Erie Huron and Richland Counties",
+      "phone": "419-626-4320",
+      "website": "https://www.cacehr.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Huron": {
+      "name": "Community Action Commission of Erie Huron and Richland Counties",
+      "phone": "419-626-4320",
+      "website": "https://www.cacehr.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Richland": {
+      "name": "Community Action Commission of Erie Huron and Richland Counties",
+      "phone": "419-626-4320",
+      "website": "https://www.cacehr.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Fairfield": {
+      "name": "Lancaster-Fairfield Community Action Agency",
+      "phone": "740-653-4146",
+      "website": "https://www.faircaa.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Fayette": {
+      "name": "Community Action Commission of Fayette County",
+      "phone": "740-335-7282",
+      "website": "https://www.cacfayettecounty.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Franklin": {
+      "name": "IMPACT Community Action",
+      "phone": "614-252-2799",
+      "website": "https://www.impactca.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Gallia": {
+      "name": "Gallia-Meigs Community Action Agency",
+      "phone": "740-444-4400",
+      "website": "https://www.galliameigscaa.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Meigs": {
+      "name": "Gallia-Meigs Community Action Agency",
+      "phone": "740-444-4400",
+      "website": "https://www.galliameigscaa.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Geauga": {
+      "name": "Lifeline",
+      "phone": "440-354-2148",
+      "website": "https://www.lclifeline.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Lake": {
+      "name": "Lifeline",
+      "phone": "440-354-2148",
+      "website": "https://www.lclifeline.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Guernsey": {
+      "name": "GMN Tri-County CAC",
+      "phone": "740-732-2388",
+      "website": "https://www.gmntrico.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Monroe": {
+      "name": "GMN Tri-County CAC",
+      "phone": "740-732-2388",
+      "website": "https://www.gmntrico.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Noble": {
+      "name": "GMN Tri-County CAC",
+      "phone": "740-732-2388",
+      "website": "https://www.gmntrico.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Hamilton": {
+      "name": "Community Action Agency Cincinnati-Hamilton County",
+      "phone": "513-569-1840",
+      "website": "https://www.cincy-caa.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Hancock": {
+      "name": "HHWP Community Action Commission",
+      "phone": "419-423-3755",
+      "website": "https://www.hhwpcac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Hardin": {
+      "name": "HHWP Community Action Commission",
+      "phone": "419-423-3755",
+      "website": "https://www.hhwpcac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Putnam": {
+      "name": "HHWP Community Action Commission",
+      "phone": "419-423-3755",
+      "website": "https://www.hhwpcac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Wyandot": {
+      "name": "HHWP Community Action Commission",
+      "phone": "419-423-3755",
+      "website": "https://www.hhwpcac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Highland": {
+      "name": "Highland County Community Action Organization",
+      "phone": "937-393-3458",
+      "website": "https://www.hccao.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Jackson": {
+      "name": "Jackson-Vinton Community Action",
+      "phone": "740-384-3722",
+      "website": "https://www.jvcai.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Vinton": {
+      "name": "Jackson-Vinton Community Action",
+      "phone": "740-384-3722",
+      "website": "https://www.jvcai.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Jefferson": {
+      "name": "Jefferson County Community Action Council",
+      "phone": "740-282-0971",
+      "website": "https://www.jeffersoncountycac.com",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Lawrence": {
+      "name": "Ironton-Lawrence County Community Action Organization",
+      "phone": "740-532-3140",
+      "website": "https://www.ilcao.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Licking": {
+      "name": "LEADS Community Action Agency",
+      "phone": "740-349-8606",
+      "website": "https://www.leadscaa.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Lorain": {
+      "name": "Lorain County Community Action Agency",
+      "phone": "440-245-2009",
+      "website": "https://www.lccaa.net",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Lucas": {
+      "name": "Pathway",
+      "phone": "419-242-7304",
+      "website": "https://www.pathwaytoledo.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Mahoning": {
+      "name": "Mahoning Youngstown Community Action Partnership",
+      "phone": "330-747-7921",
+      "website": "https://www.mycaphelp.com",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Medina": {
+      "name": "Community Action Wayne/Medina",
+      "phone": "330-264-8677",
+      "website": "https://www.cawm.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Wayne": {
+      "name": "Community Action Wayne/Medina",
+      "phone": "330-264-8677",
+      "website": "https://www.cawm.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Miami": {
+      "name": "Miami County Community Action Council",
+      "phone": "937-335-7920",
+      "website": "https://www.miamicac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Morgan": {
+      "name": "Washington-Morgan Community Action",
+      "phone": "740-373-3745",
+      "website": "https://www.wmcap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Washington": {
+      "name": "Washington-Morgan Community Action",
+      "phone": "740-373-3745",
+      "website": "https://www.wmcap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Muskingum": {
+      "name": "Muskingum Economic Opportunity Action Group",
+      "phone": "740-453-5703",
+      "website": "https://www.meoag.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Ottawa": {
+      "name": "Great Lakes Community Action Partnership",
+      "phone": "800-775-9767",
+      "website": "https://www.glcap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Sandusky": {
+      "name": "Great Lakes Community Action Partnership",
+      "phone": "800-775-9767",
+      "website": "https://www.glcap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Seneca": {
+      "name": "Great Lakes Community Action Partnership",
+      "phone": "800-775-9767",
+      "website": "https://www.glcap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Wood": {
+      "name": "Great Lakes Community Action Partnership",
+      "phone": "800-775-9767",
+      "website": "https://www.glcap.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Pickaway": {
+      "name": "Pickaway County Community Action Organization",
+      "phone": "740-477-1655",
+      "website": "https://www.picca.info",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Pike": {
+      "name": "Community Action Committee of Pike County",
+      "phone": "740-289-2371",
+      "website": "https://www.pikecac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Portage": {
+      "name": "Community Action Council of Portage County",
+      "phone": "330-297-1456",
+      "website": "https://www.cacportage.net",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Ross": {
+      "name": "Ross County Community Action Commission",
+      "phone": "740-702-7222",
+      "website": "https://www.rossccac.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Scioto": {
+      "name": "Community Action Organization of Scioto County",
+      "phone": "740-354-7541",
+      "website": "https://www.caosciotocounty.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Stark": {
+      "name": "Stark County Community Action Agency",
+      "phone": "330-454-1676",
+      "website": "https://www.sccaa.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Summit": {
+      "name": "Community Action Akron Summit",
+      "phone": "330-376-7730",
+      "website": "https://www.ca-akron.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Trumbull": {
+      "name": "Trumbull Community Action Program",
+      "phone": "330-393-2507",
+      "website": "https://www.tcaphelps.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    },
+    "Warren": {
+      "name": "Warren County Community Services",
+      "phone": "513-970-6737",
+      "website": "https://www.wccsi.org",
+      "source": "https://oacaa.org/find-an-agency/",
+      "source_type": "association_directory",
+      "last_source_review": "2026-10-28",
+      "availability": "program_specific_check_required"
+    }
+  }
+}
