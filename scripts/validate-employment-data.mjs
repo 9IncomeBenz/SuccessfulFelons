@@ -8,6 +8,7 @@ const statewide = readFileSync('ohio.html', 'utf8');
 const housing = readFileSync('housing.html', 'utf8');
 const housingAgencies = JSON.parse(readFileSync('data/ohio-support-agencies.json', 'utf8'));
 const reentryPrograms = JSON.parse(readFileSync('data/ohio-reentry-programs.json', 'utf8'));
+const verificationQueue = JSON.parse(readFileSync('data/employer-verification-queue.json', 'utf8'));
 const counties = JSON.parse(readFileSync('data/ohio-counties.json', 'utf8'));
 assert.equal(counties.counties.length,88,'Ohio coverage must include all 88 counties');
 const countyNames = counties.counties.map(c=>c.name);
@@ -58,6 +59,18 @@ assert.match(homepage, /item\.opening_status==='not_employer_confirmed'/, 'Main 
 assert.match(directory, /id="availability"/, 'Directory must offer historical status filter');
 assert.match(homepage, /employer has not confirmed the vacancy/i, 'Main search must disclose lack of employer confirmation');
 
+assert.equal(verificationQueue.leads.length,data.records.length,'Every employer research record must have a verification queue entry');
+const queuedIDs=new Set();
+for(const q of verificationQueue.leads){
+  assert.ok(!queuedIDs.has(q.research_id),'Duplicate provider verification queue item: '+q.research_id);
+  queuedIDs.add(q.research_id);
+  assert.equal(q.contact_status,'not_contacted','Do not claim unverified contact');
+  assert.equal(q.current_opening_confirmed,false,'Unconfirmed hiring should not be labeled open');
+  assert.equal(q.conviction_policy_confirmed,false,'Screening rules are not independently confirmed');
+  assert.equal(q.publication_state,'research_only','Research must not be publicly published as a verified listing');
+  assert.equal(q.last_contacted_at,null,'Direct contact cannot be invented');
+}
+for(const item of data.records)assert.ok(queuedIDs.has(item.id),'Research item not queued for verification: '+item.id);
 const ids = new Set();
 const kinds = new Set(['program', 'posting', 'timed', 'case']);
 const statuses = new Set(['not_employer_confirmed', 'expired_listing', 'source_unavailable']);
@@ -99,4 +112,4 @@ for(const [name,html] of [['homepage',homepage],['employment directory',director
   for(const script of scripts) new Function(script[1]);
 }
 console.log('Statewide coverage validated: 88 Ohio counties with directory-published community agencies, documented local reentry services, four site pages and script syntax passed.');
-console.log(`Employment research validated: ${data.records.length} records, ${ids.size} unique IDs, ${domains.size} source domains. No research lead is presented as an employer-confirmed vacancy.`);
+console.log(`Employment research validated: ${data.records.length} records, ${ids.size} unique IDs, ${domains.size} source domains, ${verificationQueue.leads.length} untouched direct-contact verification tasks. No research lead is presented as an employer-confirmed vacancy.`);
