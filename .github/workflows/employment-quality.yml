@@ -14,6 +14,10 @@ on:
       - 'index.html'
       - 'scripts/validate-employment-data.mjs'
       - 'package.json'
+      - 'saved.html'
+      - 'assets/saved-leads.js'
+      - 'scripts/validate-saved-leads.mjs'
+      - 'tools.html'
       - '.github/workflows/employment-quality.yml'
   pull_request:
     paths:
@@ -29,6 +33,10 @@ on:
       - 'index.html'
       - 'scripts/validate-employment-data.mjs'
       - 'package.json'
+      - 'saved.html'
+      - 'assets/saved-leads.js'
+      - 'scripts/validate-saved-leads.mjs'
+      - 'tools.html'
       - '.github/workflows/employment-quality.yml'
 permissions:
   contents: read
@@ -42,4 +50,4 @@ jobs:
         with:
           node-version: '24'
       - name: Validate evidence and waiting-period rules
-        run: npm run check:employment
+        run: npm run check
