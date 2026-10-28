@@ -1,9 +1,9 @@
 # SuccessfulFelons — Private Accounts & Cloud Sync Rollout
 Updated: 2026-10-28
 
-**Deployment state: backend staged, member accounts NOT open.**
+**Deployment state: production private storage installed; account UI and cloud API implemented behind explicit readiness flag; member registration NOT publicly open.**
 
-The project already exposes managed Neon Auth and Neon Postgres environment configuration in Vercel. This DOES NOT mean users have working sign-up, trusted-domain redirects, verified sessions or synced data. Keep the public `/api/account-status` response `accountsAvailable:false` and `onlineSyncAvailable:false` until the checklist below is finished and tested.
+The existing Neon Auth service and production private database schema are connected. Registration and online sync are explicitly gated by `ACCOUNT_REGISTRATION_ENABLED=true` plus database readiness. Until email deliverability and real multi-device authentication tests pass, leave the launch flag unset and do not describe this system as publicly operational.
 
 ## Connected Neon verification — October 28, 2026
 - Connected Neon project: `SuccessfulFelons` (existing project), production branch `production`, database `neondb`.
@@ -14,11 +14,11 @@ The project already exposes managed Neon Auth and Neon Postgres environment conf
 - Neon's completion workflow applied the base migration to production and deleted the temporary test branch `br-still-sky-b4y3exh9`. Temporary test rows were **not** copied into production.
 - Read-only production checks verified existing `public.opportunities` and `public.organizations` remained present. Table privileges were not granted to PUBLIC.
 - The public `/api/account-status` responded with `privateStorageReady:true`, `accountsAvailable:false` and `onlineSyncAvailable:false`. The existing `/api/opportunities` endpoint returned HTTP 200.
-- The production sign-in page, account deletion, verified email flows, cross-device testing and secure user-facing cloud sync remain gated.
+- The production signup screen, managed account deletion, verified-email end-to-end tests, and true cross-device authenticated tests remain gated. The UI and protected endpoints have been implemented but real sessions have not been exercised by an authenticated test user.
 
 ## Architecture
 - Use **managed Neon Auth** for sign-up, sign-in, email verification, password management, session cookies and JWT issuance. Do not store passwords, password hashes, session cookies, JWTs or full criminal-history details in SuccessfulFelons tables or browser localStorage.
-- The verified browser client is **staged** in `src/account-sync.js` using official `@neondatabase/auth`. It has **not** been bundled into a live sign-in experience. Never substitute an unpinned third-party CDN for the trusted SDK.
+- The managed browser client in `src/account-sync.js` is bundled into static production assets using the pinned official `@neondatabase/auth` SDK, with esbuild through `scripts/build-site.mjs`. The sign-in forms are available only when the account-status endpoint confirms the explicit launch flag and private storage. Never substitute an unpinned third-party CDN.
 - Protected API: `/api/account/saved` accepts a short-lived `Authorization: Bearer` JWT issued by managed Neon Auth. `api/_lib/auth.js` verifies its signature using Neon Auth's HTTPS JWKS, issuer and EdDSA. Every query uses `payload.sub` as the owner, never an ID supplied by the client.
 - Database: `sf_private.saved_leads` in `migrations/002_private_saved_leads.sql` and quota trigger `migrations/003_private_saved_leads_quota.sql`. This private schema is not an exposed public Data API table. Store **only** opaque lead ID, role title, organization, URL and timestamps, not resume contents, address, SSN, criminal history or email.
 - The `GET`, `PUT`, and `DELETE` API returns 401 for missing/invalid JWTs and 503 for absent configuration/database table. It must not return another user's row.
@@ -49,3 +49,10 @@ node --check src/account-sync.js
 
 ## Direct employer and housing confirmations
 The `data/employer-verification-queue.json` research queue still records **zero direct contacts**. Do not promote an employer program or posting to a verified vacancy until an authorized employer representative has confirmed the specific role, opening, pay and relevant offense lookback period (including what date starts that period). Likewise, an agency listing does not imply a landlord will rent to someone with a felony. Housing intake must confirm specific units, current availability, written screening criteria and permission to publish. Maintain reviewer attribution and evidence privately, never within the public repository; publishing requires moderation.
+
+## Implementation status after account frontend build
+- `/account.html` has sign-in, register, email verification-code entry, cloud saved-lead list, export, per-owner cloud deletion and managed identity deletion request. The latter depends on Neon Auth enabling self-deletion; no end-to-end deletion result has been verified.
+- `/saved.html`, `/employment.html`, `/ohio.html` and the homepage retain local saving and optional cloud upload. Per-account auto-upload is off by default, explicitly consented, and can be disabled; signed-out user data is never uploaded.
+- Authorization now consults `neon_auth."user"` to require a live, email-verified, non-banned identity. This rejects a deleted identity even if a short-lived JWT has not yet expired. The live identity check and private authorization paths have regression tests; a production JWT was not used in automated tests.
+- Production custom SMTP has **not** been configured. Neon shared SMTP is configured, but the official production checklist requires an appropriate transactional provider and sender verification.
+- Registration remains disabled by default; setting the launch flag alone without actual SMTP and end-to-end testing is not sufficient to declare this finished.
