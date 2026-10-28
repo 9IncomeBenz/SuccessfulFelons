@@ -5,11 +5,21 @@ Updated: 2026-10-28
 
 The project already exposes managed Neon Auth and Neon Postgres environment configuration in Vercel. This DOES NOT mean users have working sign-up, trusted-domain redirects, verified sessions or synced data. Keep the public `/api/account-status` response `accountsAvailable:false` and `onlineSyncAvailable:false` until the checklist below is finished and tested.
 
+## Connected Neon verification — October 28, 2026
+- Connected Neon project: `SuccessfulFelons` (existing project), production branch `production`, database `neondb`.
+- Neon Auth is provisioned with managed Better Auth, and the official production URL is trusted. The shared Neon SMTP service is still configured; custom transactional email and end-to-end verification are required before public launch.
+- Production's `sf_private.saved_leads` table was **absent** during the read-only inspection.
+- Migration `002_private_saved_leads.sql` has been **successfully tested on a temporary Neon branch**, not on production.
+- Migration `003_private_saved_leads_quota.sql` contains the separate quota trigger (the automated migration preparer cannot parse a semicolon-bearing PL/pgSQL function as part of the multi-statement migration). On the temporary branch, its function and trigger were executed and validated.
+- Synthetic temporary-branch results: one owner inserted 100 saved leads; attempt #101 correctly raised `Saved lead limit exceeded`; a second owner could save independently; an existing record could be updated at quota.
+- **No production schema migration was applied.** Applying migrations to production requires the owner's explicit approval and completion of the reviewed change process. The prepared temporary branch should be cleaned up through the migration completion/cancellation workflow after the owner decides.
+- The production sign-in page, account deletion, verified email flows, cross-device testing and secure user-facing cloud sync remain gated.
+
 ## Architecture
 - Use **managed Neon Auth** for sign-up, sign-in, email verification, password management, session cookies and JWT issuance. Do not store passwords, password hashes, session cookies, JWTs or full criminal-history details in SuccessfulFelons tables or browser localStorage.
 - The verified browser client is **staged** in `src/account-sync.js` using official `@neondatabase/auth`. It has **not** been bundled into a live sign-in experience. Never substitute an unpinned third-party CDN for the trusted SDK.
 - Protected API: `/api/account/saved` accepts a short-lived `Authorization: Bearer` JWT issued by managed Neon Auth. `api/_lib/auth.js` verifies its signature using Neon Auth's HTTPS JWKS, issuer and EdDSA. Every query uses `payload.sub` as the owner, never an ID supplied by the client.
-- Database: `sf_private.saved_leads` in `migrations/002_private_saved_leads.sql`. This private schema is not an exposed public Data API table. Store **only** opaque lead ID, role title, organization, URL and timestamps, not resume contents, address, SSN, criminal history or email.
+- Database: `sf_private.saved_leads` in `migrations/002_private_saved_leads.sql` and quota trigger `migrations/003_private_saved_leads_quota.sql`. This private schema is not an exposed public Data API table. Store **only** opaque lead ID, role title, organization, URL and timestamps, not resume contents, address, SSN, criminal history or email.
 - The `GET`, `PUT`, and `DELETE` API returns 401 for missing/invalid JWTs and 503 for absent configuration/database table. It must not return another user's row.
 - Existing browser storage and device backups keep working. Any migration of locally saved links to a user account needs **explicit, informed opt-in**. No automatic reading or uploading of old browser data.
 - A sign-out ends the managed browser session but does not instantly revoke any previously issued JWT until expiry. Keep JWT lifetimes short.
