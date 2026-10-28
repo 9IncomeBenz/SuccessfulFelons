@@ -52,7 +52,7 @@ async function loadEmployerResearch(){
   }
   if(document.getElementById('listing-kind').value && document.getElementById('listing-kind').value!=='employment'){section.hidden=true;return;}
   const city=document.getElementById('listing-city').value.trim().toLowerCase();
-  const matches=cachedEmployerResearch.filter(item=>!city || String(item.area||'').toLowerCase().includes(city));
+  const matches=cachedEmployerResearch.filter(item=>item.opening_status==='not_employer_confirmed' && (!city || String(item.area||'').toLowerCase().includes(city)));
   state.textContent=matches.length+' researched employer lead'+(matches.length===1?'':'s')+' found'+(city?' near '+city:'')+'. Vacancies are not employer-confirmed.';
   if(!matches.length){addText(out,'p','No research leads found for this city. Try Columbus, Groveport, Lebanon or clear the city filter.');return;}
   const category={program:'DOCUMENTED EMPLOYER PROGRAM',posting:'POSTING WELCOMES RECORDS',timed:'POSITION-SPECIFIC WAITING PERIOD',case:'CASE-BY-CASE / COMPLIANCE'};
