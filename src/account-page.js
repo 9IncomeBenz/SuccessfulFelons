@@ -57,10 +57,10 @@ function renderCloud(){
   }
   out(cloud.length+' saved link'+(cloud.length===1?'':'s')+' in your private online account.');
 }
-async function refreshCloud(){
+async function refreshCloud(options={}){
   if(!user)return;
   try{cloud=await client.list();if(!Array.isArray(cloud))throw Error('Invalid cloud response');renderCloud()}
-  catch(error){cloud=[];if(get('cloud-list'))get('cloud-list').replaceChildren();out('Unable to load cloud leads: '+error.message)}
+  catch(error){cloud=[];if(get('cloud-list'))get('cloud-list').replaceChildren();out('Unable to load cloud leads: '+error.message);if(options.required)throw error}
 }
 async function guarded(fn){
   if(!configured)return;
@@ -77,9 +77,15 @@ on('signin','submit',ev=>{ev.preventDefault();guarded(async()=>{
 })});
 on('register','submit',ev=>{ev.preventDefault();guarded(async()=>{
   const f=new FormData(ev.currentTarget);
-  resultData(await client.signUp(String(f.get('email')).trim(),String(f.get('password')),String(f.get('name')).trim()),'Registration failed');
-  showMode('verify');get('verify').elements.email.value=String(f.get('email')).trim();
-  msg('Registration submitted. Verify your email using the code from Neon Auth; an account may not be active until verification succeeds.');
+  const email=String(f.get('email')).trim();
+  const signup=resultData(await client.signUp(email,String(f.get('password')),String(f.get('name')).trim()),'Registration failed');
+  showMode('verify');get('verify').elements.email.value=email;
+  try {
+    resultData(await client.auth.emailOtp.sendVerificationOtp({email,type:'email-verification'}),'Verification code could not be sent');
+    msg('Registration received. Check your inbox for a verification code. Codes expire after 15 minutes.');
+  } catch {
+    msg('Registration received, but a verification code could not be sent automatically. Use Send verification code or try again.');
+  }
 })});
 on('verify','submit',ev=>{ev.preventDefault();guarded(async()=>{
   const f=new FormData(ev.currentTarget);
@@ -139,8 +145,16 @@ on('delete-identity','click',()=>guarded(async()=>{
   if(typeof client.auth.deleteUser!=='function')throw Error('Managed identity self-deletion is not available. Contact platform support for a verified deletion request.');
   const password=get('delete-password')?.value||'';
   if(!password)throw Error('Password confirmation required; no data deleted.');
-  // Delete cloud saves before identity. If identity deletion fails, report that
-  // identity remains, and never claim the entire account is deleted.
+  // Export a local recoverable copy before destructive changes. If the
+  // managed identity deletion is unavailable, do not delete any cloud data.
+  await refreshCloud({required:true});
+  saveJson('successfulfelons-before-account-deletion.json',{
+    format:'successfulfelons-saved-leads-v1',
+    exportedAt:new Date().toISOString(),
+    saved:cloud.map(x=>({id:x.id,title:x.title,organization:x.organization,url:x.url}))
+  });
+  // Managed Neon deletion may reject password/session; report partial failures
+  // accurately and never claim deletion unless the identity request succeeds.
   const result=await client.clear();
   const deleted=await client.auth.deleteUser({password});
   if(deleted?.error){await refreshCloud();throw Error('Cloud links deleted ('+result.deleted_count+'), but the identity could not be deleted: '+(deleted.error.message||'Managed Auth rejected deletion'))}
