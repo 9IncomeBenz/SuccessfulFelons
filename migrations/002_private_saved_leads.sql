@@ -23,7 +23,7 @@ ON sf_private.saved_leads (owner_user_id, updated_at DESC);
 -- Serialize inserts by owner and enforce the same 100-item limit in Postgres,
 -- including when parallel requests race. Updating an existing lead remains allowed.
 CREATE OR REPLACE FUNCTION sf_private.enforce_saved_leads_quota()
-RETURNS trigger LANGUAGE plpgsql AS $
+RETURNS trigger LANGUAGE plpgsql AS $sfquota$
 BEGIN
   PERFORM pg_advisory_xact_lock(hashtextextended(NEW.owner_user_id, 0));
   IF NOT EXISTS (
@@ -38,7 +38,7 @@ BEGIN
   END IF;
   RETURN NEW;
 END;
-$;
+$sfquota$;
 REVOKE ALL ON FUNCTION sf_private.enforce_saved_leads_quota() FROM PUBLIC;
 CREATE OR REPLACE TRIGGER sf_saved_leads_quota_before_insert
 BEFORE INSERT ON sf_private.saved_leads
