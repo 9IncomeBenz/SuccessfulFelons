@@ -7,9 +7,11 @@
     "dev": "vercel dev",
     "check:employment": "node scripts/validate-employment-data.mjs",
     "check:workspace": "node scripts/validate-saved-leads.mjs",
-    "check": "npm run check:employment && npm run check:workspace"
+    "check": "npm run check:employment && npm run check:workspace && npm run check:account",
+    "check:account": "node scripts/validate-account-security.mjs"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.0.0"
+    "@neondatabase/serverless": "^1.0.0",
+    "jose": "^6.1.0"
   }
 }
