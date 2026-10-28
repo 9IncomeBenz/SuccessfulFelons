@@ -20,7 +20,15 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "employer_program",
       "is_verified_vacancy": false,
-      "screening_scope": "program"
+      "screening_scope": "program",
+      "county": "Warren",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null,
+      "opening_evidence": "program_only"
     },
     {
       "kind": "program",
@@ -38,7 +46,15 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "community_directory",
       "is_verified_vacancy": false,
-      "screening_scope": "program"
+      "screening_scope": "program",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null,
+      "opening_evidence": "program_only"
     },
     {
       "kind": "posting",
@@ -56,7 +72,14 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null
     },
     {
       "kind": "posting",
@@ -74,7 +97,14 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null
     },
     {
       "kind": "posting",
@@ -92,7 +122,14 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null
     },
     {
       "kind": "posting",
@@ -110,7 +147,14 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null
     },
     {
       "kind": "timed",
@@ -129,7 +173,15 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "county": "Summit",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null,
+      "lookback_start_basis": "not_confirmed"
     },
     {
       "kind": "timed",
@@ -148,7 +200,15 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "position_specific_employer_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null,
+      "lookback_start_basis": "not_confirmed"
     },
     {
       "kind": "timed",
@@ -167,7 +227,15 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "position_specific_employer_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null,
+      "lookback_start_basis": "not_confirmed"
     },
     {
       "kind": "timed",
@@ -186,7 +254,15 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "position_specific_employer_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "county": "Cuyahoga",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null,
+      "lookback_start_basis": "not_confirmed"
     },
     {
       "kind": "timed",
@@ -206,7 +282,15 @@
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
       "screening_scope": "position_or_assignment",
-      "status_note": "Job expired on Indeed as of October 28, 2026"
+      "status_note": "Job expired on Indeed as of October 28, 2026",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "historical_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null,
+      "lookback_start_basis": "not_confirmed"
     },
     {
       "kind": "timed",
@@ -226,7 +310,15 @@
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
       "screening_scope": "position_or_assignment",
-      "status_note": "The cited job link returned 404 on October 28, 2026; historical policy only"
+      "status_note": "The cited job link returned 404 on October 28, 2026; historical policy only",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "historical_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null,
+      "lookback_start_basis": "not_confirmed"
     },
     {
       "kind": "case",
@@ -244,7 +336,15 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null,
+      "opening_evidence": "fair_chance_compliance_only"
     },
     {
       "kind": "posting",
@@ -262,7 +362,14 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null
     },
     {
       "kind": "posting",
@@ -280,7 +387,16 @@
       "opening_status": "not_employer_confirmed",
       "source_level": "third_party_or_syndicated_posting",
       "is_verified_vacancy": false,
-      "screening_scope": "position_or_assignment"
+      "screening_scope": "position_or_assignment",
+      "county": "Franklin",
+      "county_basis": "city_or_municipality_proxy_worksite_unconfirmed",
+      "geography": "Ohio",
+      "employer_directly_confirmed": false,
+      "verification_stage": "research_only",
+      "last_contacted_at": null,
+      "last_employer_verified_at": null
     }
-  ]
+  ],
+  "statewide_navigation": "All 88 Ohio counties available through /ohio.html and OhioMeansJobs; research density differs across counties.",
+  "county_note": "County assignment is approximate from city/municipality when no exact worksite address was confirmed. It is NOT direct verification of employer location or vacancy."
 }
