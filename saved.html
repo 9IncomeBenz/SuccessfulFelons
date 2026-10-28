@@ -25,7 +25,7 @@ button.secondary{background:#334657;color:white}button:disabled{opacity:.6;curso
 <main><section class="hero"><p class="muted">PERSONAL WORKSPACE • ON THIS DEVICE ONLY</p><h1>My saved opportunities</h1><p>Keep track of employer research and opportunities you want to revisit. Your saved links remain in this browser and are not part of an online account.</p>
 <div class="actions"><a class="button" href="/employment.html">Explore employers</a><a class="button secondary" href="/housing.html">Find housing support</a><a href="/tools.html">Open application tracker and backups</a></div></section>
 <div class="notice"><strong>Privacy and reliability:</strong> These entries are not applications, job offers or verified openings. Saving a lead does not submit it to an employer. Entries may disappear if your browser data is cleared, and they do not sync across devices. Avoid saving criminal-history notes or sensitive identifying information.</div>
-<section class="panel"><div class="actions"><button id="export" type="button" class="secondary">Export saved links (JSON)</button><button id="refresh" type="button" class="secondary">Refresh list</button></div>
+<section class="panel"><div class="actions"><button id="export" type="button" class="secondary">Export saved links (JSON)</button><button id="refresh" type="button" class="secondary">Refresh list</button></div><label>Restore previously exported saved links (JSON file)<input id="restore-file" type="file" accept=".json,application/json"></label><button id="restore" type="button" class="secondary">Import and merge saved links</button><p class="muted">Imports only backups exported by this saved-leads page. Import merges links, skips duplicates, and never deletes existing saved links or application history. Files stay in your browser.</p>
 <label>Find saved links<input id="search" type="search" placeholder="Employer, role or organization" maxlength="120"></label>
 <p id="status" role="status" aria-live="polite">Loading saved links…</p></section>
 <section aria-labelledby="saved-heading"><h2 id="saved-heading">Saved leads</h2><div id="saved" class="list"></div></section>
@@ -42,5 +42,18 @@ const panel=el('div',null,card);panel.className='actions';const button=el('butto
 search.addEventListener('input',render);document.getElementById('refresh').addEventListener('click',render);
 document.getElementById('export').addEventListener('click',()=>{const items=SFLeads.list();if(!items.length){status.textContent='There are no saved links to export.';return}const data={format:'successfulfelons-saved-leads-v1',exportedAt:new Date().toISOString(),saved:items.map(x=>({id:String(x.id||'').slice(0,120),title:String(x.title||'').slice(0,180),organization:String(x.organization||'').slice(0,180),url:safeURL(x.url)||''}))};
 const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='successfulfelons-saved-links.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='Saved links backup downloaded on this device.'});
+document.getElementById('restore').addEventListener('click',async()=>{
+const field=document.getElementById('restore-file'),file=field.files && field.files[0];
+if(!file){status.textContent='Choose a saved-links JSON backup first.';return}
+if(file.size>1048576){status.textContent='That backup is too large (maximum 1 MB).';return}
+try{
+ const obj=JSON.parse(await file.text());
+ if(!obj || obj.format!=='successfulfelons-saved-leads-v1' || !Array.isArray(obj.saved) || obj.saved.length>100)throw Error('Invalid SuccessfulFelons saved-links backup');
+ if(!confirm('Merge up to '+obj.saved.length+' saved links into this browser? This does not overwrite existing applications.'))return;
+ let added=0,skipped=0,failed=0;
+ for(const item of obj.saved){const result=SFLeads.save(item);if(!result.ok)failed++;else if(result.added)added++;else skipped++}
+ field.value='';render();status.textContent='Restore complete: '+added+' added, '+skipped+' already saved, '+failed+' rejected or unable to save.';
+}catch{status.textContent='Unable to import this file. Use a valid SuccessfulFelons saved-links JSON backup.';}
+});
 window.addEventListener('storage',event=>{if(event.key===SFLeads.key)render()});window.addEventListener('sf:saved-changed',render);render();
 </script></body></html>
