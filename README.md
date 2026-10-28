@@ -5,6 +5,15 @@ Independent Ohio-first platform helping people find housing, employment, indepen
 ## Status
 Early development. The site has an evidence-based employer-research directory and a separate database-backed verified-opportunity search. The researched leads are **not employer-confirmed live vacancies** and are not presented as published/verified opportunity records. Employer and landlord partnerships, account synchronization, eligibility decisions, and payment processing are not established by this repository.
 
+## Private account implementation (launch gated)
+- Managed Neon Auth is connected; the production `sf_private.saved_leads` database table and per-user 100-lead trigger are installed and tested. Existing opportunity tables were unchanged.
+- `/account.html` contains sign-in, registration, email OTP verification, private cloud saved links, export, explicit import, local opt-in auto-upload, clearing cloud data and a managed account deletion request.
+- `/saved.html` displays local device leads independently and has a private online list for signed-in accounts.
+- `api/account/saved.js` and `api/account/clear.js` require signed, short-lived Neon JWTs **and** an active, email-verified, non-banned managed identity. User-provided owner IDs never authorize access.
+- `src/cloud-auto-sync.js` uploads saved links only after affirmative opt-in for the authenticated user on that device. Offline failures do not delete local browser saves; other tracker records are not uploaded.
+- Production builds run all statewide, storage and account security tests before bundling the official `@neondatabase/auth` SDK into first-party JS via esbuild.
+- **Public signup is deliberately disabled:** the `ACCOUNT_REGISTRATION_ENABLED` environment flag is not set to `true`. Completion of production email-sending configuration, real verified-user sign-in, two-device session isolation, and deletion testing are still required. The presence of code and database tables is not proof that signup has passed end-to-end QA.
+
 ## Statewide Ohio access
 - `/ohio.html` provides a searchable directory of **all 88 Ohio counties**, using `data/ohio-counties.json` as the authoritative in-repository county list (sourced from OhioMeansJobs).
 - Ohio residents can select a county and access official OhioMeansJobs workforce-center guidance, OhioMeansJobs job search, Ohio Housing Locator, Ohio 211 support and Ohio Legal Help. These are *external official resources*, not directly confirmed SuccessfulFelons vacancies.
