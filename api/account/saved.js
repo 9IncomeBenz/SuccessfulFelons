@@ -47,7 +47,7 @@ export default async function handler(req, res) {
         ORDER BY updated_at DESC
         LIMIT 100
       `;
-      return res.status(200).json({ leads: rows, storage: 'private-account', verified: true });
+      return res.status(200).json({ leads: rows, storage: 'private-account', authenticated: true });
     }
     if (req.method === 'PUT') {
       const serialized = typeof req.body === 'string' ? req.body : JSON.stringify(req.body || '');
