@@ -13,8 +13,8 @@ for (const entry of await readdir(root, {withFileTypes:true})) {
 }
 for (const folder of ['assets','data','docs']) await cp(join(root,folder),join(output,folder),{recursive:true,force:true});
 await build({
-  entryPoints: [join(root,'src/account-page.js')],
-  outfile:join(output,'assets/account-page.js'),
+  entryPoints: [join(root,'src/account-page.js'),join(root,'src/cloud-auto-sync.js')],
+  outdir:join(output,'assets'),
   bundle:true,platform:'browser',format:'esm',minify:true,target:['es2022'],
   sourcemap:false,logLevel:'warning',
   define:{'process.env.NODE_ENV':JSON.stringify('production')}
