@@ -1,5 +1,6 @@
 import { neon } from '@neondatabase/serverless';
 import { authHeaders, requireAuthUser } from '../_lib/auth.js';
+import { requireLiveAccount } from '../_lib/account-active.js';
 
 function clean(value, max) {
   return typeof value === 'string' ? value.trim().slice(0, max + 1) : '';
@@ -38,6 +39,7 @@ export default async function handler(req, res) {
     return res.status(error?.statusCode || 503).json({ error: error?.statusCode === 401 ? 'Authentication required' : 'Account service unavailable' });
   }
   const sql = neon(process.env.DATABASE_URL);
+  try {await requireLiveAccount(sql,owner)} catch(error) {return res.status(error?.statusCode===401?401:503).json({error:'Account not active or email not verified'});}
   try {
     if (req.method === 'GET') {
       const rows = await sql`
