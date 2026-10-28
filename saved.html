@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Review and manage employment, training and housing leads saved privately on this device.">
+<title>My Saved Leads | SuccessfulFelons</title>
+<style>
+:root{color-scheme:dark;background:#101419;color:#f4f7f9;font-family:system-ui,-apple-system,Segoe UI,sans-serif}*{box-sizing:border-box}
+body{margin:0}header,main,footer{max-width:1060px;padding:20px;margin:auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.brand{font-weight:850}.brand span{color:#ffda59}
+nav{display:flex;gap:15px;flex-wrap:wrap}
+a{color:#ffdc67}nav a{text-decoration:none}
+h1{font-size:clamp(2rem,5vw,3rem);margin:.35em 0}h2{font-size:1.2rem}
+p{line-height:1.55;color:#ced8e1}.hero,.panel,.card{background:#1c2731;border:1px solid #40505d;border-radius:14px;padding:23px;margin:14px 0}
+label{display:grid;gap:7px;font-weight:650;margin:15px 0}
+input{background:#131d27;color:#fff;border:1px solid #8ca0b2;font:inherit;padding:12px;border-radius:9px;width:100%}
+.actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+button,.button{background:#ffd85c;color:#121923;border:0;font:inherit;font-weight:750;border-radius:9px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block}
+button.secondary{background:#334657;color:white}button:disabled{opacity:.6;cursor:not-allowed}
+.list{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:13px}.card{margin:0;min-width:0}.card h3{margin:5px 0;overflow-wrap:anywhere}.card a{overflow-wrap:anywhere}
+.notice{border-left:4px solid #ffd85c;background:#302b24;padding:15px;border-radius:9px;margin:18px 0}
+.muted{font-size:.9rem;color:#bbc8d4}footer{margin-top:36px;border-top:1px solid #3b4853}
+:focus-visible{outline:3px solid #ffdd70;outline-offset:3px}@media(max-width:560px){header,main,footer{padding:14px}.hero,.panel,.card{padding:17px}}
+</style></head><body>
+<header><div class="brand">SUCCESSFUL<span>FELONS</span><div class="muted">Second Chance Network</div></div><nav aria-label="Main navigation"><a href="/">Home</a><a href="/employment.html">Employment</a><a href="/housing.html">Housing</a><a href="/ohio.html">All counties</a><a href="/tools.html">Practical tools</a></nav></header>
+<main><section class="hero"><p class="muted">PERSONAL WORKSPACE • ON THIS DEVICE ONLY</p><h1>My saved opportunities</h1><p>Keep track of employer research and opportunities you want to revisit. Your saved links remain in this browser and are not part of an online account.</p>
+<div class="actions"><a class="button" href="/employment.html">Explore employers</a><a class="button secondary" href="/housing.html">Find housing support</a><a href="/tools.html">Open application tracker and backups</a></div></section>
+<div class="notice"><strong>Privacy and reliability:</strong> These entries are not applications, job offers or verified openings. Saving a lead does not submit it to an employer. Entries may disappear if your browser data is cleared, and they do not sync across devices. Avoid saving criminal-history notes or sensitive identifying information.</div>
+<section class="panel"><div class="actions"><button id="export" type="button" class="secondary">Export saved links (JSON)</button><button id="refresh" type="button" class="secondary">Refresh list</button></div>
+<label>Find saved links<input id="search" type="search" placeholder="Employer, role or organization" maxlength="120"></label>
+<p id="status" role="status" aria-live="polite">Loading saved links…</p></section>
+<section aria-labelledby="saved-heading"><h2 id="saved-heading">Saved leads</h2><div id="saved" class="list"></div></section>
+<p class="muted">The backup download contains only saved lead titles, organizations, links and IDs. For the application tracker and resume drafts, use the separate backup options on the <a href="/tools.html">Practical tools</a> page.</p>
+</main><footer>© SuccessfulFelons — Second Chance Network. Private browser storage, not cloud synchronization.</footer>
+<script src="/assets/saved-leads.js"></script><script>
+const list=document.getElementById('saved'),search=document.getElementById('search'),status=document.getElementById('status');
+function el(tag,text,parent){const node=document.createElement(tag);if(text!==null)node.textContent=text;parent.append(node);return node}
+function safeURL(value){try{const u=new URL(value);return ['http:','https:'].includes(u.protocol)?u.href:null}catch{return null}}
+function render(){list.replaceChildren();const all=SFLeads.list();const term=search.value.trim().toLowerCase();const entries=all.filter(x=>(String(x.title||'')+' '+String(x.organization||'')).toLowerCase().includes(term));
+status.textContent=entries.length+' of '+all.length+' saved leads on this device.';if(!entries.length){el('p',all.length?'No saved lead matches your search.':'No leads saved yet. Visit the employer directory and choose Save to my leads.',list);return}
+for(const item of entries){const card=el('article',null,list);card.className='card';el('h3',String(item.title||'Opportunity'),card);el('p',String(item.organization||'Organization not provided'),card);const url=safeURL(item.url);if(url){const a=el('a','Review source or application',card);a.href=url;a.target='_blank';a.rel='noopener noreferrer'}else el('p','No valid external website was saved for this lead.',card).className='muted';
+const panel=el('div',null,card);panel.className='actions';const button=el('button','Remove saved lead',panel);button.type='button';button.className='secondary';button.addEventListener('click',()=>{const result=SFLeads.remove(item.id);if(!result.ok){status.textContent=result.reason;return}render()});}}
+search.addEventListener('input',render);document.getElementById('refresh').addEventListener('click',render);
+document.getElementById('export').addEventListener('click',()=>{const items=SFLeads.list();if(!items.length){status.textContent='There are no saved links to export.';return}const data={format:'successfulfelons-saved-leads-v1',exportedAt:new Date().toISOString(),saved:items.map(x=>({id:String(x.id||'').slice(0,120),title:String(x.title||'').slice(0,180),organization:String(x.organization||'').slice(0,180),url:safeURL(x.url)||''}))};
+const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='successfulfelons-saved-links.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='Saved links backup downloaded on this device.'});
+window.addEventListener('storage',event=>{if(event.key===SFLeads.key)render()});window.addEventListener('sf:saved-changed',render);render();
+</script></body></html>
