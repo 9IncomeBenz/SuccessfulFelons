@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="SuccessfulFelons account launch information, local saved leads and safe backups. Online sync is not available yet.">
+<title>Account & Data Security | SuccessfulFelons</title><style>
+:root{background:#101419;color:#f3f5f8;color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif}*{box-sizing:border-box}
+body{margin:0}header,main,footer{max-width:950px;margin:auto;padding:20px}header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}a{color:#ffd765}nav{display:flex;gap:15px;flex-wrap:wrap}.brand{font-weight:850}.brand span{color:#ffd765}
+.hero,.card{background:#1b2630;border:1px solid #435465;padding:24px;border-radius:15px;margin:18px 0}h1{font-size:clamp(2rem,5vw,3rem);margin:.25em 0}h2{font-size:1.3rem}p{color:#cfdae2;line-height:1.6}
+.label{font-size:.82rem;color:#ffe185;font-weight:750;text-transform:uppercase}.notice{border-left:4px solid #ffdc6c;background:#332d20;padding:15px;border-radius:9px;margin:16px 0}.row{display:flex;flex-wrap:wrap;gap:12px}
+.button{background:#ffd964;color:#151d23;font-weight:750;padding:12px 16px;border-radius:8px;text-decoration:none;display:inline-block}.button.alt{background:#35485a;color:#fff}footer{border-top:1px solid #364651;font-size:.87rem}
+@media(max-width:560px){header,main,footer{padding:14px}.hero,.card{padding:17px}}
+</style></head><body><header><div class="brand">SUCCESSFUL<span>FELONS</span></div><nav><a href="/">Home</a><a href="/saved.html">My saved leads</a><a href="/tools.html">Practical tools</a></nav></header><main>
+<section class="hero"><p class="label">Secure account rollout</p><h1>Personal accounts are being prepared.</h1><p>We are building secure, private sign-in and cross-device saved opportunities. Registration, online account saving and synchronization are not publicly available yet.</p><div class="row"><a class="button" href="/saved.html">Manage leads on this device</a><a class="button alt" href="/tools.html">Export application tracker backup</a></div></section>
+<section class="card"><h2>Current availability</h2><p id="account-status" role="status" aria-live="polite">Checking service setup…</p><div class="notice"><strong>Do not enter passwords here.</strong> The site does not yet offer an account registration form. Never send your Social Security number, convictions, court case numbers or full resume to an unverified form. Existing saved leads remain in this browser only until you explicitly choose to upload them after account launch.</div><p>What comes next: identity verification, private storage migration, two-account isolation testing, cross-device sign-in, opt-in import and deletion/export controls.</p></section>
+</main><footer>© SuccessfulFelons — Second Chance Network. Private account functionality has not launched.</footer>
+<script>
+const status=document.getElementById('account-status');
+fetch('/api/account-status',{cache:'no-store'}).then(async r=>{if(!r.ok)throw Error('Not ready');return r.json()})
+.then(data=>{const ready=Boolean(data.accountsAvailable && data.onlineSyncAvailable);status.textContent=ready?'Account service enabled. Check the website’s official sign-in navigation.':'Accounts and cloud sync are not yet enabled. Local saved opportunities and backups remain available. No sign-up is being collected on this page.'})
+.catch(()=>{status.textContent='The account status service is unavailable; do not assume accounts are enabled. Local links remain on this device.'});
+</script></body></html>
