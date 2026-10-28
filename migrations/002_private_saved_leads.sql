@@ -40,9 +40,7 @@ BEGIN
 END;
 $;
 REVOKE ALL ON FUNCTION sf_private.enforce_saved_leads_quota() FROM PUBLIC;
-DROP TRIGGER IF EXISTS sf_saved_leads_quota_before_insert
-ON sf_private.saved_leads;
-CREATE TRIGGER sf_saved_leads_quota_before_insert
+CREATE OR REPLACE TRIGGER sf_saved_leads_quota_before_insert
 BEFORE INSERT ON sf_private.saved_leads
 FOR EACH ROW EXECUTE FUNCTION sf_private.enforce_saved_leads_quota();
 
