@@ -8,11 +8,12 @@ The project already exposes managed Neon Auth and Neon Postgres environment conf
 ## Connected Neon verification — October 28, 2026
 - Connected Neon project: `SuccessfulFelons` (existing project), production branch `production`, database `neondb`.
 - Neon Auth is provisioned with managed Better Auth, and the official production URL is trusted. The shared Neon SMTP service is still configured; custom transactional email and end-to-end verification are required before public launch.
-- Production's `sf_private.saved_leads` table was **absent** during the read-only inspection.
-- Migration `002_private_saved_leads.sql` has been **successfully tested on a temporary Neon branch**, not on production.
-- Migration `003_private_saved_leads_quota.sql` contains the separate quota trigger (the automated migration preparer cannot parse a semicolon-bearing PL/pgSQL function as part of the multi-statement migration). On the temporary branch, its function and trigger were executed and validated.
-- Synthetic temporary-branch results: one owner inserted 100 saved leads; attempt #101 correctly raised `Saved lead limit exceeded`; a second owner could save independently; an existing record could be updated at quota.
-- **No production schema migration was applied.** Applying migrations to production requires the owner's explicit approval and completion of the reviewed change process. The prepared temporary branch should be cleaned up through the migration completion/cancellation workflow after the owner decides.
+- Production migration **approved by the owner and applied October 28, 2026**. The `sf_private.saved_leads` table, `sf_private.enforce_saved_leads_quota()` function, and enabled `sf_saved_leads_quota_before_insert` trigger are present in production. The production saved-leads table contains **0** rows at initial verification.
+- Base schema: `migrations/002_private_saved_leads.sql`. Database-enforced quota: `migrations/003_private_saved_leads_quota.sql`. The quota statements were applied in one database transaction after the base migration.
+- Isolated preview tests before release: one owner inserted 100 synthetic leads; #101 was rejected; a second owner inserted an independent lead; updating an existing saved lead at quota succeeded.
+- Neon's completion workflow applied the base migration to production and deleted the temporary test branch `br-still-sky-b4y3exh9`. Temporary test rows were **not** copied into production.
+- Read-only production checks verified existing `public.opportunities` and `public.organizations` remained present. Table privileges were not granted to PUBLIC.
+- The public `/api/account-status` responded with `privateStorageReady:true`, `accountsAvailable:false` and `onlineSyncAvailable:false`. The existing `/api/opportunities` endpoint returned HTTP 200.
 - The production sign-in page, account deletion, verified email flows, cross-device testing and secure user-facing cloud sync remain gated.
 
 ## Architecture
