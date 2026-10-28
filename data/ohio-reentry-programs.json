@@ -153,6 +153,74 @@
       "last_public_source_review": "2026-10-28",
       "direct_contact_verified": false,
       "enrollment_status": "confirm_with_provider"
+    },
+    {
+      "id": "akron-urbean-workforce",
+      "name": "Urbean Cafe / Broken Chains Ministry Workforce Development",
+      "county": "Summit",
+      "city": "Akron",
+      "type": "reentry_employment",
+      "summary": "Official Broken Chains Ministry page describes hands-on cafe work and workforce training for returning citizens in Akron. Current training placement or jobs are not confirmed.",
+      "phone": null,
+      "url": "https://www.brokenchainsministry.org/urbean-cafe",
+      "source_type": "provider_official",
+      "not_vacancy": true,
+      "last_public_source_review": "2026-10-28",
+      "direct_contact_verified": false,
+      "enrollment_status": "confirm_with_provider"
+    },
+    {
+      "id": "akron-south-street-front-porch",
+      "name": "South Street Ministries — Front Porch Reentry Support",
+      "county": "Summit",
+      "city": "Akron",
+      "type": "reentry_support",
+      "summary": "Community directory describes free reentry meetings, job readiness, peer support, housing referrals and cafe training when available. Verify current hours and capacity.",
+      "phone": "330-800-0115",
+      "url": "https://needs.relink.org/provider/south-street-ministries-reentry-support-services-at-the-front-porch-cafe?pcid=32&psid=80",
+      "source_type": "reentry_directory",
+      "not_vacancy": true,
+      "last_public_source_review": "2026-10-28",
+      "direct_contact_verified": false,
+      "enrollment_status": "confirm_with_provider"
+    },
+    {
+      "id": "soche-dayton-second-chance",
+      "name": "SOCHE Job Seeker Resources for Returning Citizens",
+      "county": "Montgomery",
+      "city": "Dayton region",
+      "type": "reentry_employment",
+      "summary": "Official SOCHE job seeker page connects returning citizens to second-chance-focused employer resources, education and Montgomery County reentry support. This is a referral resource, not an individual vacancy.",
+      "phone": null,
+      "url": "https://www.soche.org/job-seekers/",
+      "source_type": "provider_official",
+      "not_vacancy": true,
+      "last_public_source_review": "2026-10-28",
+      "direct_contact_verified": false,
+      "enrollment_status": "confirm_with_provider"
+    },
+    {
+      "id": "southeast-ohio-reentry-coalition",
+      "name": "Southeast Ohio Reentry Coalition",
+      "county": "Adams",
+      "city": "Multiple southern Ohio counties",
+      "service_counties": [
+        "Adams",
+        "Brown",
+        "Jackson",
+        "Lawrence",
+        "Pike",
+        "Scioto"
+      ],
+      "type": "reentry_support",
+      "summary": "Ohio reentry coalition listed in the ReLink directory for six southern Ohio counties. Find coalition and related county reentry resources; this is not an employer or guaranteed placement.",
+      "phone": null,
+      "url": "https://needs.relink.org/coalition.php?cid=28&sid=87",
+      "source_type": "reentry_directory",
+      "not_vacancy": true,
+      "last_public_source_review": "2026-10-28",
+      "direct_contact_verified": false,
+      "enrollment_status": "confirm_with_provider"
     }
   ]
 }
