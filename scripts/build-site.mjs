@@ -15,7 +15,7 @@ for (const folder of ['assets','data','docs']) await cp(join(root,folder),join(o
 await build({
   entryPoints: [join(root,'src/account-page.js'),join(root,'src/cloud-auto-sync.js')],
   outdir:join(output,'assets'),
-  bundle:true,platform:'browser',format:'esm',minify:true,target:['es2022'],
+  bundle:true,platform:'browser',format:'esm',splitting:true,chunkNames:'chunks/[name]-[hash]',minify:true,target:['es2022'],
   sourcemap:false,logLevel:'warning',
   define:{'process.env.NODE_ENV':JSON.stringify('production')}
 });
