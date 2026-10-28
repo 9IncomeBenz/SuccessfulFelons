@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 function source(path) {
   return readFileSync(path, 'utf8').replace(/^import .*;?\s*$/gm, '').replace(/export (default )?/g, '');
 }
-for (const file of ['api/_lib/auth.js','api/account/saved.js','api/account/clear.js','api/account-status.js']) {
+for (const file of ['api/_lib/auth.js','api/_lib/account-active.js','api/account/saved.js','api/account/clear.js','api/account-status.js']) {
   assert.doesNotThrow(() => new Function(source(file)), 'Invalid JS syntax in ' + file);
 }
 const authSource = source('api/_lib/auth.js');
@@ -39,11 +39,11 @@ async function testAccountAPI(){
       return [{id:'saved-test',title:'Warehouse role',organization:'Test',url:'https://example.org/apply'}];
     };
   }
-  const handler = new Function('neon','authHeaders','requireAuthUser','URL','process',
+  const handler = new Function('neon','authHeaders','requireAuthUser','requireLiveAccount','URL','process',
     source('api/account/saved.js')+';return handler;')(
       neon,
       res=>{res.setHeader('Cache-Control','no-store');},
-      async ()=> 'trusted-user-from-token', URL, {env}
+      async ()=> 'trusted-user-from-token', async (_,owner)=>owner, URL, {env}
     );
   const send = async (method,body)=>{
     const res={headers:{},statusCode:200,
@@ -67,11 +67,11 @@ async function testAccountAPI(){
   assert.equal(deleted.statusCode,200);
   assert.ok(seen.some(row=>/WHERE owner_user_id/.test(row.query) && row.params.includes('trusted-user-from-token')),
     'Private database reads and writes must be explicitly owner-scoped');
-  const blockedHandler=new Function('neon','authHeaders','requireAuthUser','URL','process',
+  const blockedHandler=new Function('neon','authHeaders','requireAuthUser','requireLiveAccount','URL','process',
     source('api/account/saved.js')+';return handler;')(
       ()=>{throw Error('Database should never be accessed')},
       ()=>{},
-      async ()=>{throw Object.assign(Error('Unauthenticated'),{statusCode:401})}, URL, {env});
+      async ()=>{throw Object.assign(Error('Unauthenticated'),{statusCode:401})}, async()=>{throw Error('Should never check live user')}, URL, {env});
   const res={statusCode:200,setHeader(){},status(n){this.statusCode=n;return this},json(x){this.body=x;return this}};
   await blockedHandler({method:'GET',headers:{}},res);
   assert.equal(res.statusCode,401);
@@ -83,3 +83,13 @@ async function testAccountAPI(){
 }
 await testAuth();
 await testAccountAPI();
+async function testLiveIdentity(){
+ const factory=new Function(source('api/_lib/account-active.js')+';return requireLiveAccount;');
+ const live=factory();
+ const goodId='11111111-1111-4111-8111-111111111111';
+ assert.equal(await live(async()=>[{active:true}],goodId),goodId,'Verified active user can access private saves');
+ await assert.rejects(()=>live(async()=>[{active:false}],goodId),e=>e.statusCode===401);
+ await assert.rejects(()=>live(async()=>[{active:true}],'fake-identifier'),e=>e.statusCode===401);
+ await assert.rejects(()=>live(async()=>{throw Error('Database down')},goodId),e=>e.statusCode===503);
+}
+await testLiveIdentity();
