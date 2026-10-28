@@ -125,13 +125,14 @@ on('delete-identity','click',()=>guarded(async()=>{
   if(!confirm('Permanently delete your SuccessfulFelons identity and saved cloud data? Download a backup first. This cannot be undone.'))return;
   const typed=prompt('Type DELETE MY ACCOUNT to confirm:');if(typed!=='DELETE MY ACCOUNT')throw Error('Account deletion cancelled.');
   if(typeof client.auth.deleteUser!=='function')throw Error('Managed identity self-deletion is not available. Contact platform support for a verified deletion request.');
-  const password=prompt('Enter your account password to confirm identity deletion (it is sent only to managed Neon Auth):');
+  const password=get('delete-password')?.value||'';
   if(!password)throw Error('Password confirmation required; no data deleted.');
   // Delete cloud saves before identity. If identity deletion fails, report that
   // identity remains, and never claim the entire account is deleted.
   const result=await client.clear();
   const deleted=await client.auth.deleteUser({password});
   if(deleted?.error){await refreshCloud();throw Error('Cloud links deleted ('+result.deleted_count+'), but the identity could not be deleted: '+(deleted.error.message||'Managed Auth rejected deletion'))}
+  if(get('delete-password'))get('delete-password').value='';
   signedIn({data:null});
   msg('Managed identity deletion request was accepted. Cloud saved links were cleared; browser-local files stay on this device.');
 }));
