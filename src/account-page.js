@@ -27,6 +27,7 @@ function signedIn(session){
   if(get('auth-forms'))get('auth-forms').hidden=Boolean(user);
   if(get('signed-in'))get('signed-in').hidden=!user;
   if(get('signed-name'))get('signed-name').textContent=user?'Signed in as '+(user.email||'your account'):'';
+  if(get('auto-cloud'))get('auto-cloud').checked=Boolean(user&&localStorage.getItem('sf_auto_cloud_user_'+user.id)==='yes');
   if(get('account-state'))get('account-state').textContent=user?'Your session is active. Cloud-saved leads stay separate from local device data.':'Sign in to synchronize saved lead links across your devices.';
   if(!user){cloud=[];if(get('cloud-list'))get('cloud-list').replaceChildren();}
 }
@@ -96,6 +97,17 @@ on('send-code','click',()=>guarded(async()=>{
 }));
 on('signout','click',()=>guarded(async()=>{
   resultData(await client.signOut(),'Sign-out failed');signedIn({data:null});msg('Signed out. Local device leads remain saved.');
+}));
+on('auto-cloud','change',event=>guarded(async()=>{
+ if(!user)throw Error('Sign in to change upload preferences.');
+ const box=event.currentTarget,key='sf_auto_cloud_user_'+user.id;
+ if(box.checked){
+   if(!confirm('Allow this browser to upload saved lead titles, organizations and source links to this signed-in account? Existing device-saved leads will also be uploaded. Application notes will never be uploaded.')){box.checked=false;return}
+   try{localStorage.setItem(key,'yes')}catch{box.checked=false;throw Error('Device preferences could not be saved')}
+   window.dispatchEvent(new CustomEvent('sf:auto-sync-changed'));
+   await client.importLocalWithConsent((window.SFLeads?.list()||[]).map(x=>({...x,url:cleanUrl(x.url)||''})));
+   await refreshCloud();msg('Automatic cloud upload enabled for this account on this device.');
+ }else{localStorage.removeItem(key);window.dispatchEvent(new CustomEvent('sf:auto-sync-changed'));msg('Automatic cloud upload disabled. Previously uploaded cloud links remain available.')}
 }));
 on('cloud-refresh','click',()=>guarded(refreshCloud));
 on('cloud-import','click',()=>guarded(async()=>{
