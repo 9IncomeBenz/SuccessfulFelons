@@ -64,7 +64,7 @@ async function refreshCloud(){
 async function guarded(fn){
   if(!configured)return;
   msg('Working…');
-  try{await fn();msg('')}catch(error){msg(error?.message||'Request unsuccessful. Try again.')}
+  try{await fn();if(get('account-msg')?.textContent==='Working…')msg('')}catch(error){msg(error?.message||'Request unsuccessful. Try again.')}
 }
 on('show-signin','click',()=>showMode('signin'));
 on('show-register','click',()=>showMode('register'));
