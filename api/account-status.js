@@ -25,6 +25,6 @@ export default async function handler(req, res) {
     managedIdentityConfigured,
     privateStorageReady,
     onlineSyncAvailable: false,
-    nextStep: 'Configure and verify Neon Auth origin, apply reviewed migration, and pass cross-device session tests before enabling accounts.'
+    nextStep: privateStorageReady ? 'Private storage is installed. Complete account sign-in, email verification, cross-device isolation, export and deletion tests before enabling accounts.' : 'Private storage is unavailable. Verify the reviewed migration and database connection before testing account sign-in.'
   });
 }
