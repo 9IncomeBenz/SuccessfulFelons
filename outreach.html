@@ -1,0 +1,77 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SuccessfulFelons Ohio provider outreach worksheet. Prepare fact checks for employers and housing agencies without publishing unverified claims.">
+<title>Provider Research Desk | SuccessfulFelons</title><style>
+:root{color-scheme:dark;background:#101419;color:#eff4f7;font-family:system-ui,-apple-system,Segoe UI,sans-serif}*{box-sizing:border-box}
+body{margin:0}header,main,footer{max-width:1120px;margin:auto;padding:20px}header{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;align-items:center}
+.brand{font-weight:850}.brand span{color:#ffd65c}nav{display:flex;gap:15px;flex-wrap:wrap}a{color:#ffdd73}
+h1{font-size:clamp(2rem,5vw,3rem);margin:12px 0}h2{font-size:1.25rem}
+p{line-height:1.55;color:#cad6e0}.hero,.panel,.card{background:#1d2833;border:1px solid #465968;border-radius:15px;padding:21px;margin:15px 0}
+small,.muted{font-size:.88rem;color:#b6c4ce}.notice{padding:16px;border-left:4px solid #ffd65c;border-radius:9px;background:#322d23;margin:18px 0}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+label{display:grid;gap:7px;font-weight:650}
+select,input,textarea{border:1px solid #8399ac;background:#101a25;color:#fff;border-radius:8px;font:inherit;padding:10px;width:100%}
+textarea{min-height:125px;resize:vertical}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+button,.button{background:#ffda60;color:#172027;border:0;border-radius:8px;font:inherit;font-weight:750;padding:10px 14px;cursor:pointer}
+button.secondary{background:#3b4e5f;color:#fff}button:disabled{opacity:.65;cursor:default}
+.card{margin:12px 0}.card h3{margin:3px 0}.card p{margin:7px 0}
+#results .card a{overflow-wrap:anywhere}
+footer{margin-top:35px;border-top:1px solid #3b4755}.pill{display:inline-block;font-size:.75rem;color:#ffdf85;font-weight:700}
+:focus-visible{outline:3px solid #ffdf7e;outline-offset:3px}
+@media(max-width:600px){header,main,footer{padding:14px}.hero,.panel,.card{padding:16px}}
+</style></head><body>
+<header><div class="brand">SUCCESSFUL<span>FELONS</span><div class="muted">Second Chance Network</div></div><nav><a href="/">Home</a><a href="/employment.html">Employment</a><a href="/housing.html">Housing</a><a href="/ohio.html">All counties</a></nav></header>
+<main><section class="hero"><p class="pill">RESEARCH TOOL • LOCAL TO THIS DEVICE</p><h1>Provider research & outreach desk</h1><p>Prepare employer screening questions and county housing-support follow-ups. Nothing on this page sends emails, contacts a provider or publishes a job. A changed status is only your local outreach checklist, not a verified claim.</p></section>
+<div class="notice"><strong>No false confirmations.</strong> Public research is not direct employer or landlord verification. This worksheet cannot publish or approve listings. Do not enter applicant names, criminal histories, confidential provider replies or personal contact information. Use the approved private moderation workflow for actual evidence once one exists.</div>
+<section class="panel"><div class="filters">
+<label>Research category<select id="category"><option value="employer">Employer and job leads</option><option value="housing">County housing-support agencies (not landlords)</option></select></label>
+<label>Ohio county<select id="county"><option value="">All counties</option></select></label>
+<label>Local outreach status<select id="stage"><option value="">All stages</option><option value="not-started">Not started</option><option value="planned">Contact planned</option><option value="contacted">Contact attempt made</option><option value="awaiting">Awaiting reply</option><option value="followup">Needs follow-up</option><option value="closed">No longer pursuing</option></select></label>
+<label>Search<input id="search" type="search" placeholder="Employer, role, agency or county" maxlength="100"></label></div>
+<div class="row"><button type="button" id="export" class="secondary">Export local outreach progress</button><button type="button" id="reset" class="secondary">Clear local outreach progress</button></div><p id="status" class="muted" role="status" aria-live="polite">Loading provider research…</p></section>
+<section class="panel"><h2>What to ask before publication</h2>
+<label>Request template<select id="template"><option value="job">Employer: role and conviction-screening policy</option><option value="housing">Housing: specific available units and screening</option><option value="agency">Community Action: current assistance and referrals</option></select></label>
+<textarea id="message" readonly aria-label="Provider confirmation questions"></textarea>
+<div class="row"><button type="button" id="copy">Copy verification questions</button><a href="/docs/PROVIDER-VERIFICATION.md">Review the verification standard (GitHub source)</a></div>
+<p class="muted">A phone call or email reply must be recorded through a secure review process, with permission to publish exact provider statements. The site never infers a guaranteed hire or rental acceptance.</p></section>
+<section aria-labelledby="results-title"><h2 id="results-title">Research items</h2><div id="results"></div></section>
+</main><footer>© SuccessfulFelons — Second Chance Network. This is a research and contact checklist, not a verified provider partnership registry.</footer>
+<script>
+const stateKey='sf_outreach_progress_v1',category=document.getElementById('category'),county=document.getElementById('county'),stage=document.getElementById('stage'),search=document.getElementById('search'),results=document.getElementById('results'),status=document.getElementById('status'),tpl=document.getElementById('template'),message=document.getElementById('message');
+const templates={
+job:'Hello, I am researching employment opportunities for Ohio residents with criminal records. Could you confirm whether the exact position is currently accepting applications, its location, pay and application link? Does the employer consider people with felony convictions for this specific position? Are any conviction categories or a lookback period excluded, and does the period start on the offense, conviction, sentence, supervision completion or release date? May the company’s written answer be quoted publicly with its official application link? Thank you.',
+housing:'Hello, I am researching Ohio housing opportunities for people facing rental screening barriers. Are there specific units currently available, and what are the rental price, deposits, income requirements, application fees and waitlist details? Could you share your written criminal-background screening policy and whether applications receive individual review? Please confirm whether voucher applicants are considered and whether you permit publication of your official contact and policy summary.',
+agency:'Hello, I am looking for currently available housing and stability assistance for residents in this Ohio county. What rent, utility, food, transportation or shelter referral programs are accepting applications at present? What eligibility rules, funding limits, appointments, or waitlists apply? Do you serve people with reentry barriers? Is there an official program page we can link to? Thank you.'
+};
+let records=[],progress={},countyNames=[];
+try{const stored=JSON.parse(localStorage.getItem(stateKey)||'{}');if(stored&&typeof stored==='object'&&!Array.isArray(stored))progress=stored}catch{}
+function element(tag,text,parent){const n=document.createElement(tag);if(text!==null)n.textContent=text;parent.append(n);return n}
+function saveProgress(){try{localStorage.setItem(stateKey,JSON.stringify(progress));return true}catch{status.textContent='Unable to save outreach progress on this browser.';return false}}
+function updateTemplate(){message.value=templates[tpl.value]||templates.job}
+function render(){results.replaceChildren();let visible=0;const query=search.value.trim().toLowerCase();
+for(const entry of records){if(category.value!==entry.category)continue;if(county.value!==''&&entry.county!==county.value)continue;
+const existing=progress[entry.id]?.stage||'not-started';if(stage.value&&existing!==stage.value)continue;
+if(query&&!([entry.name,entry.role,entry.county,entry.rule].join(' ').toLowerCase().includes(query)))continue;
+visible++;const card=element('article',null,results);card.className='card';element('div',entry.category==='housing'?'DIRECTORY-PUBLISHED ASSISTANCE AGENCY (NOT LANDLORD)':'RESEARCH LEAD — NOT AN EMPLOYER-CONFIRMED JOB',card).className='pill';element('h3',entry.name,card);element('p',entry.role+' • '+entry.county+' County',card);element('p',entry.rule,card).className='muted';const source=element('a','Open published source',card);source.href=entry.url;source.rel='noopener noreferrer';source.target='_blank';
+const label=element('label','Your private local outreach progress',card);const sel=element('select',null,label);
+for(const [value,title] of [['not-started','Not started'],['planned','Contact planned'],['contacted','Contact attempt made'],['awaiting','Awaiting reply'],['followup','Needs follow-up'],['closed','No longer pursuing']]){const op=element('option',title,sel);op.value=value}
+sel.value=existing;sel.addEventListener('change',()=>{progress[entry.id]={stage:sel.value,updated:new Date().toISOString().slice(0,10)};if(!saveProgress())return;if(stage.value)render()});
+if(progress[entry.id]?.updated)element('p','Local checklist updated '+progress[entry.id].updated,card).className='muted';
+}
+status.textContent=visible+' research record'+(visible===1?'':'s')+' match. Local statuses do not establish any provider verification.';if(!visible)element('p','No records match these filters. Try another county or category.',results)}
+Promise.all([
+fetch('/data/ohio-counties.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()),
+fetch('/data/employer-verification-queue.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()),
+fetch('/data/ohio-support-agencies.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject())
+]).then(([geo,jobs,agencies])=>{
+if(!Array.isArray(geo.counties)||geo.counties.length!==88||!Array.isArray(jobs.leads))throw Error('Invalid research dataset');
+countyNames=geo.counties.map(x=>x.name);for(const name of countyNames){const opt=element('option',name+' County',county);opt.value=name}
+records=jobs.leads.map(x=>({id:'employer:'+x.research_id,category:'employer',name:x.provider,role:x.kind+' — '+x.claim,county:x.county||'',rule:'Direct employer contact: not confirmed',url:x.source_url}));
+for(const name of countyNames){const a=agencies.counties?.[name];if(a&&a.website)records.push({id:'agency:'+name,category:'housing',name:a.name,role:'Community Action contact',county:name,rule:'Directory published; no active rent assistance, landlord screening or vacancies verified',url:a.website})}
+render();
+}).catch(()=>{status.textContent='Could not load the outreach research. No data was submitted.'});
+for(const el of [category,county,stage])el.addEventListener('change',render);search.addEventListener('input',render);tpl.addEventListener('change',updateTemplate);updateTemplate();
+document.getElementById('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(message.value);status.textContent='Questions copied; no messages were sent.'}catch{message.focus();message.select();status.textContent='Select and copy the questions manually.'}});
+document.getElementById('export').addEventListener('click',()=>{const contents=JSON.stringify({type:'sf_outreach_local_v1',saved_at:new Date().toISOString(),progress},null,2);const blob=new Blob([contents],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='successfulfelons-outreach-progress.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+document.getElementById('reset').addEventListener('click',()=>{if(!confirm('Clear only this browser’s outreach checklist? This does not affect published research or your saved leads.'))return;progress={};try{localStorage.removeItem(stateKey)}catch{}render()});
+</script></body></html>
