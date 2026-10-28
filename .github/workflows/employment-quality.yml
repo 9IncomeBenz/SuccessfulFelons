@@ -3,6 +3,8 @@ on:
   push:
     paths:
       - 'data/employment-research.json'
+      - 'data/ohio-counties.json'
+      - 'ohio.html'
       - 'employment.html'
       - 'index.html'
       - 'scripts/validate-employment-data.mjs'
@@ -11,6 +13,8 @@ on:
   pull_request:
     paths:
       - 'data/employment-research.json'
+      - 'data/ohio-counties.json'
+      - 'ohio.html'
       - 'employment.html'
       - 'index.html'
       - 'scripts/validate-employment-data.mjs'
