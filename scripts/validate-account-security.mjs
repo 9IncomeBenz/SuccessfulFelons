@@ -93,3 +93,27 @@ async function testLiveIdentity(){
  await assert.rejects(()=>live(async()=>{throw Error('Database down')},goodId),e=>e.statusCode===503);
 }
 await testLiveIdentity();
+async function testCloudClear() {
+  const sqlCalls=[];
+  const fakeSQL=async(strings,...params)=>{sqlCalls.push({query:strings.join('?'),params});return [{lead_id:'a'}]};
+  const factory=new Function('neon','authHeaders','requireAuthUser','requireLiveAccount','process',
+    source('api/account/clear.js')+';return handler;');
+  const valid=factory(()=>fakeSQL,()=>{},async()=> 'trusted-uuid',async()=>true,{env});
+  const invoke=async(handler,body)=>{
+    const res={code:200,setHeader(){},status(n){this.code=n;return this},json(data){this.body=data;return this}};
+    await handler({method:'POST',body,headers:{authorization:'Bearer x'}},res);
+    return res;
+  };
+  assert.equal((await invoke(valid,{confirmation:'wrong'})).code,400,'Cloud clear requires exact confirmation');
+  const ok=await invoke(valid,{confirmation:'DELETE CLOUD SAVES'});
+  assert.equal(ok.code,200);
+  assert.ok(sqlCalls.some(x=>/DELETE FROM sf_private.saved_leads/.test(x.query) && x.params.includes('trusted-uuid')),
+    'Cloud deletion may only use verified JWT owner');
+  const denied=factory(()=>{throw Error('DB must not be called')},()=>{},async()=>{throw Object.assign(Error('No token'),{statusCode:401})},async()=>{throw Error('Must not check user')},{env});
+  assert.equal((await invoke(denied,{confirmation:'DELETE CLOUD SAVES'})).code,401);
+}
+await testCloudClear();
+assert.match(readFileSync('src/cloud-auto-sync.js','utf8'),/localStorage.getItem\(prefix\+owner\)!=='yes'/,'Cloud uploads must require consent for the active user');
+assert.match(readFileSync('src/account-page.js','utf8'),/confirm\('Allow this browser to upload/,'Existing local leads must require explicit upload confirmation');
+assert.match(readFileSync('account.html','utf8'),/id="delete-password" type="password"/,'Account deletion password must be masked');
+
