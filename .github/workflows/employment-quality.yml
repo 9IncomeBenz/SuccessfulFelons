@@ -1,0 +1,31 @@
+name: Employment research quality
+on:
+  push:
+    paths:
+      - 'data/employment-research.json'
+      - 'employment.html'
+      - 'index.html'
+      - 'scripts/validate-employment-data.mjs'
+      - 'package.json'
+      - '.github/workflows/employment-quality.yml'
+  pull_request:
+    paths:
+      - 'data/employment-research.json'
+      - 'employment.html'
+      - 'index.html'
+      - 'scripts/validate-employment-data.mjs'
+      - 'package.json'
+      - '.github/workflows/employment-quality.yml'
+permissions:
+  contents: read
+jobs:
+  verify-research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate evidence and waiting-period rules
+        run: npm run check:employment
