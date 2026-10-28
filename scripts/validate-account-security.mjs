@@ -39,11 +39,11 @@ async function testAccountAPI(){
       return [{id:'saved-test',title:'Warehouse role',organization:'Test',url:'https://example.org/apply'}];
     };
   }
-  const handler = new Function('neon','authHeaders','requireAuthUser',
+  const handler = new Function('neon','authHeaders','requireAuthUser','URL','process',
     source('api/account/saved.js')+';return handler;')(
       neon,
       res=>{res.setHeader('Cache-Control','no-store');},
-      async ()=> 'trusted-user-from-token'
+      async ()=> 'trusted-user-from-token', URL, {env}
     );
   const send = async (method,body)=>{
     const res={headers:{},statusCode:200,
@@ -67,11 +67,11 @@ async function testAccountAPI(){
   assert.equal(deleted.statusCode,200);
   assert.ok(seen.some(row=>/WHERE owner_user_id/.test(row.query) && row.params.includes('trusted-user-from-token')),
     'Private database reads and writes must be explicitly owner-scoped');
-  const blockedHandler=new Function('neon','authHeaders','requireAuthUser',
+  const blockedHandler=new Function('neon','authHeaders','requireAuthUser','URL','process',
     source('api/account/saved.js')+';return handler;')(
       ()=>{throw Error('Database should never be accessed')},
       ()=>{},
-      async ()=>{throw Object.assign(Error('Unauthenticated'),{statusCode:401})});
+      async ()=>{throw Object.assign(Error('Unauthenticated'),{statusCode:401})}, URL, {env});
   const res={statusCode:200,setHeader(){},status(n){this.statusCode=n;return this},json(x){this.body=x;return this}};
   await blockedHandler({method:'GET',headers:{}},res);
   assert.equal(res.statusCode,401);
