@@ -5,12 +5,13 @@ import { build } from 'esbuild';
 const root=process.cwd(), output=join(root,'public');
 await mkdir(join(output,'assets'),{recursive:true});
 await mkdir(join(output,'data'),{recursive:true});
+await mkdir(join(output,'docs'),{recursive:true});
 for (const entry of await readdir(root, {withFileTypes:true})) {
   if (entry.isFile() && ['.html','.txt','.ico','.webmanifest','.xml'].includes(extname(entry.name))) {
     await copyFile(join(root,entry.name),join(output,entry.name));
   }
 }
-for (const folder of ['assets','data']) await cp(join(root,folder),join(output,folder),{recursive:true,force:true});
+for (const folder of ['assets','data','docs']) await cp(join(root,folder),join(output,folder),{recursive:true,force:true});
 await build({
   entryPoints: [join(root,'src/account-page.js')],
   outfile:join(output,'assets/account-page.js'),
