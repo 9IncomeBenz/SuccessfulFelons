@@ -15,9 +15,15 @@ Early development. The site has an evidence-based employer-research directory an
 ## Ohio housing and locally published support
 - `/housing.html` is a dedicated 88-county housing navigator, with rental searches, emergency housing referrals, landlord-screening questions, and community-action contact details. This page does **not** claim properties or shelter beds are open, accepts no applications, and never declares a landlord will accept a particular felony.
 - `data/ohio-support-agencies.json` maps all **88** counties to the Community Action Agency name and published phone/website in the Ohio Association of Community Action Agencies' [directory](https://oacaa.org/find-an-agency/), research reviewed 2026-10-28. The 88 county references represent **48** agency names (including multijurisdiction providers); availability, funding and program eligibility still require direct contact.
-- `data/ohio-reentry-programs.json` contains 10 source-documented reentry employment and training/referral programs around Columbus, Cleveland, Cincinnati, Toledo and Dayton. Programs are **not verified vacancies** or guaranteed enrollments.
+- `data/ohio-reentry-programs.json` contains 14 source-documented reentry employment and training/referral programs in Ohio, including the Akron area and a regional coalition serving six southern Ohio counties. Programs are **not verified vacancies** or guaranteed enrollments.
 - `/ohio.html` includes county-specific agency and reentry resources, and deep links into the housing and employment directories.
 - Housing and employment are equal primary areas. Throughout Ohio, the statewide tools work even in counties where no verified role or housing opening is in our database.
+
+## Saving opportunities privately
+- Browse `/employment.html` or `/ohio.html` and choose **Save lead** to keep researched positions and programs in the existing `sf_workspace_v1` browser workspace. The same saved leads appear in the homepage My Progress area and on `/saved.html`.
+- `/saved.html` can search and remove saved leads, export them as a JSON backup, and safely merge a previously exported JSON backup. The import process checks the file format, refuses invalid links and respects the 100-lead device limit.
+- This is **local device storage, not a user account, remote database, application submission or cross-device synchronization**. It keeps existing local application tracking records intact; clearing browser storage can remove them.
+- `assets/saved-leads.js` contains the shared save/remove/storage implementation; `scripts/validate-saved-leads.mjs` has regression checks for duplicate saves, malicious URLs, preserving tracker records and storage failures.
 
 ## Provider confirmation queue
 - `data/employer-verification-queue.json` tracks the **17 researched job/employer entries** awaiting outreach; all contact states start `not_contacted`. It is not evidence of direct employer confirmation.
@@ -35,7 +41,7 @@ Early development. The site has an evidence-based employer-research directory an
 - Dates reflect a research/source check, not automatic monitoring. Job listings may change between checks.
 
 ## Quality checks
-Run `npm run check:employment` (Node.js 24+). The validator checks all 88 Ohio counties, published agency contacts, sourced reentry programs, employer confirmation queue, HTML scripts, shared data wiring, unique IDs, HTTPS sources, evidence categories, restrictions and archived-status safeguards. GitHub Actions automatically runs the validator on relevant changes. Passing these tests **does not** establish that any job is presently available, and external links still require manual review.
+Run `npm run check` (Node.js 24+). The validator checks all 88 Ohio counties, published agency contacts, sourced reentry programs, employer confirmation queue, HTML scripts, shared data wiring, unique IDs, HTTPS sources, evidence categories, restrictions and archived-status safeguards. GitHub Actions automatically runs the validator on relevant changes. Passing these tests **does not** establish that any job is presently available, and external links still require manual review.
 
 ## Local preview
 Open `index.html` in a browser for the basic static shell. To load the research JSON and backend APIs, serve the project over HTTP (for example, via Vercel dev) rather than opening individual HTML files with `file://`.
