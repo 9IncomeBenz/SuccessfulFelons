@@ -1,10 +1,10 @@
 # SuccessfulFelons: Production email & account launch checklist
-Reviewed October 28, 2026.
+Reviewed October 29, 2026.
 
 ## Current infrastructure observed
 - Neon project: **SuccessfulFelons** (production branch), managed Better Auth is provisioned.
 - The public site is currently **successfulfelons.vercel.app**; Vercel has **no separately owned custom domain** attached.
-- Managed Neon Auth email provider is currently shared SMTP (sender: `auth@mail.myneon.app`). It is for tests; it has lower reliability/limits than a production provider.
+- Managed Neon Auth email provider is now configured for custom Gmail SMTP (`smtp.gmail.com`, port `465`, sender `Successfulfelons0@gmail.com`); the owner confirmed that Neon's test email arrived in a real inbox on October 29, 2026.
 - Neon email/password sign-up is enabled, `require_email_verification` is true, but **Verify at Sign-up is not enabled** in the provider configuration (`verify_email_on_sign_up:false`). The site explicitly requests a verification OTP after registration, but production verification must be enabled and tested in Neon Auth itself.
 - The website deliberately hides registration unless the server sets `ACCOUNT_REGISTRATION_ENABLED=true`. This **does not** itself disable public sign-up via the underlying Neon Auth API while provider `allow_sign_up:true`. To fully pause provider sign-up before launch, disable it in the Neon Console.
 - Public launch must not be claimed until verified sender, successful real inbox OTP, signed-in JWT and 2-user isolation, account deletion and recovery are tested.
@@ -23,7 +23,7 @@ Alternatively, for a domain-based email provider, use its verified sender addres
 
 ## Selected pilot sender — 2026-10-28
 
-**Chosen sender address:** `Successfulfelons0@gmail.com`. This is an owner-provided configuration choice, **not a confirmed working SMTP connection**. The latest connected Neon Auth read still reports `email_provider.type = shared` and sender `auth@mail.myneon.app`; no Gmail credential or test email has been configured by ChatGPT.
+**Confirmed pilot sender:** `Successfulfelons0@gmail.com`. Production Neon now reports custom SMTP with the correct sender and Gmail host; the owner confirmed a successful real-inbox test on October 29, 2026. Neither SMTP credentials nor OTP codes are stored in this repository. The managed Auth configuration API still reports `verify_email_on_sign_up:false`, despite the dashboard toggle showing enabled and reporting successful updates. Treat this mismatch as unresolved until an actual sign-up OTP arrives and is verified. The public Vercel account gate remains OFF.
 
 Configure the sender on the account owner's devices and in the Neon Console:
 
