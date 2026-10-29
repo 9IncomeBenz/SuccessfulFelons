@@ -4,6 +4,7 @@ import { requireLiveAccount } from '../_lib/account-active.js';
 export default async function handler(req,res){
   authHeaders(res);res.setHeader('Allow','POST');
   if(req.method!=='POST')return res.status(405).json({error:'Method not allowed'});
+  if (process.env.ACCOUNT_REGISTRATION_ENABLED !== 'true') return res.status(503).json({error:'Private account service is not yet available'});
   let owner;try{owner=await requireAuthUser(req)}catch(error){return res.status(error?.statusCode===401?401:503).json({error:'Account authorization required'})}
   const sql=neon(process.env.DATABASE_URL);
   try{await requireLiveAccount(sql,owner)}catch(error){return res.status(error?.statusCode===401?401:503).json({error:'Account not active or email not verified'});}
