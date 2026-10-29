@@ -32,6 +32,9 @@ export default async function handler(req, res) {
   if (!['GET', 'PUT', 'DELETE'].includes(req.method)) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+  if (process.env.ACCOUNT_REGISTRATION_ENABLED !== 'true') {
+    return res.status(503).json({ error: 'Private account service is not yet available' });
+  }
   let owner;
   try {
     owner = await requireAuthUser(req);
