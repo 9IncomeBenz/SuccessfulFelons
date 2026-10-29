@@ -8,7 +8,7 @@ for (const file of ['api/_lib/auth.js','api/_lib/account-active.js','api/account
   assert.doesNotThrow(() => new Function(source(file)), 'Invalid JS syntax in ' + file);
 }
 const authSource = source('api/_lib/auth.js');
-const env = {DATABASE_URL:'postgresql://test.invalid/database',NEON_AUTH_BASE_URL:'https://auth.example.com/neondb/auth'};
+const env = {DATABASE_URL:'postgresql://test.invalid/database',NEON_AUTH_BASE_URL:'https://auth.example.com/neondb/auth',ACCOUNT_REGISTRATION_ENABLED:'true'};
 let verifyCalls=0;
 const authFactory = new Function('createRemoteJWKSet','jwtVerify','URL','process',
   authSource + '; return { requireAuthUser, accountBackendConfigured };');
@@ -75,6 +75,14 @@ async function testAccountAPI(){
   const res={statusCode:200,setHeader(){},status(n){this.statusCode=n;return this},json(x){this.body=x;return this}};
   await blockedHandler({method:'GET',headers:{}},res);
   assert.equal(res.statusCode,401);
+  const gateOff={env:{...env,ACCOUNT_REGISTRATION_ENABLED:'false'}};
+  const closedHandler=new Function('neon','authHeaders','requireAuthUser','requireLiveAccount','URL','process',
+    source('api/account/saved.js')+';return handler;')(
+      ()=>{throw Error('Do not touch database with registration disabled')},
+      ()=>{},async()=>{throw Error('Do not authenticate with registration disabled')},async()=>{throw Error('Do not inspect identity with registration disabled')},URL,gateOff);
+  const closedRes={statusCode:200,setHeader(){},status(n){this.statusCode=n;return this},json(x){this.body=x;return this}};
+  await closedHandler({method:'GET',headers:{}},closedRes);
+  assert.equal(closedRes.statusCode,503,'Account API must stay closed when launch flag is off');
   assert.match(readFileSync('migrations/002_private_saved_leads.sql','utf8'),/REVOKE ALL ON SCHEMA sf_private FROM PUBLIC/);
   assert.match(readFileSync('api/account-status.js','utf8'),/accountsAvailable:\s*enabled/);
   assert.match(readFileSync('api/account-status.js','utf8'),/ACCOUNT_REGISTRATION_ENABLED==='true'/,'Registration must be gated until enabled');
@@ -111,6 +119,11 @@ async function testCloudClear() {
     'Cloud deletion may only use verified JWT owner');
   const denied=factory(()=>{throw Error('DB must not be called')},()=>{},async()=>{throw Object.assign(Error('No token'),{statusCode:401})},async()=>{throw Error('Must not check user')},{env});
   assert.equal((await invoke(denied,{confirmation:'DELETE CLOUD SAVES'})).code,401);
+  const closed=factory(()=>{throw Error('No database access while disabled')},()=>{},
+    async()=>{throw Error('No authentication while disabled')},async()=>{throw Error('No identity query while disabled')},
+    {env:{...env,ACCOUNT_REGISTRATION_ENABLED:'false'}});
+  assert.equal((await invoke(closed,{confirmation:'DELETE CLOUD SAVES'})).code,503,
+    'Cloud delete must stay closed when account launch flag is off');
 }
 await testCloudClear();
 assert.match(readFileSync('src/cloud-auto-sync.js','utf8'),/localStorage.getItem\(prefix\+owner\)!=='yes'/,'Cloud uploads must require consent for the active user');
