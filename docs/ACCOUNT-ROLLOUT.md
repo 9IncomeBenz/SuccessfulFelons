@@ -1,5 +1,5 @@
 # SuccessfulFelons — Private Accounts & Cloud Sync Rollout
-Updated: 2026-10-28
+Updated: 2026-10-29
 
 **Deployment state: production private storage installed; account UI and cloud API implemented behind explicit readiness flag; member registration NOT publicly open.**
 
@@ -7,7 +7,7 @@ The existing Neon Auth service and production private database schema are connec
 
 ## Connected Neon verification — October 28, 2026
 - Connected Neon project: `SuccessfulFelons` (existing project), production branch `production`, database `neondb`.
-- Neon Auth is provisioned with managed Better Auth, and the official production URL is trusted. The shared Neon SMTP service is still configured; custom transactional email and end-to-end verification are required before public launch.
+- Neon Auth is provisioned with managed Better Auth, and the official production URL is trusted. Custom Gmail SMTP is now configured; the project owner confirmed actual test email receipt on October 29. Signup OTP, verified sign-in, and account privacy across two users still require real testing. The managed provider reports `verify_email_on_sign_up:false` despite the dashboard toggle remaining green.
 - Production migration **approved by the owner and applied October 28, 2026**. The `sf_private.saved_leads` table, `sf_private.enforce_saved_leads_quota()` function, and enabled `sf_saved_leads_quota_before_insert` trigger are present in production. The production saved-leads table contains **0** rows at initial verification.
 - Base schema: `migrations/002_private_saved_leads.sql`. Database-enforced quota: `migrations/003_private_saved_leads_quota.sql`. The quota statements were applied in one database transaction after the base migration.
 - Isolated preview tests before release: one owner inserted 100 synthetic leads; #101 was rejected; a second owner inserted an independent lead; updating an existing saved lead at quota succeeded.
@@ -16,7 +16,7 @@ The existing Neon Auth service and production private database schema are connec
 - The public `/api/account-status` responded with `privateStorageReady:true`, `accountsAvailable:false` and `onlineSyncAvailable:false`. The existing `/api/opportunities` endpoint returned HTTP 200.
 - The production signup screen, managed account deletion, verified-email end-to-end tests, and true cross-device authenticated tests remain gated. The UI and protected endpoints have been implemented but real sessions have not been exercised by an authenticated test user.
 
-## Architecture
+## October 29 account-testing progress\n- Production Vercel deployment of the existing account UI is READY, but `/api/account-status` still returns `accountsAvailable:false`; this is intentional.\n- The protected saved-lead GET/PUT/DELETE and cloud-clear endpoints now additionally refuse requests with 503 unless `ACCOUNT_REGISTRATION_ENABLED=true`, keeping all app-owned cloud operations disabled before launch. Regression tests cover both routes with the flag off.\n- Email delivery confirmed by an owner-observed received Gmail SMTP test message. This does NOT establish that actual registration OTP or recovery emails work.\n- Underlying Neon Auth still has `allow_sign_up:true`; the web-app launch gate does not prevent direct managed-provider signup. Disable provider signup in Neon before an unmonitored public launch window or use a properly isolated preview auth environment for testing.\n- Do not collect a user's password or OTP code in ChatGPT; the account owner completes those steps directly in their browser.\n\n## Architecture
 - Use **managed Neon Auth** for sign-up, sign-in, email verification, password management, session cookies and JWT issuance. Do not store passwords, password hashes, session cookies, JWTs or full criminal-history details in SuccessfulFelons tables or browser localStorage.
 - The managed browser client in `src/account-sync.js` is bundled into static production assets using the pinned official `@neondatabase/auth` SDK, with esbuild through `scripts/build-site.mjs`. The sign-in forms are available only when the account-status endpoint confirms the explicit launch flag and private storage. Never substitute an unpinned third-party CDN.
 - Protected API: `/api/account/saved` accepts a short-lived `Authorization: Bearer` JWT issued by managed Neon Auth. `api/_lib/auth.js` verifies its signature using Neon Auth's HTTPS JWKS, issuer and EdDSA. Every query uses `payload.sub` as the owner, never an ID supplied by the client.
