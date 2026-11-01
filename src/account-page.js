@@ -19,7 +19,7 @@ async function ensureEnabled(){
   configured=true;return true;
 }
 function showMode(mode){
-  for(const name of ['signin','register','verify'])if(get(name))get(name).hidden=name!==mode;
+  for(const name of ['signin','register'])if(get(name))get(name).hidden=name!==mode;
   msg('');
 }
 function signedIn(session){
@@ -69,38 +69,23 @@ async function guarded(fn){
 }
 on('show-signin','click',()=>showMode('signin'));
 on('show-register','click',()=>showMode('register'));
-on('show-verify','click',()=>showMode('verify'));
 on('signin','submit',ev=>{ev.preventDefault();guarded(async()=>{
   const f=new FormData(ev.currentTarget);resultData(await client.signIn(String(f.get('email')).trim(),String(f.get('password'))),'Sign-in failed');
   await refreshSession();
-  if(!user)throw Error('Sign-in did not establish a session. Verify your email if requested.');
+  if(!user)throw Error('Sign-in did not establish a session. Try signing in again.');
 })});
 on('register','submit',ev=>{ev.preventDefault();guarded(async()=>{
   const f=new FormData(ev.currentTarget);
   const email=String(f.get('email')).trim();
-  const signup=resultData(await client.signUp(email,String(f.get('password')),String(f.get('name')).trim()),'Registration failed');
-  showMode('verify');get('verify').elements.email.value=email;
-  try {
-    resultData(await client.auth.emailOtp.sendVerificationOtp({email,type:'email-verification'}),'Verification code could not be sent');
-    msg('Registration received. Check your inbox for a verification code. Codes expire after 15 minutes.');
-  } catch {
-    msg('Registration received, but a verification code could not be sent automatically. Use Send verification code or try again.');
-  }
+  resultData(await client.signUp(email,String(f.get('password')),String(f.get('name')).trim()),'Registration failed');
+  // Managed Auth may establish a session automatically. If not, invite sign-in.
+  // Do not require email OTP to use basic accounts or saved opportunities.
+  try { await refreshSession(); } catch { signedIn({data:null}); }
+  if(user){msg('Account created. Your private account workspace is ready.');return;}
+  showMode('signin');
+  get('signin').elements.email.value=email;
+  msg('Account created. Sign in with your email and password to continue.');
 })});
-on('verify','submit',ev=>{ev.preventDefault();guarded(async()=>{
-  const f=new FormData(ev.currentTarget);
-  const response=await client.auth.emailOtp.verifyEmail({email:String(f.get('email')).trim(),otp:String(f.get('otp')).trim()});
-  resultData(response,'Email verification failed');
-  await refreshSession();
-  if(!user)showMode('signin');
-  msg(user?'Your email has been verified.':'Email verified. Sign in to continue.');
-})});
-on('send-code','click',()=>guarded(async()=>{
-  const email=get('verify').elements.email.value.trim();
-  if(!email)throw Error('Enter the account email first.');
-  resultData(await client.auth.emailOtp.sendVerificationOtp({email,type:'email-verification'}),'Could not send email code');
-  msg('If your account is eligible, Neon Auth has sent a verification code.');
-}));
 on('signout','click',()=>guarded(async()=>{
   resultData(await client.signOut(),'Sign-out failed');signedIn({data:null});msg('Signed out. Local device leads remain saved.');
 }));
