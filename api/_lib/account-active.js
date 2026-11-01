@@ -11,7 +11,6 @@ export async function requireLiveAccount(sql, owner) {
       SELECT EXISTS (
         SELECT 1 FROM neon_auth."user"
         WHERE id=${owner}::uuid
-          AND "emailVerified"=TRUE
           AND COALESCE(banned,FALSE)=FALSE
       ) AS active
     `;
@@ -20,6 +19,6 @@ export async function requireLiveAccount(sql, owner) {
     if (error?.statusCode===401) throw error;
     const fail=new Error('Account service unavailable');fail.statusCode=503;throw fail;
   }
-  const error=new Error('Account not active or email not verified');
+  const error=new Error('Account not active');
   error.statusCode=401;throw error;
 }
