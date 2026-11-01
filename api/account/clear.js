@@ -7,7 +7,7 @@ export default async function handler(req,res){
   if (process.env.ACCOUNT_REGISTRATION_ENABLED !== 'true') return res.status(503).json({error:'Private account service is not yet available'});
   let owner;try{owner=await requireAuthUser(req)}catch(error){return res.status(error?.statusCode===401?401:503).json({error:'Account authorization required'})}
   const sql=neon(process.env.DATABASE_URL);
-  try{await requireLiveAccount(sql,owner)}catch(error){return res.status(error?.statusCode===401?401:503).json({error:'Account not active or email not verified'});}
+  try{await requireLiveAccount(sql,owner)}catch(error){return res.status(error?.statusCode===401?401:503).json({error:'Account not active'});}
   try{
     const body=typeof req.body==='string'?JSON.parse(req.body):req.body;
     if(!body||body.confirmation!=='DELETE CLOUD SAVES')return res.status(400).json({error:'Explicit deletion confirmation required'});
