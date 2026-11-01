@@ -95,7 +95,10 @@ async function testLiveIdentity(){
  const factory=new Function(source('api/_lib/account-active.js')+';return requireLiveAccount;');
  const live=factory();
  const goodId='11111111-1111-4111-8111-111111111111';
- assert.equal(await live(async()=>[{active:true}],goodId),goodId,'Verified active user can access private saves');
+ const sourceText=source('api/_lib/account-active.js');
+ assert.doesNotMatch(sourceText,/emailVerified/,'Unverified users must not be denied access solely for lack of email verification');
+ assert.match(sourceText,/COALESCE\(banned,FALSE\)=FALSE/,'Banned accounts must remain blocked');
+ assert.equal(await live(async()=>[{active:true}],goodId),goodId,'Active unbanned user can access private saves');
  await assert.rejects(()=>live(async()=>[{active:false}],goodId),e=>e.statusCode===401);
  await assert.rejects(()=>live(async()=>[{active:true}],'fake-identifier'),e=>e.statusCode===401);
  await assert.rejects(()=>live(async()=>{throw Error('Database down')},goodId),e=>e.statusCode===503);
@@ -129,4 +132,7 @@ await testCloudClear();
 assert.match(readFileSync('src/cloud-auto-sync.js','utf8'),/localStorage.getItem\(prefix\+owner\)!=='yes'/,'Cloud uploads must require consent for the active user');
 assert.match(readFileSync('src/account-page.js','utf8'),/confirm\('Allow this browser to upload/,'Existing local leads must require explicit upload confirmation');
 assert.match(readFileSync('account.html','utf8'),/id="delete-password" type="password"/,'Account deletion password must be masked');
+assert.doesNotMatch(readFileSync('src/account-page.js','utf8'),/sendVerificationOtp|showMode\('verify'\)/,'Signup must not force an email code');
+assert.doesNotMatch(readFileSync('account.html','utf8'),/id="verify"|id="show-verify"/,'Account page must not require an email OTP form');
+
 
