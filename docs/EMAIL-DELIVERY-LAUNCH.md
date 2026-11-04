@@ -1,4 +1,7 @@
 # SuccessfulFelons: Production email & account launch checklist
+
+> **Policy update — November 4, 2026:** The owner selected email/password sign-up **without mandatory email verification**. Earlier steps below requiring verification at registration have been superseded. Keep email delivery available for optional account recovery, but do not force a verification code during sign-up. The production Neon Auth setting `require_email_verification` currently remains ON and must be disabled using the supported Neon Console or Auth configuration API before public registration. Current connector access cannot update this specific managed setting. Public Vercel registration remains OFF. Password recovery, actual no-code registration, and real-user cross-account isolation still need end-to-end tests.
+
 Reviewed October 29, 2026.
 
 ## Current infrastructure observed
