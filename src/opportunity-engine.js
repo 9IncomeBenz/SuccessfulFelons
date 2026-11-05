@@ -47,6 +47,17 @@ function card(item,list){
  const actions=make('div',null,article);actions.className='actions';
  const link=url(item.application_url)||url(item.source_url);
  if(link){const a=make('a','View official source',actions);a.href=link;a.target='_blank';a.rel='noopener noreferrer';a.className='button smallbtn';}
+ if(link){
+  const params=new URLSearchParams({
+   title:String(item.title||'').slice(0,180),
+   organization:String(item.organization_name||'').slice(0,180),
+   kind:item.kind==='housing'?'housing':'employment',
+   source_url:link
+  });
+  const tracker=make('a','Track application',actions);
+  tracker.href='/tracker.html?'+params.toString();
+  tracker.className='button secondary smallbtn';
+ }
  const save=make('button','Save to my leads',actions);save.type='button';save.className='secondary smallbtn';
  save.addEventListener('click',()=>{
   if(!link){el('finder-status').textContent='This source cannot be saved without a valid HTTPS link.';return;}
