@@ -7,12 +7,13 @@
     "dev": "vercel dev",
     "check:employment": "node scripts/validate-employment-data.mjs",
     "check:workspace": "node scripts/validate-saved-leads.mjs",
-    "check": "npm run check:employment && npm run check:workspace && npm run check:account && npm run check:account-isolation && npm run check:opportunities && npm run check:private-applications",
+    "check": "npm run check:employment && npm run check:workspace && npm run check:account && npm run check:account-isolation && npm run check:opportunities && npm run check:private-applications && npm run check:resources",
     "check:account": "node scripts/validate-account-security.mjs",
     "build": "npm run check && node scripts/build-site.mjs",
     "check:account-isolation": "node scripts/validate-account-isolation.mjs",
     "check:opportunities": "node scripts/validate-opportunity-engine.mjs",
-    "check:private-applications": "node scripts/validate-private-applications.mjs"
+    "check:private-applications": "node scripts/validate-private-applications.mjs",
+    "check:resources": "node scripts/validate-resource-links.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
