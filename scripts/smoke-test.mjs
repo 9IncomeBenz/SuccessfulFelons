@@ -10,12 +10,16 @@ const checks = [
   { path: '/opportunities.html', validate: async r => (await r.text()).includes('id="finder"') },
   { path: '/api/opportunities?kind=employment&listing_type=directory', validate: async r => {const d=await r.json();return Array.isArray(d.opportunities)&&d.opportunities.every(x=>x.kind==='employment'&&x.listing_type==='directory');} },
   { path: '/api/opportunities?kind=invalid', expectedStatus: 400, validate: async r => Boolean((await r.json()).error) },
+  { path: '/api/opportunity-submissions', method: 'POST', expectedStatus: 401, body: {}, validate: async r => Boolean((await r.json()).error) },
+  { path: '/api/opportunity-reports', method: 'POST', expectedStatus: 401, body: {}, validate: async r => Boolean((await r.json()).error) },
+  { path: '/api/admin/opportunities', expectedStatus: 401, validate: async r => Boolean((await r.json()).error) },
+  { path: '/api/account/preferences', expectedStatus: 401, validate: async r => Boolean((await r.json()).error) },
 ];
 let failures = 0;
 for (const check of checks) {
   const url = base + check.path;
   try {
-    const response = await fetch(url, { signal: AbortSignal.timeout(12000), redirect: 'follow' });
+    const response = await fetch(url, { signal: AbortSignal.timeout(12000), redirect: 'follow', method: check.method || 'GET', ...(check.body ? {headers:{'Content-Type':'application/json'},body:JSON.stringify(check.body)} : {}) });
     const ok = response.status === (check.expectedStatus || 200) && await check.validate(response);
     console.log(`${ok ? 'PASS' : 'FAIL'} ${check.path} (HTTP ${response.status})`);
     if (!ok) failures++;
