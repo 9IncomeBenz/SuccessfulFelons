@@ -2,8 +2,8 @@
   "schema_version": 1,
   "state": "Ohio",
   "count": 88,
-  "source": "https://ohiomeansjobs.ohio.gov/job-seekers/find-a-job/local-help",
-  "source_note": "OhioMeansJobs official directory of county service locations; every county has a center according to Ohio Department of Job and Family Services.",
+  "source": "https://cloudfront.careeronestop.org/LocalHelp/AmericanJobCenters/american-job-centers.aspx",
+  "source_note": "The 88 Ohio county names organize local navigation. The linked U.S. Department of Labor-supported American Job Center finder locates nearby workforce services; contact centers directly about availability.",
   "counties": [
     {
       "name": "Adams"
