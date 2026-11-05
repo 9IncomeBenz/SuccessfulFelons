@@ -12,3 +12,6 @@ created_at timestamptz NOT NULL DEFAULT now()
 REVOKE ALL ON TABLE sf_private.moderation_events FROM PUBLIC;
 
 CREATE INDEX IF NOT EXISTS sf_moderation_events_recent ON sf_private.moderation_events(created_at DESC);
+
+-- Required for atomic organization upsert during moderation.
+CREATE UNIQUE INDEX IF NOT EXISTS sf_org_name_unique_idx ON public.organizations(name);
