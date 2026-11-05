@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Private SuccessfulFelons application tracker: organize employment and housing follow-ups."><title>My Applications | SuccessfulFelons</title>
+<style>
+:root{color-scheme:dark;background:#111820;color:#f3f7fa;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0}header,main,footer{max-width:1080px;padding:20px;margin:auto}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+a{color:#ffe07a}.brand{font-weight:900;font-size:1.2rem}.brand span{color:#ffe07a}nav{display:flex;gap:12px;flex-wrap:wrap}nav a{text-decoration:none}
+h1{font-size:clamp(2rem,5vw,3.2rem);margin:12px 0}h2{font-size:1.4rem}p{line-height:1.55;color:#ccd7e0}
+section{background:#1d2934;border:1px solid #425667;padding:22px;border-radius:14px;margin:18px 0}
+.hero{background:linear-gradient(100deg,#263340,#1a2632)}
+label{display:grid;gap:6px;font-size:.92rem;font-weight:650}
+input,textarea,select{font:inherit;background:#111b25;color:#fff;border:1px solid #8ba0b1;padding:11px;border-radius:8px;width:100%}
+textarea{min-height:70px;resize:vertical}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:14px}
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0}
+button,.button{font:inherit;font-weight:750;background:#ffe07a;color:#17202b;border:0;border-radius:8px;padding:10px 15px;cursor:pointer;text-decoration:none}
+button.secondary,.button.secondary{background:#344c61;color:white}button:disabled{opacity:.6;cursor:not-allowed}
+.small{font-size:.88rem;color:#bdcad5}.counts{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px}
+.metric{background:#162431;border:1px solid #496072;border-radius:12px;padding:16px}.metric strong{display:block;font-size:1.75rem;color:#ffde78}
+.records{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.record{border:1px solid #52687b;border-radius:12px;padding:17px;background:#162330}
+.record h3{font-size:1.15rem;margin:0 0 8px}.record p{margin:8px 0}.record .actions{margin-bottom:0}
+.overdue{color:#ffbca7}.muted{color:#b9c8d4}
+.notice{border-left:4px solid #ffde78;padding:12px;background:#322d22;border-radius:8px}
+footer{border-top:1px solid #4c5d6f;margin-top:25px}
+[hidden]{display:none!important}:focus-visible{outline:3px solid #ffde78;outline-offset:3px}
+@media(max-width:560px){header,main,footer{padding:14px}section{padding:16px}}
+</style></head><body>
+<header><div class="brand">SUCCESSFUL<span>FELONS</span></div><nav aria-label="Main navigation"><a href="/">Home</a><a href="/opportunities.html">Opportunity finder</a><a href="/saved.html">Saved leads</a><a href="/account.html">My account</a></nav></header>
+<main>
+<section class="hero"><div class="small">PRIVATE MEMBER WORKSPACE</div><h1>My applications & follow-ups</h1><p>Keep jobs and housing searches moving. Track contacts, applications, and your next step in a single place across devices.</p>
+<p class="notice"><strong>Privacy:</strong> Only information you choose to enter is saved to your account. Do not enter Social Security numbers, criminal-history details, passwords, or private case documents. A follow-up date is an organizer, not an automatic notification.</p>
+<p id="tracker-status" role="status" aria-live="polite">Checking your account…</p><a id="signin-link" href="/account.html" class="button secondary" hidden>Sign in to use your private tracker</a></section>
+<section id="tracker-workspace" hidden>
+<h2 id="editor-title">Track a job or housing opportunity</h2>
+<form id="application-form">
+<input type="hidden" id="entry-id" name="id">
+<div class="grid">
+<label>Employment or housing<select name="kind" id="entry-kind" required><option value="employment">Employment</option><option value="housing">Housing</option></select></label>
+<label>Current progress<select name="stage" id="entry-stage" required><option>Interested</option><option>Contacted</option><option>Applied</option><option>Interview</option><option>Offer</option><option>Closed</option></select></label>
+<label>Opportunity or property name<input name="title" id="entry-title" required minlength="3" maxlength="180" placeholder="Job title or housing opportunity"></label>
+<label>Employer or housing provider<input name="organization" id="entry-organization" maxlength="180" placeholder="Provider name (optional)"></label>
+<label>Source link (optional)<input name="source_url" id="entry-source" type="url" maxlength="1800" placeholder="https://example.org/apply"></label>
+<label>Follow-up date (optional)<input name="follow_up_on" id="entry-date" type="date"></label>
+</div>
+<label style="margin-top:14px">Next step (optional)<textarea name="next_step" id="entry-next-step" maxlength="300" placeholder="Call employer, check application, contact housing agency…"></textarea></label>
+<div class="actions"><button type="submit" id="save-application">Save to my account</button><button class="secondary" type="button" id="cancel-edit" hidden>Cancel editing</button></div>
+<p id="editor-status" role="status" aria-live="polite"></p>
+</form></section>
+<section id="tracker-summary" hidden><h2>My progress</h2><div class="counts">
+<div class="metric"><strong id="total-count">0</strong><span>Tracked</span></div>
+<div class="metric"><strong id="applied-count">0</strong><span>Applied</span></div>
+<div class="metric"><strong id="follow-up-count">0</strong><span>Follow-ups due</span></div>
+<div class="metric"><strong id="housing-count">0</strong><span>Housing leads</span></div>
+</div>
+<div class="actions"><label>Filter records<select id="filter-kind"><option value="">All opportunities</option><option value="employment">Employment</option><option value="housing">Housing</option></select></label><button type="button" class="secondary" id="refresh-applications">Refresh list</button></div>
+<p id="list-status" role="status" aria-live="polite"></p><div id="application-list" class="records"></div></section>
+</main><footer>© SuccessfulFelons. <a href="/opportunities.html">Find more opportunities</a> · <a href="/tools.html">Local planning tools</a>.</footer>
+<script type="module" src="/assets/application-tracker.js"></script></body></html>
