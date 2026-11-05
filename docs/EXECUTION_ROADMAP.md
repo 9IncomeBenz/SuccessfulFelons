@@ -11,7 +11,8 @@ Ohio-first opportunity discovery with **employment and housing as equal pillars*
 - [x] Build a moderator-only queue with reviewer attestation, audit events, reject, publish, expire and resolve actions.
 - [ ] Confirm and list 50 actual employer opportunities and 50 actual housing opportunities through provider/source contact before claiming those targets. None is fabricated.
 - [ ] Assign named moderator(s) through exact Neon Auth UUIDs in Vercel's `SF_MODERATOR_USER_IDS` production environment setting. **Never use email as admin proof**, because signup verification is optional.
-- [ ] Establish routine human rechecks. Expired and overdue reviews already disappear from public search automatically; actual external website rechecks are not automatic yet.
+- [x] Add daily, read-only external source URL checks in GitHub Actions, with clear warnings for sites that block automated access. All six published source links returned HTTP 200 in the 2026-11-05 source audit.
+- [ ] Establish routine human content/provider rechecks. Expired and overdue reviews already disappear from public search automatically; checking the external link alone does not confirm a job or rental is available.
 
 ## Phase 2 — Member dashboard and tools (first features implemented)
 - [x] Existing managed member accounts, 100-item private cloud saved links, opt-in local upload, private browser-only application tracker and backups.
@@ -32,6 +33,7 @@ Ohio-first opportunity discovery with **employment and housing as equal pillars*
 - [x] Run automated employment, statewide, browser storage, account isolation and opportunity-engine build validation.
 - [x] Add member-confirmed, owner-scoped erasure of saved links, tracked applications, preferences, proposals and reports before managed identity removal, with a user backup. The end-to-end account deletion flow is **not yet independently tested**.
 - [ ] Independent live two-account privacy test, password reset and deletion validation.
+- [x] Clear the application tracker's browser-held private records when a different identity signs in or the existing user signs out in another tab; recheck identity on focus/visibility return.
 - [ ] Screen-reader, keyboard-only, mobile and slow-connection audits; external-source fraud screening; provider takedown process.
 
 ## Phase 5 — Statewide trust and growth (outreach queue prepared)
