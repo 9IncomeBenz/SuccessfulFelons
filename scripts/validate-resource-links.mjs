@@ -7,7 +7,7 @@ for(const file of targets){
  assert.ok(!read(file).includes(legacy),'Legacy OhioMeansJobs URLs must not appear in public source: '+file);
 }
 const seed=read('neon/seeds/0001_official_ohio_directories.sql');
-const matches=[...seed.matchAll(/'directory',('https:\/\/[^']+)'/g)].map(x=>x[1]);
+const matches=[...seed.matchAll(/'directory','(https:\/\/[^']+)'/g)].map(x=>x[1]);
 assert.equal(matches.length,6,'Must seed 6 official reviewed resource directories');
 assert.equal(new Set(matches).size,6,'Duplicate published source URLs in seed');
 for(const value of matches){
