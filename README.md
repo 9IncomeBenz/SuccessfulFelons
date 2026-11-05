@@ -3,16 +3,20 @@
 Independent Ohio-first platform helping people find housing, employment, independent income, record-relief information and reentry support.
 
 ## Status — November 5, 2026
-The statewide resource site, free member accounts, and evidence-gated Opportunity Finder are deployed. The database contains six official Ohio source directories (three employment, three housing), clearly labeled as directories rather than confirmed vacancies. Research leads remain separate. The first moderator workflow and signed-in opportunity suggestions/reports are deployed; actual employer/landlord vacancy confirmations are still required. The researched leads are **not employer-confirmed live vacancies** and are not presented as published/verified opportunity records. Employer and landlord partnerships, account synchronization, eligibility decisions, and payment processing are not established by this repository.
+The statewide resource site, free member accounts, and evidence-gated Opportunity Finder are deployed. The database contains six official Ohio source directories (three employment, three housing), clearly labeled as directories rather than confirmed vacancies. Research leads remain separate. The first moderator workflow and signed-in opportunity suggestions/reports are deployed; actual employer/landlord vacancy confirmations are still required. The researched leads are **not employer-confirmed live vacancies** and are not presented as published/verified opportunity records. Employer and landlord partnerships, verified live vacancies, eligibility decisions, and payment processing are not established. Account-synced saved links and a separate member application tracker are implemented.
 
 ## Private accounts (production enabled)
 - Managed Neon Auth is connected; the production `sf_private.saved_leads` database table and per-user 100-lead trigger are installed and tested. Existing opportunity tables were unchanged.
 - `/account.html` contains email/password sign-in and no-code registration, private county/focus preferences, private cloud saved links, export, explicit import, local opt-in auto-upload, clearing cloud data and a managed account deletion request.
 - `/saved.html` displays local device leads independently and has a private online list for signed-in accounts.
+- `/tracker.html` is the new private cloud application tracker for jobs and housing: progress stages, provider/contact, source link, next steps, follow-up date and JSON backup. The 100-record quota is enforced in Neon. Dates appear in the app but no automatic reminder emails are sent.
+- `api/account/applications.js` requires a verified JWT and active account, and scopes every read/write/delete to that exact subject. Legacy device-only application notes remain local and are not silently migrated.
 - `api/account/saved.js` and `api/account/clear.js` require signed, short-lived Neon JWTs **and** an active, non-banned managed identity. Email verification is optional. User-provided owner IDs never authorize access.
-- `src/cloud-auto-sync.js` uploads saved links only after affirmative opt-in for the authenticated user on that device. Offline failures do not delete local browser saves; other tracker records are not uploaded.
+- `src/cloud-auto-sync.js` uploads saved links only after affirmative opt-in for the authenticated user on that device. Offline failures do not delete local browser saves; legacy local tracker records are not automatically uploaded. Members explicitly enter new account-synced application records through `/tracker.html`.
 - Production builds run all statewide, storage and account security tests before bundling the official `@neondatabase/auth` SDK into first-party JS via esbuild.
 - **Public signup and optional cloud saving are enabled:** `ACCOUNT_REGISTRATION_ENABLED=true` is set in production. Neon requires no verification code. Live two-account privacy, password reset and deletion still require independent end-to-end testing.
+
+**Identity deletion:** User-confirmed deletion now backs up tracked applications and saved links, erases all app-owned private saved links, tracker records, preferences, proposals and reports atomically, then requests managed Neon identity removal. A failed managed deletion is reported accurately; this full flow still needs independent end-to-end testing.
 
 ## Statewide Ohio access
 - `/ohio.html` provides a searchable directory of **all 88 Ohio counties**, using `data/ohio-counties.json` as the authoritative in-repository county list (sourced from OhioMeansJobs).
@@ -31,7 +35,7 @@ The statewide resource site, free member accounts, and evidence-gated Opportunit
 ## Saving opportunities privately
 - Browse `/employment.html` or `/ohio.html` and choose **Save lead** to keep researched positions and programs in the existing `sf_workspace_v1` browser workspace. The same saved leads appear in the homepage My Progress area and on `/saved.html`.
 - `/saved.html` can search and remove saved leads, export them as a JSON backup, and safely merge a previously exported JSON backup. The import process checks the file format, refuses invalid links and respects the 100-lead device limit.
-- Device saved leads remain local by default. A signed-in member can explicitly upload links to account-scoped cloud storage, while application tracker notes stay local. Clearing browser storage can remove device-only notes and leads.
+- Device saved leads remain local by default. A signed-in member can explicitly upload links to account-scoped cloud storage. The separate new cloud application tracker stores only details the member enters there; the older local tracker stays on-device. Clearing browser storage can remove device-only notes and leads.
 - `assets/saved-leads.js` contains the shared save/remove/storage implementation; `scripts/validate-saved-leads.mjs` has regression checks for duplicate saves, malicious URLs, preserving tracker records and storage failures.
 
 ## Provider confirmation queue
