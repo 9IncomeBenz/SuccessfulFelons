@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 const read=path=>readFileSync(path,'utf8');
 const syntax=path=>new Function(read(path).replace(/^import .*;?\s*$/gm,'').replace(/export (default )?/g,''));
-for(const path of ['api/opportunities.js','api/opportunity-submissions.js','api/opportunity-reports.js','api/admin/opportunities.js','api/account/preferences.js','api/account/applications.js','src/opportunity-engine.js','src/moderation.js','src/application-tracker.js']){
+for(const path of ['api/opportunities.js','api/opportunity-submissions.js','api/opportunity-reports.js','api/admin/opportunities.js','api/account/preferences.js','api/account/applications.js','api/account/erase-data.js','src/opportunity-engine.js','src/moderation.js','src/application-tracker.js','src/account-sync.js']){
  assert.doesNotThrow(()=>syntax(path),'Invalid JavaScript in '+path);
 }
 const search=read('api/opportunities.js');
@@ -36,4 +36,15 @@ assert.match(read('neon/migrations/0006_member_applications.sql'),/REVOKE ALL ON
 assert.match(read('tracker.html'),/id="application-form"/,'Cloud tracker form missing');
 assert.match(read('tracker.html'),/id="application-list"/,'Cloud tracker list missing');
 assert.match(read('src/opportunity-engine.js'),/Track application/,'Reviewed listings must link to application tracker');
+const erasure=read('api/account/erase-data.js');
+assert.match(erasure,/await requireAuthUser\(req\)/,'Account erasure requires signed identity');
+assert.match(erasure,/await requireLiveAccount\(sql,owner\)/,'Account erasure rejects deleted identities');
+for(const relation of ['saved_leads','member_applications','member_preferences','opportunity_submissions','opportunity_reports']){
+ assert.ok(erasure.includes('sf_private.'+relation+' WHERE owner_user_id='),'Erasure must scope '+relation+' to its account owner');
+}
+assert.match(erasure,/DELETE MY ACCOUNT/,'Data erasure requires explicit confirmation');
+const accountFlow=read('src/account-page.js');
+assert.ok(accountFlow.includes('client.listApplications()'),'Deletion flow must back up application records');
+assert.ok(accountFlow.indexOf('client.eraseAccountData()')<accountFlow.indexOf('client.auth.deleteUser({password})'),
+ 'Private data must be erased before identity removal');
 console.log('PASS: Opportunity evidence, freshness, moderator permissions, review queues, source directories and responsive UI contracts.');
