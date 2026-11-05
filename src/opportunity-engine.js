@@ -109,5 +109,11 @@ el('report-form').addEventListener('submit',async event=>{
    const name=String(county.name||'').trim();if(name){const opt=make('option',name,el('county'));opt.value=name;}
   }
  }catch{}
+ const requested=new URLSearchParams(location.search);
+ for(const key of ['q','kind','county','listing_type']){
+  const value=requested.get(key);
+  const field=el('filters').elements.namedItem(key);
+  if(value&&field)field.value=value;
+ }
  await refresh();
 })();
