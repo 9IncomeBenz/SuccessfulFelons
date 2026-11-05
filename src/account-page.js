@@ -176,7 +176,7 @@ on('clear-cloud','click',()=>guarded(async()=>{
 }));
 on('delete-identity','click',()=>guarded(async()=>{
   if(!user)throw Error('Sign in first.');
-  if(!confirm('Permanently delete your SuccessfulFelons identity and saved cloud data? Download a backup first. This cannot be undone.'))return;
+  if(!confirm('Permanently delete your SuccessfulFelons identity, account-saved links, tracked applications, and preferences? A backup will download first. This cannot be undone.'))return;
   const typed=prompt('Type DELETE MY ACCOUNT to confirm:');if(typed!=='DELETE MY ACCOUNT')throw Error('Account deletion cancelled.');
   if(typeof client.auth.deleteUser!=='function')throw Error('Managed identity self-deletion is not available. Contact platform support for a verified deletion request.');
   const password=get('delete-password')?.value||'';
@@ -184,19 +184,28 @@ on('delete-identity','click',()=>guarded(async()=>{
   // Export a local recoverable copy before destructive changes. If the
   // managed identity deletion is unavailable, do not delete any cloud data.
   await refreshCloud({required:true});
+  const tracked=await client.listApplications(); // Abort deletion if backup cannot be prepared.
   saveJson('successfulfelons-before-account-deletion.json',{
-    format:'successfulfelons-saved-leads-v1',
+    format:'successfulfelons-account-backup-v1',
     exportedAt:new Date().toISOString(),
-    saved:cloud.map(x=>({id:x.id,title:x.title,organization:x.organization,url:x.url}))
+    saved:cloud.map(x=>({id:x.id,title:x.title,organization:x.organization,url:x.url})),
+    applications:tracked.map(x=>({
+      id:x.id,kind:x.kind,title:x.title,organization:x.organization,
+      source_url:x.source_url,stage:x.stage,next_step:x.next_step,follow_up_on:x.follow_up_on
+    }))
   });
-  // Managed Neon deletion may reject password/session; report partial failures
-  // accurately and never claim deletion unless the identity request succeeds.
-  const result=await client.clear();
+  // Private application, saved-link, preference and submission data are erased
+  // in one atomic query only after explicit typed confirmation and backup.
+  // Identity removal is a separate managed Neon operation.
+  const erased=await client.eraseAccountData();
   const deleted=await client.auth.deleteUser({password});
-  if(deleted?.error){await refreshCloud();throw Error('Cloud links deleted ('+result.deleted_count+'), but the identity could not be deleted: '+(deleted.error.message||'Managed Auth rejected deletion'))}
+  if(deleted?.error){
+    throw Error('Cloud account data was deleted, but managed identity deletion did not complete: '+(deleted.error.message||'Please contact support')+'. Your account may still be active.');
+  }
   if(get('delete-password'))get('delete-password').value='';
   signedIn({data:null});
-  msg('Managed identity deletion request was accepted. Cloud saved links were cleared; browser-local files stay on this device.');
+  msg('Managed identity deletion was accepted. Private cloud links, applications, and account preferences were erased. Browser-local information remains on this device.');
+
 }));
 async function boot(){
   try{
