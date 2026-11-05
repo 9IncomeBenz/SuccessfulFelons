@@ -17,6 +17,7 @@ const checks = [
   { path: '/api/account/preferences', expectedStatus: 401, validate: async r => Boolean((await r.json()).error) },
   { path: '/api/account/applications', expectedStatus: 401, validate: async r => Boolean((await r.json()).error) },
   { path: '/api/account/applications', method:'POST', body:{}, expectedStatus: 401, validate: async r => Boolean((await r.json()).error) },
+  { path: '/api/account/erase-data', method:'POST', body:{confirmation:'DELETE MY ACCOUNT'}, expectedStatus:401, validate: async r => Boolean((await r.json()).error) },
 ];
 let failures = 0;
 for (const check of checks) {
