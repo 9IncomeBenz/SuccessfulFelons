@@ -32,8 +32,9 @@ Ohio-first opportunity discovery with **employment and housing as equal pillars*
 - [ ] Independent live two-account privacy test, password reset and deletion validation.
 - [ ] Screen-reader, keyboard-only, mobile and slow-connection audits; external-source fraud screening; provider takedown process.
 
-## Phase 5 — Statewide trust and growth (not yet executed)
-- [ ] Recruit verified employer and housing partners in each Ohio region.
+## Phase 5 — Statewide trust and growth (outreach queue prepared)
+- [x] Build a source-grounded outreach queue with 79 uncontacted targets: 31 employment/reentry leads and 48 published housing/community agencies. No vacancy or partnership is represented as confirmed.
+- [ ] Contact and recruit verified employer and housing partners in each Ohio region.
 - [ ] Publish a public accuracy policy, support channels, and consent-respecting referral process.
 - [ ] Measure useful outcomes without collecting unnecessary criminal-history details. Track referrals and confirmed opportunities, not unsupported promises.
 - [ ] Consider nonintrusive sponsorship or paid provider tools while keeping seeker access free.
