@@ -2,7 +2,7 @@ import {createSuccessfulFelonsAccountClient} from './account-sync.js';
 
 const el=id=>document.getElementById(id);
 const append=(parent,tag,value)=>{const n=document.createElement(tag);if(value!==undefined)n.textContent=String(value);parent.append(n);return n};
-let client=null,applications=[];
+let client=null,applications=[],currentUserId=null,sessionChecking=false;
 const datePart=d=>typeof d==='string'?d.slice(0,10):'';
 function todayLocal(){
  const d=new Date(),yy=d.getFullYear(),mm=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0');
@@ -27,7 +27,7 @@ async function request(method,details){
   body:details?JSON.stringify(details):undefined
  });
  const data=await response.json().catch(()=>({}));
- if(!response.ok)throw Error(data.error||'Tracker temporarily unavailable.');
+ if(!response.ok){const error=new Error(data.error||'Tracker temporarily unavailable.');if(response.status===401)error.authExpired=true;throw error;}
  return data;
 }
 function edit(item){
@@ -92,6 +92,29 @@ function draw(){
   const remove=append(actions,'button','Delete');remove.type='button';remove.className='secondary';remove.addEventListener('click',()=>void erase(item));
  }
 }
+function lockWorkspace(message){
+ applications=[];currentUserId=null;
+ el('application-list').replaceChildren();
+ el('tracker-workspace').hidden=true;el('tracker-summary').hidden=true;
+ el('signin-link').hidden=false;
+ el('application-form').reset();el('entry-id').value='';
+ el('tracker-status').textContent=message;
+}
+async function verifyVisibleSession(){
+ if(document.hidden||sessionChecking||!client)return;
+ sessionChecking=true;
+ try{
+  const session=await client.getSession();
+  const active=session?.data?.user?.id||session?.user?.id||null;
+  if(session?.error||!active){lockWorkspace('Your session ended. Sign in again to access your private applications.');return}
+  if(active!==currentUserId){
+   lockWorkspace('Account changed. Loading the correct private workspace…');
+   await initialize();
+  }
+ }catch{
+  lockWorkspace('Unable to confirm your session. Sign in again to protect private records.');
+ }finally{sessionChecking=false}
+}
 async function refresh(){
  el('list-status').textContent='Loading your private application records…';
  try{
@@ -99,7 +122,7 @@ async function refresh(){
   if(!Array.isArray(data.applications))throw Error('Unexpected server response');
   applications=data.applications;
   draw();
- }catch(e){el('list-status').textContent='Unable to load applications: '+e.message;throw e}
+ }catch(e){if(e.authExpired)lockWorkspace('Your session ended. Please sign in again.');else el('list-status').textContent='Unable to load applications: '+e.message;throw e}
 }
 async function initialize(){
  try{
@@ -112,6 +135,7 @@ async function initialize(){
   if(session?.error)throw Error('Could not check your sign-in');
   const user=session?.data?.user||session?.user;
   if(!user)throw Error('Sign in first. Your records are private to your account.');
+  currentUserId=String(user.id||'');
   el('tracker-workspace').hidden=false;el('tracker-summary').hidden=false;
   el('tracker-status').textContent='Your private tracker is connected. No automatic emails or notifications are sent.';
   const params=new URLSearchParams(location.search);
@@ -164,4 +188,6 @@ el('export-applications').addEventListener('click',()=>{
  }catch(e){el('list-status').textContent='Unable to export tracker: '+e.message}
 });
 el('refresh-applications').addEventListener('click',()=>void refresh().catch(()=>{}));
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)void verifyVisibleSession()});
+window.addEventListener('focus',()=>void verifyVisibleSession());
 void initialize();
