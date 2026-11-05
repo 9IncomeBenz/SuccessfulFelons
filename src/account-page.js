@@ -34,7 +34,7 @@ function signedIn(session){
 async function refreshSession(){
   const session=resultData(await client.getSession(),'Could not verify your session');
   signedIn({data:session});
-  if(user)await refreshCloud();
+  if(user){await refreshCloud();void loadPreferences();}
 }
 function element(tag,text,parent){const node=document.createElement(tag);if(text!=null)node.textContent=text;parent.append(node);return node}
 function cleanUrl(url){try{const p=new URL(url);return p.protocol==='https:'?p.href:null}catch{return null}}
@@ -86,6 +86,57 @@ on('register','submit',ev=>{ev.preventDefault();guarded(async()=>{
   get('signin').elements.email.value=email;
   msg('Account created. Sign in with your email and password to continue.');
 })});
+async function preferencesRequest(method,body){
+ if(!client||!user)throw Error('Sign in first.');
+ const response=await client.auth.token();
+ const token=response?.data?.token;
+ if(response?.error||!token)throw Error('Sign in again to save preferences.');
+ const r=await fetch('/api/account/preferences',{
+  method,cache:'no-store',headers:{Authorization:'Bearer '+token,...(body?{'Content-Type':'application/json'}:{})},
+  body:body?JSON.stringify(body):undefined
+ });
+ const data=await r.json().catch(()=>({}));
+ if(!r.ok)throw Error(data.error||'Preferences unavailable');
+ return data.preferences;
+}
+function preferencesLink(){
+ const county=get('pref-county')?.value||'',kind=get('pref-focus')?.value||'all';
+ const params=new URLSearchParams();
+ if(county)params.set('county',county);
+ if(kind!=='all')params.set('kind',kind);
+ if(get('pref-link'))get('pref-link').href='/opportunities.html'+(params.size?'?'+params:'');
+}
+async function populateCounties(){
+ try{
+  const response=await fetch('/data/ohio-counties.json');
+  if(!response.ok)return;
+  const data=await response.json();
+  for(const county of data.counties||[]){
+   const name=String(county.name||'').trim();
+   if(name){const opt=document.createElement('option');opt.value=name;opt.textContent=name;get('pref-county')?.append(opt);}
+  }
+ }catch{}
+}
+async function loadPreferences(){
+ try{
+  const pref=await preferencesRequest('GET');
+  if(!user)return;
+  if(get('pref-county'))get('pref-county').value=pref.home_county||'';
+  if(get('pref-focus'))get('pref-focus').value=pref.focus||'all';
+  preferencesLink();
+  if(get('pref-status'))get('pref-status').textContent='Preferences loaded from your private account.';
+ }catch(e){
+  if(get('pref-status'))get('pref-status').textContent='Could not load preferences: '+e.message;
+ }
+}
+on('pref-form','submit',ev=>{ev.preventDefault();guarded(async()=>{
+ const f=new FormData(ev.currentTarget);
+ await preferencesRequest('PUT',{home_county:String(f.get('home_county')||''),focus:String(f.get('focus')||'all')});
+ preferencesLink();
+ get('pref-status').textContent='Your county and opportunity focus are saved to your account.';
+})});
+on('pref-county','change',preferencesLink);
+on('pref-focus','change',preferencesLink);
 on('signout','click',()=>guarded(async()=>{
   resultData(await client.signOut(),'Sign-out failed');signedIn({data:null});msg('Signed out. Local device leads remain saved.');
 }));
@@ -152,7 +203,7 @@ async function boot(){
     const enabled=await ensureEnabled();
     if(!enabled){if(get('unavailable'))get('unavailable').hidden=false;if(get('account-state'))get('account-state').textContent='Private cloud storage is prepared. Account registration and synchronization are not yet enabled.';return;}
     if(get('auth-forms'))get('auth-forms').hidden=false;
-    showMode('signin');await refreshSession();
+    await populateCounties();showMode('signin');await refreshSession();
   }catch(error){if(get('unavailable'))get('unavailable').hidden=false;msg('Account service unavailable: '+error.message)}
 }
 boot();
