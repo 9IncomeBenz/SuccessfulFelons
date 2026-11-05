@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 const read=path=>readFileSync(path,'utf8');
 const syntax=path=>new Function(read(path).replace(/^import .*;?\s*$/gm,'').replace(/export (default )?/g,''));
-for(const path of ['api/opportunities.js','api/opportunity-submissions.js','api/opportunity-reports.js','api/admin/opportunities.js','api/account/preferences.js','src/opportunity-engine.js','src/moderation.js']){
+for(const path of ['api/opportunities.js','api/opportunity-submissions.js','api/opportunity-reports.js','api/admin/opportunities.js','api/account/preferences.js','api/account/applications.js','src/opportunity-engine.js','src/moderation.js','src/application-tracker.js']){
  assert.doesNotThrow(()=>syntax(path),'Invalid JavaScript in '+path);
 }
 const search=read('api/opportunities.js');
@@ -26,4 +26,14 @@ assert.match(read('src/account-page.js'),/preferencesRequest\('PUT'/,'Preference
 assert.match(read('api/account/preferences.js'),/await requireAuthUser/,'Preferences require verified member session');
 assert.match(read('neon/migrations/0005_member_preferences.sql'),/sf_private\.member_preferences/);
 
+const tracking=read('api/account/applications.js');
+assert.match(tracking,/await requireAuthUser\(req\)/,'Application records require verified token');
+assert.match(tracking,/await requireLiveAccount\(sql,owner\)/,'Inactive accounts must be denied');
+assert.match(tracking,/WHERE owner_user_id=\$\{owner\}/,'Reading applications must use token-derived owner ID');
+assert.match(tracking,/WHERE id=\$\{id\}::uuid AND owner_user_id=\$\{owner\}/,'Writes and deletions must scope to authenticated owner');
+assert.match(read('neon/migrations/0006_member_applications.sql'),/enforce_member_applications_quota/,'Per-account 100 record quota required');
+assert.match(read('neon/migrations/0006_member_applications.sql'),/REVOKE ALL ON TABLE sf_private\.member_applications FROM PUBLIC/,'Application rows must be private');
+assert.match(read('tracker.html'),/id="application-form"/,'Cloud tracker form missing');
+assert.match(read('tracker.html'),/id="application-list"/,'Cloud tracker list missing');
+assert.match(read('src/opportunity-engine.js'),/Track application/,'Reviewed listings must link to application tracker');
 console.log('PASS: Opportunity evidence, freshness, moderator permissions, review queues, source directories and responsive UI contracts.');
