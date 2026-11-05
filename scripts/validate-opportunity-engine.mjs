@@ -47,4 +47,9 @@ const accountFlow=read('src/account-page.js');
 assert.ok(accountFlow.includes('client.listApplications()'),'Deletion flow must back up application records');
 assert.ok(accountFlow.indexOf('client.eraseAccountData()')<accountFlow.indexOf('client.auth.deleteUser({password})'),
  'Private data must be erased before identity removal');
+const trackerClient=read('src/application-tracker.js');
+assert.match(trackerClient,/function lockWorkspace\(/,'Private records need a session-change cleanup path');
+assert.match(trackerClient,/visibilitychange/,'Tracker must recheck sessions after backgrounding');
+assert.match(trackerClient,/active!==currentUserId/,'Tracker must detect a different account on shared devices');
+assert.match(trackerClient,/applications=\[\];currentUserId=null/,'Cached private data must clear on logout/account change');
 console.log('PASS: Opportunity evidence, freshness, moderator permissions, review queues, source directories and responsive UI contracts.');
