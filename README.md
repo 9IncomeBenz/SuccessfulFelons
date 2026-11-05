@@ -2,17 +2,17 @@
 
 Independent Ohio-first platform helping people find housing, employment, independent income, record-relief information and reentry support.
 
-## Status
-Early development. The site has an evidence-based employer-research directory and a separate database-backed verified-opportunity search. The researched leads are **not employer-confirmed live vacancies** and are not presented as published/verified opportunity records. Employer and landlord partnerships, account synchronization, eligibility decisions, and payment processing are not established by this repository.
+## Status — November 5, 2026
+The statewide resource site, free member accounts, and evidence-gated Opportunity Finder are deployed. The database contains six official Ohio source directories (three employment, three housing), clearly labeled as directories rather than confirmed vacancies. Research leads remain separate. The first moderator workflow and signed-in opportunity suggestions/reports are deployed; actual employer/landlord vacancy confirmations are still required. The researched leads are **not employer-confirmed live vacancies** and are not presented as published/verified opportunity records. Employer and landlord partnerships, account synchronization, eligibility decisions, and payment processing are not established by this repository.
 
-## Private account implementation (launch gated)
+## Private accounts (production enabled)
 - Managed Neon Auth is connected; the production `sf_private.saved_leads` database table and per-user 100-lead trigger are installed and tested. Existing opportunity tables were unchanged.
-- `/account.html` contains sign-in, registration, email OTP verification, private cloud saved links, export, explicit import, local opt-in auto-upload, clearing cloud data and a managed account deletion request.
+- `/account.html` contains email/password sign-in and no-code registration, private county/focus preferences, private cloud saved links, export, explicit import, local opt-in auto-upload, clearing cloud data and a managed account deletion request.
 - `/saved.html` displays local device leads independently and has a private online list for signed-in accounts.
-- `api/account/saved.js` and `api/account/clear.js` require signed, short-lived Neon JWTs **and** an active, email-verified, non-banned managed identity. User-provided owner IDs never authorize access.
+- `api/account/saved.js` and `api/account/clear.js` require signed, short-lived Neon JWTs **and** an active, non-banned managed identity. Email verification is optional. User-provided owner IDs never authorize access.
 - `src/cloud-auto-sync.js` uploads saved links only after affirmative opt-in for the authenticated user on that device. Offline failures do not delete local browser saves; other tracker records are not uploaded.
 - Production builds run all statewide, storage and account security tests before bundling the official `@neondatabase/auth` SDK into first-party JS via esbuild.
-- **Public signup is deliberately disabled:** the `ACCOUNT_REGISTRATION_ENABLED` environment flag is not set to `true`. Completion of production email-sending configuration, real verified-user sign-in, two-device session isolation, and deletion testing are still required. The presence of code and database tables is not proof that signup has passed end-to-end QA.
+- **Public signup and optional cloud saving are enabled:** `ACCOUNT_REGISTRATION_ENABLED=true` is set in production. Neon requires no verification code. Live two-account privacy, password reset and deletion still require independent end-to-end testing.
 
 ## Statewide Ohio access
 - `/ohio.html` provides a searchable directory of **all 88 Ohio counties**, using `data/ohio-counties.json` as the authoritative in-repository county list (sourced from OhioMeansJobs).
@@ -31,7 +31,7 @@ Early development. The site has an evidence-based employer-research directory an
 ## Saving opportunities privately
 - Browse `/employment.html` or `/ohio.html` and choose **Save lead** to keep researched positions and programs in the existing `sf_workspace_v1` browser workspace. The same saved leads appear in the homepage My Progress area and on `/saved.html`.
 - `/saved.html` can search and remove saved leads, export them as a JSON backup, and safely merge a previously exported JSON backup. The import process checks the file format, refuses invalid links and respects the 100-lead device limit.
-- This is **local device storage, not a user account, remote database, application submission or cross-device synchronization**. It keeps existing local application tracking records intact; clearing browser storage can remove them.
+- Device saved leads remain local by default. A signed-in member can explicitly upload links to account-scoped cloud storage, while application tracker notes stay local. Clearing browser storage can remove device-only notes and leads.
 - `assets/saved-leads.js` contains the shared save/remove/storage implementation; `scripts/validate-saved-leads.mjs` has regression checks for duplicate saves, malicious URLs, preserving tracker records and storage failures.
 
 ## Provider confirmation queue
@@ -62,9 +62,5 @@ Open `index.html` in a browser for the basic static shell. To load the research 
 - Record-relief guidance is educational, not legal advice; no eligibility determination without reviewed rules.
 - This repository is independent of Playaz Club and other products.
 
-## Roadmap
-1. Expand verified housing and job leads across all Ohio counties. Directly confirm employer screening policies and available roles before entering reviewed openings through moderation.
-2. Secure backend, member accounts, admin moderation, and applications.
-3. Employer and housing-provider onboarding.
-4. Legal-reviewed record-relief screening.
-5. Outcome tracking and expansion.
+## Current execution plan
+See [November 5 development roadmap](docs/EXECUTION_ROADMAP.md) for what is live, what is staged, and next targets. The immediate priority is direct verification of actual job and housing availability, moderation access, member experience, and independent live privacy and recovery tests.
