@@ -59,7 +59,7 @@ function card(item,list){
 async function refresh(){
  el('finder-status').textContent='Searching reviewed sources…';
  const form=new FormData(el('filters')),params=new URLSearchParams();
- for(const key of ['q','kind','county','listing_type']){const value=String(form.get(key)||'').trim();if(value)params.set(key,value);}
+ for(const key of ['q','kind','city','county','listing_type']){const value=String(form.get(key)||'').trim();if(value)params.set(key,value);}
  try{
   const response=await fetch('/api/opportunities?'+params.toString(),{cache:'no-store'});
   const result=await response.json();
@@ -110,7 +110,7 @@ el('report-form').addEventListener('submit',async event=>{
   }
  }catch{}
  const requested=new URLSearchParams(location.search);
- for(const key of ['q','kind','county','listing_type']){
+ for(const key of ['q','kind','city','county','listing_type']){
   const value=requested.get(key);
   const field=el('filters').elements.namedItem(key);
   if(value&&field)field.value=value;
