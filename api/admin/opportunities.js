@@ -55,7 +55,7 @@ export default async function handler(req,res){
      INSERT INTO public.organizations(name,kind,verified)
      SELECT organization_name,
        CASE WHEN kind='housing' THEN 'housing_provider' ELSE 'employer' END,true
-     FROM claimed
+     FROM claimed WHERE true
      ON CONFLICT (name) DO UPDATE SET verified=true
      RETURNING id
     ),
