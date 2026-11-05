@@ -4,9 +4,11 @@ const base = (process.argv[2] || 'https://successfulfelons.vercel.app').replace(
 const checks = [
   { path: '/', validate: async r => (await r.text()).includes('SUCCESSFUL') },
   { path: '/tools.html', validate: async r => { const html = await r.text(); return html.includes('tracker-form') && html.includes('resume-form') && html.includes('backup-import'); } },
-  { path: '/api/account-status', validate: async r => { const data = await r.json(); return data.accountsAvailable === false && data.localSavingAvailable === true; } },
+  { path: '/api/account-status', validate: async r => { const data = await r.json(); return data.accountsAvailable === true && data.onlineSyncAvailable === true && data.localSavingAvailable === true; } },
   { path: '/api/database-status', validate: async r => { const j = await r.json(); return j.healthy === true && j.organizations_exists === true && j.opportunities_exists === true; } },
-  { path: '/api/opportunities', validate: async r => Array.isArray((await r.json()).opportunities) },
+  { path: '/api/opportunities', validate: async r => { const d=await r.json();return Array.isArray(d.opportunities)&&d.opportunities.some(x=>x.listing_type==='directory'); } },
+  { path: '/opportunities.html', validate: async r => (await r.text()).includes('id="finder"') },
+  { path: '/api/opportunities?kind=employment&listing_type=directory', validate: async r => {const d=await r.json();return Array.isArray(d.opportunities)&&d.opportunities.every(x=>x.kind==='employment'&&x.listing_type==='directory');} },
   { path: '/api/opportunities?kind=invalid', expectedStatus: 400, validate: async r => Boolean((await r.json()).error) },
 ];
 let failures = 0;
