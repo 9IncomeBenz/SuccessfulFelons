@@ -13,7 +13,7 @@ for (const entry of await readdir(root, {withFileTypes:true})) {
 }
 for (const folder of ['assets','data','docs']) await cp(join(root,folder),join(output,folder),{recursive:true,force:true});
 await build({
-  entryPoints: [join(root,'src/account-page.js'),join(root,'src/cloud-auto-sync.js')],
+  entryPoints: [join(root,'src/account-page.js'),join(root,'src/cloud-auto-sync.js'),join(root,'src/opportunity-engine.js'),join(root,'src/moderation.js')],
   outdir:join(output,'assets'),
   bundle:true,platform:'browser',format:'esm',splitting:true,chunkNames:'chunks/[name]-[hash]',minify:true,target:['es2022'],
   sourcemap:false,logLevel:'warning',
