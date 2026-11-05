@@ -1,0 +1,1128 @@
+{
+  "schema_version": 1,
+  "generated_on": "2026-11-05",
+  "purpose": "Source-backed provider contact research targets for future manual outreach, not active job/rental listings.",
+  "verification_warning": "No target has been directly contacted or confirmed through this queue. Do not mark source research as provider confirmation. Individual eligibility must be confirmed.",
+  "totals": {
+    "total": 79,
+    "employment": 31,
+    "housing": 48
+  },
+  "targets": [
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "JBM Packaging",
+      "county": "Warren",
+      "source_url": "https://www.jbmpackaging.com/why-jbm/careers/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "CleanTurn",
+      "county": "Franklin",
+      "source_url": "https://www.cap4kids.org/columbus/cleanturn/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "PointPlus Personnel",
+      "county": "Franklin",
+      "source_url": "https://placesthathirefelons.com/job/picker-packer-laborer-pointplus-personnel-columbus-oh-dfe8a102afbc4fd8",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Creole 2 Geaux",
+      "county": "Franklin",
+      "source_url": "https://placesthathirefelons.com/job/utility-worker-creole-2-geaux-columbus-oh-8b545b470f790a0b",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Shrader Tire & Oil",
+      "county": "Franklin",
+      "source_url": "https://placesthathirefelons.com/job/warehouse-associate-shrader-tire-and-oil-columbus-oh-8c9d05c141a9572c",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Housepitality",
+      "county": "Franklin",
+      "source_url": "https://placesthathirefelons.com/job/maintenance-technician-housepitality-columbus-oh-a2075fdbe5e866c9",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "R&J Linehaul (FedEx contractor)",
+      "county": "Summit",
+      "source_url": "https://www.career.com/job/r-j-linehaul-inc-fedex-ground-contractor/cdl-a-truck-driver-home-daily-no-touch-freight-dedicated-route/j202610140253064534856",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Sterling Staffing Services",
+      "county": "Franklin",
+      "source_url": "https://sterlingcols.com/job-seekers/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Sterling Staffing Services",
+      "county": "Franklin",
+      "source_url": "https://sterlingcols.com/job-seekers/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Kingship Logistics (Amazon DSP)",
+      "county": "Cuyahoga",
+      "source_url": "https://jobs.smartrecruiters.com/KINGSHIPLOGISTICSLLC/3743990010558546-delivery-driver-kingship-logistics-",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Overhaul Carriers",
+      "county": "Franklin",
+      "source_url": "https://www.indeed.com/viewjob?jk=be0093d26c9590a2",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Venture Logistics",
+      "county": "Franklin",
+      "source_url": "https://www.jobsparx.com/Job/B15018900/Venture-Logistics-Cdl-A-Driver-Home-Daily-4000-Sign-Bonus-Columbus-OH",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Loeb Electric",
+      "county": "Franklin",
+      "source_url": "https://placesthathirefelons.com/job/warehouse-receiving-and-forklift-specialist-7am-3-30pm-loeb-electric-columbus-oh-886f77bda7cbc412",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "COMTEX",
+      "county": "Franklin",
+      "source_url": "https://placesthathirefelons.com/job/first-and-second-shift-linen-finisher-comtex-columbus-oh-75641ba619feef70",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Revolution Field Strategies",
+      "county": "Franklin",
+      "source_url": "https://placesthathirefelons.com/job/canvassers-needed-24-hr-revolution-field-strategies-columbus-oh-da6099d177a1bbb7",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Nehemiah Manufacturing",
+      "county": "Hamilton",
+      "source_url": "https://www.nehemiahmfg.com/our-jobs/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "employer_research",
+      "pillar": "employment",
+      "provider": "Nehemiah Manufacturing",
+      "county": "Hamilton",
+      "source_url": "https://www.nehemiahmfg.com/our-jobs/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Adams Brown Community Action Partnership",
+      "counties": [
+        "Adams",
+        "Brown"
+      ],
+      "provider_url": "https://www.abcap.net",
+      "phone": "937-378-6041",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "West Ohio Community Action Partnership",
+      "counties": [
+        "Allen",
+        "Auglaize",
+        "Mercer"
+      ],
+      "provider_url": "https://www.wocap.org",
+      "phone": "419-227-2586",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Kno-Ho-Co-Ashland Community Action Commission",
+      "counties": [
+        "Ashland",
+        "Coshocton",
+        "Holmes",
+        "Knox"
+      ],
+      "provider_url": "https://www.knohoco.org",
+      "phone": "740-622-9801",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Ashtabula County Community Action Agency",
+      "counties": [
+        "Ashtabula"
+      ],
+      "provider_url": "https://www.accaa.org",
+      "phone": "440-990-1740",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Hocking Athens Perry Community Action",
+      "counties": [
+        "Athens",
+        "Hocking",
+        "Perry"
+      ],
+      "provider_url": "https://www.hapcap.org",
+      "phone": "740-767-4500",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Community Action Commission of Belmont County",
+      "counties": [
+        "Belmont"
+      ],
+      "provider_url": "https://www.cacbelmont.org",
+      "phone": "740-695-0293",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Supports to Encourage Low-Income Families (SELF)",
+      "counties": [
+        "Butler"
+      ],
+      "provider_url": "https://www.selfhelps.org",
+      "phone": "513-868-9300",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "HARCATUS Tri-County Community Action Organization",
+      "counties": [
+        "Carroll",
+        "Harrison",
+        "Tuscarawas"
+      ],
+      "provider_url": "https://www.harcatus.org",
+      "phone": "740-922-0933",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Bridges Community Action Partnership",
+      "counties": [
+        "Champaign",
+        "Delaware",
+        "Logan",
+        "Madison",
+        "Shelby",
+        "Union"
+      ],
+      "provider_url": "https://www.bridgescap.org",
+      "phone": "937-642-4986",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Opportunities for Individual Change of Clark County",
+      "counties": [
+        "Clark"
+      ],
+      "provider_url": "https://www.oicofclarkco.org",
+      "phone": "937-323-6461",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Clermont County Community Service",
+      "counties": [
+        "Clermont"
+      ],
+      "provider_url": "https://www.cccsi.org",
+      "phone": "513-732-2277",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Clinton County Community Action Program",
+      "counties": [
+        "Clinton"
+      ],
+      "provider_url": "https://www.clintoncap.org",
+      "phone": "937-382-8365",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Community Action Agency of Columbiana County",
+      "counties": [
+        "Columbiana"
+      ],
+      "provider_url": "https://www.caaofcc.org",
+      "phone": "330-424-7221",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Ohio Heartland Community Action Commission",
+      "counties": [
+        "Crawford",
+        "Marion",
+        "Morrow"
+      ],
+      "provider_url": "https://www.ohcac.org",
+      "phone": "740-387-1039",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Step Forward",
+      "counties": [
+        "Cuyahoga"
+      ],
+      "provider_url": "https://www.stepforwardtoday.org",
+      "phone": "216-696-9077",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Miami Valley Community Action Partnership",
+      "counties": [
+        "Darke",
+        "Greene",
+        "Montgomery",
+        "Preble"
+      ],
+      "provider_url": "https://www.miamivalleycap.org",
+      "phone": "937-341-5000",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Northwestern Ohio Community Action Commission",
+      "counties": [
+        "Defiance",
+        "Fulton",
+        "Henry",
+        "Paulding",
+        "Van Wert",
+        "Williams"
+      ],
+      "provider_url": "https://www.nocac.org",
+      "phone": "419-784-5136",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Community Action Commission of Erie Huron and Richland Counties",
+      "counties": [
+        "Erie",
+        "Huron",
+        "Richland"
+      ],
+      "provider_url": "https://www.cacehr.org",
+      "phone": "419-626-4320",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Lancaster-Fairfield Community Action Agency",
+      "counties": [
+        "Fairfield"
+      ],
+      "provider_url": "https://www.faircaa.org",
+      "phone": "740-653-4146",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Community Action Commission of Fayette County",
+      "counties": [
+        "Fayette"
+      ],
+      "provider_url": "https://www.cacfayettecounty.org",
+      "phone": "740-335-7282",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "IMPACT Community Action",
+      "counties": [
+        "Franklin"
+      ],
+      "provider_url": "https://www.impactca.org",
+      "phone": "614-252-2799",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Gallia-Meigs Community Action Agency",
+      "counties": [
+        "Gallia",
+        "Meigs"
+      ],
+      "provider_url": "https://www.galliameigscaa.org",
+      "phone": "740-444-4400",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Lifeline",
+      "counties": [
+        "Geauga",
+        "Lake"
+      ],
+      "provider_url": "https://www.lclifeline.org",
+      "phone": "440-354-2148",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "GMN Tri-County CAC",
+      "counties": [
+        "Guernsey",
+        "Monroe",
+        "Noble"
+      ],
+      "provider_url": "https://www.gmntrico.org",
+      "phone": "740-732-2388",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Community Action Agency Cincinnati-Hamilton County",
+      "counties": [
+        "Hamilton"
+      ],
+      "provider_url": "https://www.cincy-caa.org",
+      "phone": "513-569-1840",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "HHWP Community Action Commission",
+      "counties": [
+        "Hancock",
+        "Hardin",
+        "Putnam",
+        "Wyandot"
+      ],
+      "provider_url": "https://www.hhwpcac.org",
+      "phone": "419-423-3755",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Highland County Community Action Organization",
+      "counties": [
+        "Highland"
+      ],
+      "provider_url": "https://www.hccao.org",
+      "phone": "937-393-3458",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Jackson-Vinton Community Action",
+      "counties": [
+        "Jackson",
+        "Vinton"
+      ],
+      "provider_url": "https://www.jvcai.org",
+      "phone": "740-384-3722",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Jefferson County Community Action Council",
+      "counties": [
+        "Jefferson"
+      ],
+      "provider_url": "https://www.jeffersoncountycac.com",
+      "phone": "740-282-0971",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Ironton-Lawrence County Community Action Organization",
+      "counties": [
+        "Lawrence"
+      ],
+      "provider_url": "https://www.ilcao.org",
+      "phone": "740-532-3140",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "LEADS Community Action Agency",
+      "counties": [
+        "Licking"
+      ],
+      "provider_url": "https://www.leadscaa.org",
+      "phone": "740-349-8606",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Lorain County Community Action Agency",
+      "counties": [
+        "Lorain"
+      ],
+      "provider_url": "https://www.lccaa.net",
+      "phone": "440-245-2009",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Pathway",
+      "counties": [
+        "Lucas"
+      ],
+      "provider_url": "https://www.pathwaytoledo.org",
+      "phone": "419-242-7304",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Mahoning Youngstown Community Action Partnership",
+      "counties": [
+        "Mahoning"
+      ],
+      "provider_url": "https://www.mycaphelp.com",
+      "phone": "330-747-7921",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Community Action Wayne/Medina",
+      "counties": [
+        "Medina",
+        "Wayne"
+      ],
+      "provider_url": "https://www.cawm.org",
+      "phone": "330-264-8677",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Miami County Community Action Council",
+      "counties": [
+        "Miami"
+      ],
+      "provider_url": "https://www.miamicac.org",
+      "phone": "937-335-7921",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Washington-Morgan Community Action",
+      "counties": [
+        "Morgan",
+        "Washington"
+      ],
+      "provider_url": "https://www.wmcap.org",
+      "phone": "740-373-3745",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Muskingum Economic Opportunity Action Group",
+      "counties": [
+        "Muskingum"
+      ],
+      "provider_url": "https://www.meoag.org",
+      "phone": "740-453-5703",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Great Lakes Community Action Partnership",
+      "counties": [
+        "Ottawa",
+        "Sandusky",
+        "Seneca",
+        "Wood"
+      ],
+      "provider_url": "https://www.glcap.org",
+      "phone": "800-775-9767",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Pickaway County Community Action Organization",
+      "counties": [
+        "Pickaway"
+      ],
+      "provider_url": "https://www.picca.info",
+      "phone": "740-477-1655",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Community Action Committee of Pike County",
+      "counties": [
+        "Pike"
+      ],
+      "provider_url": "https://www.pikecac.org",
+      "phone": "740-289-2371",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Community Action Council of Portage County",
+      "counties": [
+        "Portage"
+      ],
+      "provider_url": "https://www.cacportage.net",
+      "phone": "330-297-1456",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Ross County Community Action Commission",
+      "counties": [
+        "Ross"
+      ],
+      "provider_url": "https://www.rossccac.org",
+      "phone": "740-702-7222",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Community Action Organization of Scioto County",
+      "counties": [
+        "Scioto"
+      ],
+      "provider_url": "https://www.caosciotocounty.org",
+      "phone": "740-354-7541",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Stark County Community Action Agency",
+      "counties": [
+        "Stark"
+      ],
+      "provider_url": "https://www.sccaa.org",
+      "phone": "330-454-1676",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Community Action Akron Summit",
+      "counties": [
+        "Summit"
+      ],
+      "provider_url": "https://www.ca-akron.org",
+      "phone": "330-376-7730",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Trumbull Community Action Program",
+      "counties": [
+        "Trumbull"
+      ],
+      "provider_url": "https://www.tcaphelps.org",
+      "phone": "330-393-2507",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "community_housing_agency",
+      "pillar": "housing",
+      "provider": "Warren County Community Services",
+      "counties": [
+        "Warren"
+      ],
+      "provider_url": "https://www.wccsi.org",
+      "phone": "513-970-6737",
+      "source_url": "https://oacaa.org/find-an-agency/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "Center for Employment Opportunities — Columbus",
+      "county": "Franklin",
+      "provider_url": "https://www.ceoworks.org/locations/columbus",
+      "source_url": "https://www.ceoworks.org/locations/columbus",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "Center for Employment Opportunities — Cleveland",
+      "county": "Cuyahoga",
+      "provider_url": "https://www.ceoworks.org/locations/cleveland",
+      "source_url": "https://www.ceoworks.org/locations/cleveland",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "Center for Employment Opportunities — Cincinnati",
+      "county": "Hamilton",
+      "provider_url": "https://www.ceoworks.org/locations/cincinnati",
+      "source_url": "https://www.ceoworks.org/locations/cincinnati",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "Towards Employment — Community & Reentry",
+      "county": "Cuyahoga",
+      "provider_url": "https://www.towardsemployment.org/community-reentry/",
+      "source_url": "https://www.towardsemployment.org/community-reentry/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "EDWINS Leadership & Restaurant Institute",
+      "county": "Cuyahoga",
+      "provider_url": "https://edwinsrestaurant.org/interested-in-joining-the-edwins-program/",
+      "source_url": "https://edwinsrestaurant.org/interested-in-joining-the-edwins-program/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "Cincinnati Works / Beacon of Hope",
+      "county": "Hamilton",
+      "provider_url": "https://cincinnatiworks.org/our-partners/",
+      "source_url": "https://cincinnatiworks.org/our-partners/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "Goodwill Industries of Northwest Ohio — Reentry Services",
+      "county": "Lucas",
+      "provider_url": "https://toledo.oh.gov/departments/neighborhood-safety-and-engagement/healing-hub/re-entry",
+      "source_url": "https://toledo.oh.gov/departments/neighborhood-safety-and-engagement/healing-hub/re-entry",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "Reentry Coalition of Northwest Ohio",
+      "county": "Lucas",
+      "provider_url": "https://reentry419.com/",
+      "source_url": "https://reentry419.com/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "Montgomery County Reentry Career Alliance Academy",
+      "county": "Montgomery",
+      "provider_url": "https://www.mcohio.org/373/Reentry-Career-Alliance-Academy",
+      "source_url": "https://www.mcohio.org/373/Reentry-Career-Alliance-Academy",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "Lucas County CJCC Reentry Committee",
+      "county": "Lucas",
+      "provider_url": "https://lucascountycjcc.org/Reentry",
+      "source_url": "https://lucascountycjcc.org/Reentry",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "Urbean Cafe / Broken Chains Ministry Workforce Development",
+      "county": "Summit",
+      "provider_url": "https://www.brokenchainsministry.org/urbean-cafe",
+      "source_url": "https://www.brokenchainsministry.org/urbean-cafe",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "South Street Ministries — Front Porch Reentry Support",
+      "county": "Summit",
+      "provider_url": "https://needs.relink.org/provider/south-street-ministries-reentry-support-services-at-the-front-porch-cafe?pcid=32&psid=80",
+      "source_url": "https://needs.relink.org/provider/south-street-ministries-reentry-support-services-at-the-front-porch-cafe?pcid=32&psid=80",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "SOCHE Job Seeker Resources for Returning Citizens",
+      "county": "Montgomery",
+      "provider_url": "https://www.soche.org/job-seekers/",
+      "source_url": "https://www.soche.org/job-seekers/",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    },
+    {
+      "type": "reentry_program",
+      "pillar": "employment",
+      "provider": "Southeast Ohio Reentry Coalition",
+      "county": "Adams",
+      "provider_url": "https://needs.relink.org/coalition.php?cid=28&sid=87",
+      "source_url": "https://needs.relink.org/coalition.php?cid=28&sid=87",
+      "status": "not_contacted",
+      "opening_confirmed": false,
+      "screening_confirmed": false,
+      "source_checked_at": "2026-10-28"
+    }
+  ]
+}
