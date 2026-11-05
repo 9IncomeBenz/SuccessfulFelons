@@ -19,7 +19,9 @@ assert.match(statewide, /ohio-counties\.json/, 'Statewide navigator must load co
 assert.match(statewide, /employment-research\.json/, 'Statewide navigator must use shared employer research');
 assert.match(statewide, /ohiohousinglocator\.org/, 'Statewide housing resource missing');
 assert.match(statewide, /ohio211\.org/, 'Statewide 211 resource missing');
-assert.match(statewide, /ohiomeansjobs\.ohio\.gov/, 'Statewide employment resource missing');
+assert.match(statewide, /cloudfront\.careeronestop\.org\/LocalHelp\/AmericanJobCenters/, 'Current American Job Center locator is required');
+assert.match(statewide, /jobs\.ohiomeansjobs\.applygovt\.com\/Search\.aspx/, 'Current OhioMeansJobs job-search portal missing');
+assert.doesNotMatch(statewide, /ohiomeansjobs\.ohio\.gov/, 'Do not reintroduce unreachable OhioMeansJobs pages');
 assert.match(homepage, /href="\/ohio\.html"/, 'Homepage needs Ohio statewide navigation');
 assert.match(directory, /id="county"/, 'Employer directory needs county selector');
 assert.match(homepage, /href="\/housing\.html"/, 'Homepage must link directly to statewide housing');
