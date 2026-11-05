@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 const read=path=>readFileSync(path,'utf8');
 const syntax=path=>new Function(read(path).replace(/^import .*;?\s*$/gm,'').replace(/export (default )?/g,''));
-for(const path of ['api/opportunities.js','api/opportunity-submissions.js','api/opportunity-reports.js','api/admin/opportunities.js','src/opportunity-engine.js','src/moderation.js']){
+for(const path of ['api/opportunities.js','api/opportunity-submissions.js','api/opportunity-reports.js','api/admin/opportunities.js','api/account/preferences.js','src/opportunity-engine.js','src/moderation.js']){
  assert.doesNotThrow(()=>syntax(path),'Invalid JavaScript in '+path);
 }
 const search=read('api/opportunities.js');
@@ -21,4 +21,9 @@ for(const path of ['opportunities.html','moderation.html'])assert.ok(read(path).
 assert.match(read('opportunities.html'),/id="suggest-form"/,'Suggestion UI missing');
 assert.match(read('opportunities.html'),/id="results"/,'Live listings UI missing');
 assert.match(read('moderation.html'),/id="moderation-list"/,'Moderator review UI missing');
+assert.match(read('account.html'),/id="pref-form"/,'Member preferences form missing');
+assert.match(read('src/account-page.js'),/preferencesRequest\('PUT'/,'Preferences must save through authenticated account');
+assert.match(read('api/account/preferences.js'),/await requireAuthUser/,'Preferences require verified member session');
+assert.match(read('neon/migrations/0005_member_preferences.sql'),/sf_private\.member_preferences/);
+
 console.log('PASS: Opportunity evidence, freshness, moderator permissions, review queues, source directories and responsive UI contracts.');
