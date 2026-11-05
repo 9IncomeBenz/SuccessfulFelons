@@ -39,6 +39,25 @@ export function createSuccessfulFelonsAccountClient(neonAuthUrl) {
     async save(item) { return request('PUT',{item}); },
     async remove(id) { return request('DELETE',{id}); },
     async clear() { const response=await fetch('/api/account/clear',{method:'POST',cache:'no-store',credentials:'same-origin',headers:{Authorization:'Bearer '+await authToken(),'Content-Type':'application/json'},body:JSON.stringify({confirmation:'DELETE CLOUD SAVES'})});const data=await response.json().catch(()=>({}));if(!response.ok)throw Error(data.error||'Cloud deletion unavailable');return data; },
+    async listApplications() {
+      const response=await fetch('/api/account/applications',{
+        method:'GET',cache:'no-store',credentials:'same-origin',
+        headers:{Authorization:'Bearer '+await authToken()}
+      });
+      const data=await response.json().catch(()=>({}));
+      if(!response.ok||!Array.isArray(data.applications))throw Error(data.error||'Application backup unavailable');
+      return data.applications;
+    },
+    async eraseAccountData() {
+      const response=await fetch('/api/account/erase-data',{
+        method:'POST',cache:'no-store',credentials:'same-origin',
+        headers:{Authorization:'Bearer '+await authToken(),'Content-Type':'application/json'},
+        body:JSON.stringify({confirmation:'DELETE MY ACCOUNT'})
+      });
+      const data=await response.json().catch(()=>({}));
+      if(!response.ok||data.app_data_deleted!==true)throw Error(data.error||'Account data could not be erased');
+      return data;
+    },
     async importLocalWithConsent(localLeads) {
       if (!Array.isArray(localLeads) || localLeads.length > 100) throw Error('Invalid local backup');
       const uploaded=[];
