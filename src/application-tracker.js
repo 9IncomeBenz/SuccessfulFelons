@@ -148,5 +148,20 @@ el('application-form').addEventListener('submit',async event=>{
 });
 el('cancel-edit').addEventListener('click',()=>{resetEditor();el('editor-status').textContent='Edit canceled.'});
 el('filter-kind').addEventListener('change',draw);
+el('export-applications').addEventListener('click',()=>{
+ try{
+  const data={format:'successfulfelons-account-applications-v1',exportedAt:new Date().toISOString(),applications:applications.map(a=>({
+   id:a.id,kind:a.kind,title:a.title,organization:a.organization,source_url:a.source_url,
+   stage:a.stage,next_step:a.next_step,follow_up_on:a.follow_up_on
+  }))};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const address=URL.createObjectURL(blob);
+  const link=document.createElement('a');
+  link.href=address;link.download='successfulfelons-my-applications.json';
+  document.body.append(link);link.click();link.remove();
+  setTimeout(()=>URL.revokeObjectURL(address),1000);
+  el('list-status').textContent='Private tracker backup prepared for this device.';
+ }catch(e){el('list-status').textContent='Unable to export tracker: '+e.message}
+});
 el('refresh-applications').addEventListener('click',()=>void refresh().catch(()=>{}));
 void initialize();
