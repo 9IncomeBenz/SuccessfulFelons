@@ -16,7 +16,8 @@ Ohio-first opportunity discovery with **employment and housing as equal pillars*
 ## Phase 2 — Member dashboard and tools (first features implemented)
 - [x] Existing managed member accounts, 100-item private cloud saved links, opt-in local upload, private browser-only application tracker and backups.
 - [x] Add account-scoped county and employment/housing preferences; deep-link the opportunity finder with the saved filters.
-- [ ] Account-synced application pipeline, explicit reminder system and accessible notifications.
+- [x] Account-synced job and housing application tracker with 100-record quota, stages, follow-up dates, editing, user-initiated deletion and downloadable backup. The follow-up date is an organizer, **not** a scheduled alert.
+- [ ] Deliver opt-in, accessible email/in-app reminders and notifications after verified scheduling and unsubscribe controls are available.
 - [ ] Account recovery and account deletion tests against real managed sessions.
 
 ## Phase 3 — Providers and moderation (first features implemented)
@@ -29,6 +30,7 @@ Ohio-first opportunity discovery with **employment and housing as equal pillars*
 - [x] Existing JWT validation, active/banned account enforcement, owner-scoped cloud data, 100-lead quota.
 - [x] Add source freshness enforcement, reported-listing review queue and per-account submission/report limits.
 - [x] Run automated employment, statewide, browser storage, account isolation and opportunity-engine build validation.
+- [x] Add member-confirmed, owner-scoped erasure of saved links, tracked applications, preferences, proposals and reports before managed identity removal, with a user backup. The end-to-end account deletion flow is **not yet independently tested**.
 - [ ] Independent live two-account privacy test, password reset and deletion validation.
 - [ ] Screen-reader, keyboard-only, mobile and slow-connection audits; external-source fraud screening; provider takedown process.
 
