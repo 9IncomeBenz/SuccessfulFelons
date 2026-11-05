@@ -87,7 +87,7 @@ async function testAccountAPI(){
   assert.match(readFileSync('api/account-status.js','utf8'),/accountsAvailable:\s*enabled/);
   assert.match(readFileSync('api/account-status.js','utf8'),/ACCOUNT_REGISTRATION_ENABLED==='true'/,'Registration must be gated until enabled');
   assert.match(readFileSync('api/account/clear.js','utf8'),/DELETE CLOUD SAVES/,'Cloud deletion requires explicit confirmation');
-  console.log('PASS: JWT required, invalid inputs rejected, owner-scoped SQL, no public account launch.');
+  console.log('PASS: JWT required, invalid inputs rejected, owner-scoped SQL, and closed launch gate enforced when configured.');
 }
 await testAuth();
 await testAccountAPI();
