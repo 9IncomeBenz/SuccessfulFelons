@@ -1,5 +1,5 @@
-// Staged account client. Not shipped to the website until managed Neon Auth
-// trusted origins, email verification, schema and cross-device tests pass.
+// Managed Neon Auth client for optional SuccessfulFelons member accounts.
+// Browser credentials stay with managed Auth. Cloud requests require a signed JWT.
 import { createAuthClient } from '@neondatabase/auth';
 
 export function createSuccessfulFelonsAccountClient(neonAuthUrl) {
