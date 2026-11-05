@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Search reviewed Ohio employment and housing resources, save leads, and recommend new opportunities to SuccessfulFelons.">
+<title>Opportunity Finder | SuccessfulFelons</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#101419;color:#f3f7fa}
+*{box-sizing:border-box}body{margin:0}header,main,footer{max-width:1190px;margin:auto;padding:20px}
+header{display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.brand{font-size:1.2rem;font-weight:900}.brand span,.eyebrow{color:#ffe073}
+a{color:#ffdc62}nav{display:flex;gap:15px;flex-wrap:wrap}nav a{text-decoration:none;font-weight:650}
+.hero{padding:26px;border:1px solid #485565;background:linear-gradient(120deg,#202b37,#171f29);border-radius:18px;margin:8px 0 24px}
+h1{font-size:clamp(2rem,5.3vw,3.6rem);margin:.3rem 0}h2{font-size:1.55rem;margin:10px 0}h3{font-size:1.17rem;margin:0 0 8px}
+p{line-height:1.56;color:#d3dde7}.small{font-size:.9rem;color:#c1cedb}.eyebrow{font-weight:850;letter-spacing:.09em;font-size:.83rem}
+.panel{background:#1b2631;border:1px solid #435464;border-radius:13px;padding:22px;margin:20px 0}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:14px;align-items:end}
+label{display:grid;gap:6px;font-weight:650;font-size:.94rem}input,select,textarea{font:inherit;background:#111b25;color:#fff;padding:12px;border-radius:8px;border:1px solid #8095a6;max-width:100%;width:100%}
+textarea{resize:vertical;min-height:94px}button,.button{background:#ffdd67;color:#16202a;border:0;border-radius:9px;padding:12px 15px;font-weight:800;font:inherit;cursor:pointer;text-decoration:none;display:inline-block}
+button.secondary,.button.secondary{background:#31465b;color:#fff}button.smallbtn{padding:9px 12px;font-size:.9rem}
+button:disabled{opacity:.55;cursor:not-allowed}button:hover,.button:hover{filter:brightness(1.06)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(295px,1fr));gap:16px;margin:15px 0}
+.card{background:#1c2834;border:1px solid #455567;border-radius:14px;padding:21px;display:flex;flex-direction:column;gap:10px}
+.card h3,.card p{margin:0}.tag{font-size:.8rem;font-weight:800;border:1px solid #937938;border-radius:24px;padding:4px 9px;color:#ffe69d;align-self:flex-start}
+.metadata{display:grid;gap:5px;font-size:.85rem;color:#c6d6e2}
+.actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:auto;padding-top:10px}
+.notice{border-left:4px solid #ffdc67;padding:12px 17px;border-radius:7px;background:#2e2c24}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+hr{border:0;border-top:1px solid #435362;margin:30px 0}
+dialog{max-width:520px;width:calc(100% - 32px);border-radius:14px;border:1px solid #526477;padding:24px;background:#1d2935;color:#fff}
+dialog::backdrop{background:#0009}dialog form{display:grid;gap:14px}
+#finder-status,#submission-status,#report-status{min-height:1.7em}
+footer{border-top:1px solid #3d4d5e;margin-top:28px;font-size:.88rem;color:#c6d3dc}
+:focus-visible{outline:3px solid #ffdc67;outline-offset:2px}
+@media(max-width:570px){header,main,footer{padding:14px}.hero,.panel,.card{padding:17px}.cards{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="brand">SUCCESSFUL<span>FELONS</span></div><nav aria-label="Site navigation"><a href="/">Home</a><a href="/employment.html">Employment</a><a href="/housing.html">Housing</a><a href="/ohio.html">Ohio counties</a><a href="/saved.html">My saved leads</a><a href="/account.html">My account</a></nav></header>
+<main>
+<section class="hero"><div class="eyebrow">OHIO • EMPLOYMENT + HOUSING</div><h1>Find your next opportunity.</h1>
+<p>Search current, source-reviewed directories and provider-confirmed opportunities across Ohio. Source-reviewed directories are <strong>not</strong> confirmed job vacancies, open rentals, or guaranteed eligibility.</p>
+<div class="actions"><a class="button" href="#finder">Search resources</a><a class="button secondary" href="#suggest">Suggest an opportunity</a></div></section>
+<section id="finder" class="panel"><h2>Search opportunities and resources</h2>
+<form id="filters" class="filters">
+<label>Keyword<input name="q" type="search" placeholder="Warehouse, rental, workforce…" maxlength="120"></label>
+<label>Opportunity type<select name="kind"><option value="">Employment and housing</option><option value="employment">Employment</option><option value="housing">Housing</option></select></label>
+<label>Ohio county<select name="county" id="county"><option value="">All Ohio counties</option></select></label>
+<label>Evidence category<select name="listing_type"><option value="">All reviewed categories</option><option value="vacancy">Provider-confirmed opening</option><option value="directory">Official source directory</option><option value="program">Provider-confirmed program</option></select></label>
+<button type="submit">Search</button></form>
+<p id="finder-status" role="status" aria-live="polite">Loading opportunities…</p>
+<div class="notice"><strong>Our evidence standard:</strong> An official search directory does not prove a specific opening is available. A vacancy appears as provider-confirmed only after human review, and it automatically leaves the public search when its review period expires.</div>
+</section>
+<section aria-labelledby="results-title"><h2 id="results-title">Reviewed sources and opportunities</h2><div id="results" class="cards"></div></section>
+<section id="suggest" class="panel"><h2>Suggest a job, housing lead, or helpful directory</h2>
+<p>Members can recommend real sources for human review. Submitting a source never publishes it automatically. Do not include anyone's criminal record, Social Security number, or private housing application information.</p>
+<form id="suggest-form">
+<div class="form-grid">
+<label>Employment or housing<select name="kind" required><option value="employment">Employment</option><option value="housing">Housing</option></select></label>
+<label>What are you recommending?<select name="listing_type" required><option value="vacancy">Specific opening</option><option value="program">Provider program</option><option value="directory">Search directory</option></select></label>
+<label>Opportunity title<input name="title" required minlength="4" maxlength="180" placeholder="Job, rental, or service name"></label>
+<label>Organization or provider<input name="organization_name" required minlength="2" maxlength="160"></label>
+<label>City or statewide<input name="city" maxlength="100" placeholder="Columbus or Statewide"></label>
+<label>County<input name="county" maxlength="80" placeholder="Franklin"></label>
+</div>
+<label style="margin-top:14px">Official or public source URL (HTTPS)<input name="source_url" type="url" required maxlength="1800" placeholder="https://example.org/careers"></label>
+<label style="margin-top:14px">What should our reviewer confirm?<textarea name="description" required minlength="15" maxlength="1500" placeholder="Describe the role, application process or source, and anything that needs checking."></textarea></label>
+<div class="actions"><button type="submit" id="suggest-submit">Send for review</button><a href="/account.html">Sign in or create account</a></div>
+<p id="submission-status" role="status" aria-live="polite"></p>
+</form></section>
+<p class="small">Do not pay anyone to access an opportunity listed on this site. Report suspicious requests, discrimination concerns, or listings that are no longer available. Employment and housing decisions are made by the provider, not by SuccessfulFelons.</p>
+</main>
+<dialog id="report-dialog" aria-labelledby="report-title"><form id="report-form"><h2 id="report-title">Report a listing problem</h2>
+<p class="small">Your report goes to moderators, not to the employer or landlord.</p>
+<label>Problem<select name="reason" required><option value="closed">Opening closed or outdated</option><option value="incorrect">Incorrect source information</option><option value="screening">Screening policy concern</option><option value="other">Other issue</option></select></label>
+<label>Optional details<textarea name="details" maxlength="500" placeholder="What should be checked? No private criminal-history details."></textarea></label>
+<div class="actions"><button type="submit">Send report</button><button id="cancel-report" class="secondary" type="button">Cancel</button></div>
+<p id="report-status" role="status"></p></form></dialog>
+<footer>© SuccessfulFelons — Second Chance Network. Free to browse. <a href="/saved.html">Saved opportunities</a> | <a href="/tools.html">Application and housing tools</a>.</footer>
+<script src="/assets/saved-leads.js"></script><script type="module" src="/assets/opportunity-engine.js"></script></body></html>
