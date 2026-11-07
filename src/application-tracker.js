@@ -2,7 +2,7 @@ import {createSuccessfulFelonsAccountClient} from './account-sync.js';
 
 const el=id=>document.getElementById(id);
 const append=(parent,tag,value)=>{const n=document.createElement(tag);if(value!==undefined)n.textContent=String(value);parent.append(n);return n};
-let client=null,applications=[],currentUserId=null,sessionChecking=false;
+let client=null,applications=[],currentUserId=null,sessionChecking=false,workspaceEpoch=0;
 const datePart=d=>typeof d==='string'?d.slice(0,10):'';
 function todayLocal(){
  const d=new Date(),yy=d.getFullYear(),mm=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0');
@@ -19,7 +19,13 @@ function validLink(raw){
 }
 async function request(method,details){
  if(!client)throw Error('Sign in to use your private tracker.');
+ const epoch=workspaceEpoch,owner=currentUserId;
+ if(!owner)throw Error('Sign in to use your private tracker.');
  const token=await client.auth.token();
+ const before=await client.getSession();
+ const beforeId=before?.data?.user?.id||before?.user?.id||null;
+ if(epoch!==workspaceEpoch)throw Error('Account changed. Please try again.');
+ if(before?.error||beforeId!==owner){lockWorkspace('Your account changed. Refresh to load your private workspace.');throw Error('Account changed. Please refresh.');}
  if(token?.error||!token?.data?.token)throw Error('Session expired. Sign in again.');
  const response=await fetch('/api/account/applications',{
   method,credentials:'same-origin',cache:'no-store',
@@ -27,6 +33,10 @@ async function request(method,details){
   body:details?JSON.stringify(details):undefined
  });
  const data=await response.json().catch(()=>({}));
+ const after=await client.getSession();
+ const afterId=after?.data?.user?.id||after?.user?.id||null;
+ if(epoch!==workspaceEpoch)throw Error('Account changed. Please try again.');
+ if(after?.error||afterId!==owner){lockWorkspace('Your session changed. Refresh to load your private workspace.');throw Error('Account changed. Please refresh.');}
  if(!response.ok){const error=new Error(data.error||'Tracker temporarily unavailable.');if(response.status===401)error.authExpired=true;throw error;}
  return data;
 }
@@ -93,7 +103,10 @@ function draw(){
  }
 }
 function lockWorkspace(message){
- applications=[];currentUserId=null;
+ workspaceEpoch++;applications=[];currentUserId=null;
+ resetEditor();
+ for(const id of ['editor-status','list-status'])el(id).textContent='';
+ for(const id of ['total-count','applied-count','follow-up-count','housing-count'])el(id).textContent='0';
  el('application-list').replaceChildren();
  el('tracker-workspace').hidden=true;el('tracker-summary').hidden=true;
  el('signin-link').hidden=false;
@@ -116,13 +129,15 @@ async function verifyVisibleSession(){
  }finally{sessionChecking=false}
 }
 async function refresh(){
+ const epoch=workspaceEpoch;
  el('list-status').textContent='Loading your private application records…';
  try{
   const data=await request('GET');
   if(!Array.isArray(data.applications))throw Error('Unexpected server response');
+  if(epoch!==workspaceEpoch)return;
   applications=data.applications;
   draw();
- }catch(e){if(e.authExpired)lockWorkspace('Your session ended. Please sign in again.');else el('list-status').textContent='Unable to load applications: '+e.message;throw e}
+ }catch(e){if(epoch!==workspaceEpoch)return;if(e.authExpired)lockWorkspace('Your session ended. Please sign in again.');else el('list-status').textContent='Unable to load applications: '+e.message;throw e}
 }
 async function initialize(){
  try{
@@ -149,8 +164,7 @@ async function initialize(){
   }
   await refresh();
  }catch(e){
-  el('tracker-status').textContent=e.message;
-  el('signin-link').hidden=false;
+  lockWorkspace(e.message);
  }
 }
 el('application-form').addEventListener('submit',async event=>{
@@ -172,7 +186,10 @@ el('application-form').addEventListener('submit',async event=>{
 });
 el('cancel-edit').addEventListener('click',()=>{resetEditor();el('editor-status').textContent='Edit canceled.'});
 el('filter-kind').addEventListener('change',draw);
-el('export-applications').addEventListener('click',()=>{
+el('export-applications').addEventListener('click',async()=>{
+ if(sessionChecking)return;
+ await verifyVisibleSession();
+ if(!currentUserId)return;
  try{
   const data={format:'successfulfelons-account-applications-v1',exportedAt:new Date().toISOString(),applications:applications.map(a=>({
    id:a.id,kind:a.kind,title:a.title,organization:a.organization,source_url:a.source_url,

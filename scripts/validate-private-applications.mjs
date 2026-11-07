@@ -88,3 +88,41 @@ assert.equal((await call(tracker,'A','DELETE',{id:aId})).body.deleted,true,'A ca
 const closed=create('api/account/applications.js',{...env,ACCOUNT_REGISTRATION_ENABLED:'false'});
 assert.equal((await call(closed,'A','GET')).statusCode,503,'Closed account gate blocks access');
 console.log('PASS: Private application create/update/delete, two-owner isolation, invalid source rejection, explicit erasure, anonymous denial and launch gate.');
+
+// Execute the real browser request/refresh code with delayed network responses.
+const browserSource=readFileSync('src/application-tracker.js','utf8')
+ .replace(/^import .*;?\s*$/gm,'').replace(/void initialize\(\);\s*$/,'');
+function browserHarness(){
+ const nodes=new Map();
+ const document={hidden:false,addEventListener(){},getElementById(id){
+  if(!nodes.has(id))nodes.set(id,{textContent:'',hidden:false,value:'',addEventListener(){},replaceChildren(){},reset(){}});
+  return nodes.get(id);
+ }};
+ let active='A',release,started;
+ const reached=new Promise(resolve=>{started=resolve});
+ const client={getSession:async()=>({data:{user:active?{id:active}:null}}),auth:{token:async()=>({data:{token:'test-token'}})}};
+ const fetch=async()=>{started();return new Promise(resolve=>{release=()=>resolve({ok:true,json:async()=>({applications:[{title:'A private record'}]})})})};
+ const api=new Function('document','window','fetch',browserSource+`;return {
+  start(){client=arguments[0];currentUserId='A';return refresh()},
+  lock(){lockWorkspace('Signed out')},
+  records(){return applications},
+  owner(){return currentUserId}
+ };`)(document,{addEventListener(){}},fetch);
+ return {api,client,reached,switchTo(value){active=value},release(){release()},nodes};
+}
+{
+ const h=browserHarness(),pending=h.api.start(h.client);
+ await h.reached;h.api.lock();h.release();await pending;
+ assert.deepEqual(h.api.records(),[],'A delayed response cannot restore records after logout');
+ assert.equal(h.nodes.get('tracker-workspace').hidden,true);
+}
+{
+ const h=browserHarness(),pending=h.api.start(h.client);
+ await h.reached;h.switchTo('B');h.release();
+ await pending;
+ assert.deepEqual(h.api.records(),[],'Response is discarded when the managed session changes to B');
+ assert.equal(h.api.owner(),null);
+ assert.equal(h.nodes.get('tracker-summary').hidden,true);
+ assert.equal(h.nodes.get('total-count').textContent,'0');
+}
+console.log('PASS: Delayed browser responses after logout/account switch cannot restore private tracker records.');

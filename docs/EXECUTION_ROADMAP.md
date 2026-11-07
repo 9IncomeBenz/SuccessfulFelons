@@ -48,3 +48,9 @@ No listing is labeled a provider-confirmed **vacancy** without a source, direct 
 
 ## Source review
 Official resource destinations reviewed and corrected November 5, 2026: [OhioMeansJobs](https://jobs.ohiomeansjobs.applygovt.com/Search.aspx), [American Job Center finder](https://cloudfront.careeronestop.org/LocalHelp/AmericanJobCenters/american-job-centers.aspx), [Federal Bonding Program](https://bonds4jobs.com/our-services/get-your-bond-today), [Ohio Housing Locator](https://www.ohiohousinglocator.org/), [OHFA renter resources](https://www.ohiohome.org/renters.aspx), [Ohio 211](https://ohio211.org/how-to-find-help/). These are **search and referral resources**, not successful application guarantees.
+
+## November 7, 2026 — tracker privacy hardening
+- Confirmed the November 5 release reached READY in production.
+- Reject delayed tracker responses after logout or an account switch, check managed session identity before sending requests and after reading responses, clear editor/counters when locking, and recheck identity before backup export.
+- Added executable regression cases using the actual browser request/refresh code with delayed responses. These supplement the existing API owner-isolation tests; they do not replace the outstanding independent live two-account audit.
+- Validation: all seven check suites, browser-script/UI checks, production build, and 16 live production endpoint checks.
